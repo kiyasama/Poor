@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>map</title>
+		<meta name="author" content="Administrator" />
+		<!-- Date: 2016-04-05 -->
+		<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="js/leaflet/leaflet-src.js"></script>
+		<script type="text/javascript" src="js/leaflet/leaflet-tilelayer-wmts-src.js"></script>
+		<script type='text/javascript' src="js/mapOp.js"></script>
+		<br />
+		<!--<script type='text/javascript' src="js/townBorder419.js"></script>-->
+		<script type='text/javascript' src="js/xyGeoJson.js"></script>
+		<script type='text/javascript' src="../js/UICore.js"></script>
+		<link type='text/css' rel='stylesheet' href='js/leaflet/leaflet.css' />
+
+		<style>
+			.my-div-icon {
+				z-index: 10000 !important;
+				color: #2a69b4;
+				font-size: 10px;
+				width: 65px !important;
+				font-weight: bold;
+			}
+		</style>
+	</head>
+
+	<body style="padding:0px;">
+		<div id="map" style="width: 499px;height: 715px;position: relative;"></div>
+	</body>
+
+	<script type="text/javascript">
+		var map;
+		var obj = XianYangGeoJson;
+		$(function() {
+
+			//跨域提取数据
+			var url = "poorPeople/poorPeopleInterface.shtml?act=loginmess&jsonpCallback=?";
+			$.getJSON($.serviceHttp() + url,
+				function(data) {
+					switch(data.list[0].areaname) {
+						case "咸阳市":
+							obj = XianYangGeoJson;
+							break;
+						case "旬邑县":
+							obj = xunyiGeoJson;
+							break;
+						case "彬县":
+							obj = bxGeoJson;
+							break;
+						case "淳化县":
+							obj = chGeoJson;
+							break;
+						case "长武县":
+							obj = cwGeoJson;
+							break;
+						case "泾阳县":
+							obj = jyGeoJson;
+							break;
+						case "礼泉县":
+							obj = lqGeoJson;
+							break;
+						case "秦都区":
+							obj = qdGeoJson;
+							break;
+						case "乾县":
+							obj = qxGeoJson;
+							break;
+						case "三原县":
+							obj = syGeoJson;
+							break;
+						case "渭城区":
+							obj = wcGeoJson;
+							break;
+						case "武功县":
+							obj = wgGeoJson;
+							break;
+						case "兴平市":
+							obj = xpGeoJson;
+							break;
+						case "永寿县":
+							obj = ysGeoJson;
+							break;
+						default:
+							obj = XianYangGeoJson;
+							break;
+					}
+					if(data.list[0].areaname != "咸阳市" && data.list[0].areaname != "旬邑县") {
+						for(var i = 0; i < obj.features.length; i++) {
+							var obj1 = obj.features[i].geometry.coordinates[0];
+							var x = 0;
+							var y = 0;
+							for(var j = 0; j < obj1.length; j++) {
+								x += obj1[j][0];
+								y += obj1[j][1];
+							}
+							var lng = x / obj1.length;
+							var lat = y / obj1.length;
+							obj.features[i].properties.lng = lng;
+							obj.features[i].properties.lat = lat;
+						};
+					}
+
+					loadmap();
+				});
+
+		});
+
+		function loadmap() {
+			addMap();
+			var geojson = L.geoJson(obj, {
+				style: style,
+				onEachFeature: onEachFeature,
+
+			}).addTo(map);
+			//var aaa = geojson.getCenter(geojson);
+			map.on('click', function(e) {
+				//alert(e.latlng);
+				// e is an event object (MouseEvent in this case)
+			});
+		}
+
+		function style(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.8,
+				fillColor: getColor(feature.properties.rs)
+			};
+		}
+
+		function getColor(d) {
+			return d > 5000 ? '#800026' : d > 4000 ? '#BD0026' : d > 3000 ? '#E31A1C' : d > 2000 ? '#FC4E2A' : d > 1000 ? '#FD8D3C' : d > 20 ? '#FEB24C' : d > 15 ? '#FED976' : '#FFEDA0';
+		}
+
+		function onEachFeature(feature, layer) {
+			layer.on({
+				click: zoomToFeature
+			});
+
+			var lat = layer.feature.properties.lat;
+			var lng = layer.feature.properties.lng;
+			var point = L.point(20, 30);
+			var myIcon = L.divIcon({
+				iconSize: point,
+				iconAnchor: point,
+				popupAnchor: point,
+				className: 'my-div-icon',
+				html: feature.properties.NAME + "(" + feature.properties.rs + "人)"
+			});
+			var marker = L.marker([lat, lng], {
+				icon: myIcon
+			}).addTo(map);
+
+		}
+
+		function highlightFeature(e) {
+			// var layer = e.target;
+			//
+			// layer.setStyle({
+			// weight : 3,
+			// color : '#ff4c05',
+			// dashArray : '',
+			// fillOpacity : 0.7
+			// });
+			//
+			// if (!L.Browser.ie && !L.Browser.opera) {
+			// layer.bringToFront();
+			// }
+			// info.update(layer.feature.properties);
+		}
+
+		function resetHighlight(e) {
+			// geojson.resetStyle(e.target);
+			// info.update();
+		}
+
+		function zoomToFeature(e) {
+			// var list = e.target._latlngs;
+			// var lat =0;
+			// var lng =0;
+			// for(var i=0;i<list.length;i++){
+			// lat += list[i].lat;
+			// lng += list[i].lng;
+			// }
+			// var avgLat = lat/list.length;
+			// var avgLng = lng/list.length;
+			//
+			//
+			// var point = L.point(avgLat,avgLng);
+			// var myIcon = L.divIcon({
+			// iconAnchor : point,
+			// popupAnchor : point,
+			// className : 'my-div-icon',
+			// html : "adsffdsfds"
+			// });
+			// var marker = L.marker([avgLat, avgLng], {
+			// icon : myIcon
+			// }).addTo(map);
+
+			e.target._map.on('click', function(e) {
+				alert(e.latlng);
+				// e is an event object (MouseEvent in this case)
+			});
+
+		}
+	</script>
+
+</html>

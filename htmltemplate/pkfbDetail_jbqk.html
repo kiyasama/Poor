@@ -1,0 +1,348 @@
+<div class="pkcDetail jbqk" id="cunBaseInfo">
+    <div class="pkcTop" id="pk1">
+        <div id="busiform" splitSize="0">
+            <div class="jbqkyjt">
+                <p>
+                    <span>户主姓名：</span><span id="NAME">{$T.NAME}</span>
+                </p>
+                <p>
+                    <span>家庭地址：</span><span id="ADDRESS">{$T.ADDRESS}</span>
+                </p>
+                <p>
+                    <span>联系电话：</span><span id="TEL">{$T.TEL}</span>
+                </p>
+                <p>
+                    <span>开户银行：</span><span id="BANK">{$T.BANK}</span>
+                </p>
+                <p>
+                    <span>银行账号：</span><span id="ACCOUNT">{$T.ACCOUNT}</span>
+                </p>
+            </div>
+            <table cellpadding="0" cellspacing="0" border="0" id="bb" class="xzq jtInfo">
+                <tbody id="tbody1">
+                    <tr>
+                        <td class="firstCol">识别标准：</td>
+                        <td id="bzsb">{$T.IDENTIFYSTANDARD}</td>
+                    </tr>
+                    <tr>
+                        <td class="firstCol">贫困属性：</td>
+                        <td id="pkhsx">{$T.POORPROPERTY}</td>
+                    </tr>
+                    <tr>
+                        <td class="firstCol">致贫原因：</td>
+                        <td id="zyzpyy">{$T.POVERTYREASON}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table cellpadding="0" cellspacing="0" border="0" id="cc" class="cyTable">
+                <thead>
+                    <tr>
+                        <th width="60">姓名</th>
+                        <th width="60">性别</th>
+                        <th>身份证</th>
+                        <th width="60">与户主关系</th>
+                        <th>健康状况</th>
+                        <th>劳动能力</th>
+                        <th>务工状况</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                    {#foreach $T.povertyFamily as record}
+                    <tr>
+                        <td> {$T.record.NAME} </td>
+                        <td> {$T.record.SEX} </td>
+                        <td>{$T.record.CARDID}</td>
+                        <td> {$T.record.RELATION} </td>
+                        <td> {$T.record.HEALTH} </td>
+                        <td> {$T.record.WORKPOWER} </td>
+                        <td> {$T.record.WORKSTATUS} </td>
+                    </tr>
+                    {#/for}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="pkcDetail xmcx " id="cunDispatchDiv" style="display:none;">
+    <div class="pkcTop" id="pk1" style="">
+        <div id="busiform" splitSize="0">
+            <!-- <div class="txt">建档立卡日志</div> -->
+            <table cellpadding="0" cellspacing="0" class="gsTable1">
+                <tbody id="tbody2">
+                    <tr>
+                        <td class="tdleft" colspan="2">收支情况</td>
+                        <!-- <td class="tdleft1">外出务工人数</td>
+						<td class="tdright1">113</td> -->
+                    </tr>
+                    <tr>
+                        <td class="tdleft1">家庭人均收入：</td>
+                        <td class="tdright1" id="FAMILYINCOME">1000元</td>
+                        <!-- <td class="tdleft">耕地面积 (亩)</td>
+						<td class="tdright">1180</td> -->
+                    </tr>
+                    <tr>
+                        <td class="tdleft1">是否有贷款：</td>
+                        <td class="tdright1" id="ISLOAN">无</td>
+                        <!-- <td class="tdleft">耕地面积 (亩)</td>
+						<td class="tdright">1180</td> -->
+                    </tr>
+                    <tr>
+                        <td class="tdleft1">领取计划生育金：</td>
+                        <td class="tdright1" id="PLANNPARENTHOOD">2000元</td>
+                        <!-- <td class="tdleft">耕地面积 (亩)</td>
+						<td class="tdright">1180</td> -->
+                    </tr>
+                    <tr title="人社局2014年度领取低保金为：1349元">
+                        <td class="tdleft1 ">领取低保金：</td>
+                        <td class="tdright1" id="LOWLIVING">1500元</td>
+                        <!-- <td class="tdleft">耕地面积 (亩)</td>
+						<td class="tdright">1180</td> -->
+                    </tr>
+                    <tr>
+                        <td class="tdleft1">领取养老金：</td>
+                        <td class="tdright1" id="PENSIONS">10047元</td>
+                        <!-- <td class="tdleft">耕地面积 (亩)</td>
+						<td class="tdright">1180</td> -->
+                    </tr>
+                    <tr title="新农合2014年度报销医疗费为：10047元">
+                        <td class="tdleft1">报销医疗费：</td>
+                        <td class="tdright1" id="MEDICIAL">10116元</td>
+                        <!-- <td class="tdleft">耕地面积 (亩)</td>
+						<td class="tdright">1180</td> -->
+                    </tr>
+                    <tr>
+                        <td class="tdleft" colspan="2">住房情况</td>
+                    </tr>
+                    <tr title="实际住房面积40平">
+                        <td class="tdleft1">住房面积：</td>
+                        <td class="tdright1 " id="HOUSEAREA">20平</td>
+                        <!-- <td class="tdleft">林地面积（亩）</td>
+						<td class="tdright">2590</td> -->
+                    </tr>
+                    <tr>
+                        <td class="tdleft1">房屋结构：</td>
+                        <td class="tdright1" id="BUILDSTRUCTURE"></td>
+                        <!-- <td class="tdleft">林地面积（亩）</td>
+						<td class="tdright">2590</td> -->
+                    </tr>
+                    <tr>
+                        <td class="tdleft1">建房时间：</td>
+                        <td class="tdright1" id="BUILDINGTIME"></td>
+                        <!-- <td class="tdleft">林地面积（亩）</td>
+						<td class="tdright">2590</td> -->
+                    </tr>
+                    <tr>
+                        <td class="tdleft1">易地扶贫：</td>
+                        <td class="tdright1" id="RELOCATIONS"></td>
+                        <!-- <td class="tdleft">林地面积（亩）</td>
+						<td class="tdright">2590</td> -->
+                    </tr>
+                </tbody>
+            </table>
+            <table cellpadding="0" cellspacing="0" class="gsTable1" style="">
+                <tbody id="tbody3">
+                    <tr>
+                        <td class="tdleft" colspan="2">产业化组织</td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft1 ">参加扶贫资金组织：</td>
+                        <td class="tdright1 " id="ISJOINPOVERTYORG">否</td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft1">投入互助资金：</td>
+                        <td class="tdright1" id="INPUTFOUNDS">1000元</td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft1">参与农舍：</td>
+                        <td class="tdright1" id="ISJOINAGRICULTURAL">是</td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft1">产业收益：</td>
+                        <td class="tdright1" id="INDUSTRYBENEFIT">0元</td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft" colspan="2">生活条件：</td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft1">通用生活用电：</td>
+                        <td class="tdright1" id="ISLIFEPOWER"></td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft1">饮水困难：</td>
+                        <td class="tdright1" id="ISDRINKING">是</td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft1">燃料类型：</td>
+                        <td class="tdright1" id="FUELTYPE">是</td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft" colspan="2">生产条件</td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft1 ">耕地面积：</td>
+                        <td class="tdright1 " id="FARMLAND">2亩</td>
+                        <!-- <td class="tdleft">水域面积（亩）</td>
+						<td class="tdright">0</td> -->
+                    </tr>
+                    <tr>
+                        <td class="tdleft1">林地面积：</td>
+                        <td class="tdright1" id="WOODLAND">0</td>
+                        <!-- <td class="tdleft">牧草地面积（亩）</td>
+						<td class="tdright">0</td> -->
+                    </tr>
+                    <tr>
+                        <td class="tdleft1">牲畜数量：</td>
+                        <td class="tdright1" id="LIVESTOCK">911</td>
+                        <!-- <td class="tdleft">牲畜存栏数 (头)</td>
+						<td class="tdright">243</td> -->
+                    </tr>
+                </tbody>
+            </table>
+            <!-- 	<div class="txt1">建档立卡日志</div> -->
+            <!--<table cellpadding="0" cellspacing="0" border="0" id="cc"-->
+            <!--class="cyTable">-->
+            <!--<thead>-->
+            <!--<tr>-->
+            <!--<th width="120">序号</th>-->
+            <!--<th width="120">录入人员</th>-->
+            <!--<th width="120">录入时间</th>-->
+            <!--<th width="120">操作备注</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody id="tbody4">-->
+            <!--<tr>-->
+            <!--<td class="indexCol">1</td>-->
+            <!--<td>陈建</td>-->
+            <!--<td>2015-01-01</td>-->
+            <!--<td>320405199306012223</td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+            <!--<td class="indexCol">2</td>-->
+            <!--<td>陈建</td>-->
+            <!--<td>2017-10-01</td>-->
+            <!--<td>320405199306012223</td>-->
+            <!--</tr>-->
+            <!--</tbody>-->
+            <!--</table>-->
+        </div>
+    </div>
+    <div id="zb" onclick="dsjzb();">
+        大数据甄别
+    </div>
+</div>
+<div class="pkcDetail xmcx " id="cunDispatchDiv" style="display:none;">
+    <div style="">
+        <img src="images/lct-1.jpg" style="margin-top: 25px;" />
+    </div>
+</div>
+<div class="pkcDetail xmcx" id="cunDispatchDiv">
+    <table border="0" cellpadding="0" cellspacing="0" class="project">
+        <tr>
+            <td class="xmxhTD">项目序号</td>
+            <td class="jcssTD">110010</td>
+            <td class="xmxhTD">项目类别</td>
+            <td class="jcssTD">基础设施</td>
+        </tr>
+        <tr>
+            <td class="xmxhTD">项目名称</td>
+            <td colspan="3">“个需关爱”入户</td>
+        </tr>
+        <tr>
+            <td class="xmxhTD">项目效果</td>
+            <td id="gzgc">改造完毕</td>
+            <td class="xmxhTD">项目收益（万元）</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td class="xmxhTD">帮扶前照片</td>
+            <td class="imgTD"><img src="images/11019.JPEG" id="bfq" width="100" height="75"></td>
+            <td class="xmxhTD">帮扶后照片</td>
+            <td class="imgTD"><img src="images/11020.JPEG" id="bfh" width="100" height="75"></td>
+        </tr>
+    </table>
+    <br>
+    <table border="0" cellpadding="0" cellspacing="0" class="project">
+        <tr>
+            <td class="xmxhTD">项目序号</td>
+            <td>110004</td>
+            <td class="xmxhTD">项目类别</td>
+            <td>基础设施</td>
+        </tr>
+        <tr>
+            <td class="xmxhTD">项目名称</td>
+            <td colspan="3">“个需关爱”入户</td>
+        </tr>
+        <tr>
+            <td class="xmxhTD">项目效果</td>
+            <td id="gzgc1">改造完毕</td>
+            <td class="xmxhTD">A68b项目收益（元）</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td class="xmxhTD">帮扶前照片</td>
+            <td class="imgTD"><img src="images/11017.JPEG" id="bfq1" width="100" height="75"></td>
+            <td class="xmxhTD">帮扶后照片</td>
+            <td class="imgTD"><img src="images/11008.png" id="bfh1" width="100" height="75"></td>
+        </tr>
+    </table>
+</div>
+<div id="a" class="pkzb" style="display: none">
+    <div class="ckzb1">
+        <img alt="" src="images/4.png" width="32" height="33" style="margin-left: 10px; margin-top: 19px;"><span id="t1">该对象系统认定为特困户</span>
+        <br>
+        <span id="t2">与申报审核一致</span>
+    </div>
+    <div class="chartDiv zrzp" style=" margin-top: 8px;">
+        <div class="chartTitle">
+            家庭收入
+        </div>
+        <div class="leftChart zrzpleft" id="dci_chart1" style=" height: 74px; width: 74px"></div>
+        <div class="rightP zrzpRight" id="data">
+            <p>
+                平均收入：<span id="avgmoney">1万元</span>
+            </p>
+            <!--<p>-->
+            <!--年收入：<span id="allmoney">2万元</span>-->
+            <!--</p>-->
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="chartDiv shzp">
+        <div class="chartTitle">
+            住房生活条件
+        </div>
+        <div class="leftChart shzpleft" id="dci_chart2" style=" height: 74px; width: 74px"></div>
+        <div class="rightP shzpRight" id="data2">
+            <p>
+                住房面积：<span id="hosearea">50</span>平方米
+            </p>
+            <p>
+                饮水是否困难：<span id="water"></span>
+            </p>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="chartDiv jjhp">
+        <div class="chartTitle">
+            生产条件
+        </div>
+        <div class="leftChart jjhpleft" id="dci_chart3" style=" height: 74px; width: 74px"></div>
+        <div class="rightP jjhpRight" id="data3">
+            <p>
+                耕地面积：<span id="gendiarea">1</span>亩
+            </p>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="chartDiv jtsr">
+        <div class="chartTitle">
+            致贫因素
+        </div>
+        <div class="leftChart jtsrleft" id="dci_chart4" style=" height: 74px; width: 74px"></div>
+        <div class="rightP jtsrRight" id="data4"></div>
+        <div class="clear"></div>
+    </div>
+    <div class="ckzb">
+        <a href="javascript:void();" onclick="bishi();"><img src="images/2-icon.png" width="32" height="33" style="margin-left: 14px; margin-top: 19px;"><span id="t3">贫困户指标详情</span></a>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+body {
+    position: absolute;
+    width: 100%;
+    min-height: 100%;
+}
+/*����*/
+.approvedmap .goto {
+    width: 100%;
+    height: 47px;
+    line-height: 47px;
+    /*background-color: #ebebeb;*/
+    /*background-color: #e7f1fd;*/
+    font-size: 16px;
+    font-weight: bold;
+    /*padding: 4px 0px 4px 10px;*/
+    cursor: pointer;
+    background: url("../images/fpqkbg.png") no-repeat;
+    text-align: center;
+    background-size: 100% 100%;
+}
+.approvedmap .goto:hover {
+    background-color: #b4e6ff;
+}
+.approvedmap .goto.active {
+    background-color: #b4e6ff;
+}
+.approved-track-detail .icon-arrows-right, .violate-project-detail .icon-arrows-right {
+    float: right;
+    margin-right: 10px;
+    font-size: 16px;
+    padding: 3px 0px;
+    color: #a0a0a0;
+}
+
+.icon-arrows-right:before {
+    content: "\e627";
+}
+
+.approved-track-detail .summary, .violate-project-detail .summary {
+    width: 100%;
+    height: auto;
+    padding: 10px 20px;
+    font-size: 12px;
+    color: #505050;
+}
+
+.approved-track-detail .table, .approved-track-detail .table {
+    margin-bottom: 0px;
+}
+.approved-track-detail .table > thead > tr, .violate-project-detail .table > thead > tr, .approved-track-detail .table > tbody > tr, .violate-project-detail .table > tbody > tr {
+    min-height: 30px;
+    height: 30px;
+}
+/*.approved-track-detail .table > thead > tr > th, .violate-project-detail .table > thead > tr > th {
+    border-bottom: none;
+    vertical-align: middle;
+    text-align: center;
+    background-color: #f0f0f0;
+    font-weight: normal;
+    padding: 4px 4px;
+}*/
+/*.approved-track-detail .table > tbody > tr > td, .violate-project-detail .table > tbody > tr > td {
+    vertical-align: middle;
+    text-align: center;
+    font-weight: normal;
+    font-size: 12px;
+    padding: 4px 4px;
+}*/
+.approved-track-detail .approvedPie, .violate-project-detail .violatePie {
+    width: 100%;
+    height: 150px; /*padding: 0px 20px 0px 0px;*/
+}
+.approved-track-detail .table > thead > tr > th.region, .violate-project-detail .table > thead > tr > th.region {
+    font-weight: bold;
+}
+
+.title {
+    font-family: "microsoft yahei";
+    /*color: #6baedb;*/
+    color: #ffffff;
+    /*background: url("images/tip_icon.png") no-repeat;*/
+    font-size: 14px;
+    font-weight: normal;
+}

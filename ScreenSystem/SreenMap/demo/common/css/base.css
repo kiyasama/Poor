@@ -1,0 +1,106 @@
+*{
+	font-size:12px;
+}
+body {
+    font-family:helvetica,tahoma,verdana,sans-serif;
+    padding:20px;
+    font-size:13px;
+    margin:0;
+}
+h2 {
+    font-size:18px;
+    color:#333;
+    font-weight:bold;
+    margin:0;
+    margin-bottom:15px;
+}
+.demo-info{
+	background:#FFFEE6;
+	color:#8F5700;
+	padding:12px;
+}
+.demo-tip{
+	width:24px;
+	height:16px;
+	float:left;
+}
+
+.table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.table th,.table td {
+	border: 1px solid #8CACBB;
+	padding: 0.3em 0.7em;
+	text-align: left;
+}
+
+.table th {
+	background: #F8F8F8;
+	text-align: center;
+	font-weight: normal;
+}
+
+.table thead th {
+	text-align: center;
+}
+
+.table tbody th {
+	text-align: right;
+}
+
+.table tr:hover {
+	background-color: #f6fafd;
+}
+
+.table td:hover {
+	background-color: #f9feff;
+}
+
+.form th {
+	text-align: right;
+	font-size: 12px;
+}
+
+.form th,.form td {
+	padding: 0.1em 0.3em;
+	border: 1px solid #D1D7DC;
+}
+
+.form input[type='text'],.form select,.form textarea {
+	width: 150px;
+}
+
+.form input[type='checkbox'],.form input[type='radio'] {
+	width: 20px;
+}
+
+fieldset {
+	border: 1px dotted #D1D7DC;
+}
+
+/* a */
+a {
+	font-size: 9pt;
+	color: #00457D;
+	text-decoration: none
+}
+
+/* a:hover */
+a:hover {
+	font-size: 9pt;
+	color: #FF0000;
+	text-decoration: none
+}
+
+.btn_Coor{
+	height:28px; line-height:28px; background:#2288CC; width:60px; border:none; color:#FFF; cursor:pointer;font-weight:bold;
+	}
+.btn_Coor2{
+	height:28px; line-height:28px; background:#8CACE5; width:60px; border:none; color:#FFF; cursor:pointer;font-weight:bold;
+	}
+.btn_Coor:hover{
+	background:#33BBEE; color:#FFF;font-weight:bold;
+	}
+

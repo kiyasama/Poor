@@ -1,0 +1,89 @@
+
+function addMap(){
+	var emap_url='http://t0.tianditu.com/vec_c/wmts';
+	var emapanno_url='http://t0.tianditu.com/cva_c/wmts';
+	var region = "http://gisserver.tianditu.com/TDTService/region/wms";//行政区划是指县级以上行政区划名称、区划边界等信息
+	var img_url='http://t0.tianditu.com/img_c/wmts';
+	var imganno_url='http://t0.tianditu.com/cia_c/wmts';
+	
+	//电子地图
+	var emap_layer = new L.TileLayer.WMTS( emap_url ,
+                               {
+								   tileSize:256,
+                                   layer: 'vec',
+                                   style: "default",
+                                   tilematrixSet: "c",
+                                   format: "tile",
+                                   attribution: " "
+                               }
+                              );
+  //行政区划
+	var region_layer = new L.TileLayer.WMTS( region ,
+                               {
+								   tileSize:256,
+                                   layer: 'vec',
+                                   style: "default",
+                                   tilematrixSet: "c",
+                                   format: "tile",
+                                   //attribution: "<a href='https://github.com/mylen/leaflet.TileLayer.WMTS'>GitHub</a>&copy; <a href='http://www.ign.fr'>IGN</a>"
+                               }
+                              );
+	//电子地图注记
+    var emapanno_layer = new L.TileLayer.WMTS( emapanno_url,
+                               {
+								   tileSize:256,
+                                   layer: 'cva',
+                                   style: "default",
+                                   tilematrixSet: "c",
+                                   format: "tile",
+                                   //attribution: "<a href='https://github.com/mylen/leaflet.TileLayer.WMTS'>GitHub</a>&copy; <a href='http://www.ign.fr'>IGN</a>"
+                               }
+                              );
+	//影像地图						  
+	var img_layer = new L.TileLayer.WMTS( img_url,
+                               {
+								   tileSize:256,
+                                   layer: 'img',
+                                   style: "default",
+                                   tilematrixSet: "c",
+                                   format: "tile",
+                                   //attribution: "<a href='https://github.com/mylen/leaflet.TileLayer.WMTS'>GitHub</a>&copy; <a href='http://www.ign.fr'>IGN</a>"
+                               }
+                              );
+	//影像地图注记						  
+	var imganno_layer = new L.TileLayer.WMTS( imganno_url,
+                               {
+								   tileSize:256,
+                                   layer: 'cia',
+                                   style: "default",
+                                   tilematrixSet: "c",
+                                   format: "tile",
+                                   //attribution: "<a href='https://github.com/mylen/leaflet.TileLayer.WMTS'>GitHub</a>&copy; <a href='http://www.ign.fr'>IGN</a>"
+                               }
+                              );						  
+	map = L.map('map',{crs:L.CRS.EPSG4326,center: {lon:108.391299999878 , lat:35.2094999998808},zoom: 11, attributionControl: false});
+//	map.attributionControl.addAttribution("Earthquake data &copy; GeoNames")
+	//var c = L.control.attribution();
+	//c.setPrefix("");
+   // L.control.attribution({position:"bottomright",prefix:""});
+    
+	// var dlgLayer=L.layerGroup().addLayer(emap_layer,emapanno_layer);
+	// emap_layer.addTo(map);
+	// emapanno_layer.addTo(map);
+	// region_layer.addTo(map);
+	// var imgLayer=L.layerGroup().addLayer(img_layer,imganno_layer);
+// 	 
+	//map.addControl(c);
+	//L.control.attribution().addAttribution("rr");
+//	map.addLayer(dlgLayer);
+	//map.addLayer(imgLayer);
+	
+	
+	//var credits = L.control.attribution().addTo(map);
+	//credits.addAttribution("© <a href='https://www.mapbox.com/map-feedback/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>");
+	
+	// var att =  L.control.attribution({position:"bottomright",prefix:"dfassdf"});
+	// map.addControl(att);
+}
+
+

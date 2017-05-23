@@ -1,0 +1,31 @@
+<!-- 贫困分布列表模板 -->
+{#foreach $T as record}
+<div class="detailContent">
+    <div class="detailLeft">
+        <table>
+            <tr>
+                <td class="firstCol">户主名称：</td>
+                <td>{$T.record.name}</td>
+            </tr>
+            <tr>
+                <td class="firstCol">身份证号：</td>
+                <td>{$T.record.cardId}</td>
+            </tr>
+            <tr>
+                <td class="firstCol">致贫原因：</td>
+                <td>{$T.record.zhipinrenason}</td>
+            </tr>
+            <tr>
+                <td class="firstCol">联系电话：</td>
+                <td>{$T.record.tel}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="detailRight">
+        <a href="#" class="iconLink"><img src="images/dw_icon.png" class="locateClass" alt="" x='{$T.record.x}' y='{$T.record.y}' name='{$T.record.name}' id='{$T.record.id}' /></a>
+        <!-- <a href="#" class="xqLink fpybq" id='' name="{$T.record.id}" style="margin-top: 0px;">一表清</a> -->
+        <a href="#" class="xqLink pkfbXq" id='{$T.record.id}' style="margin-top: 5px;">详情</a>
+    </div>
+    <div class="clear"></div>
+</div>
+{#/for}

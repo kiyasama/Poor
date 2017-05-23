@@ -1,0 +1,18 @@
+<tr>
+    <th class="indexTD" style="width: 5%;">序号</th>
+    <th>户成员</th>
+    <th>身份证</th>
+    <th>所在地</th>
+    <th style="width: 8%;">详情</th>
+</tr>
+{#foreach $T as record}
+<tr class="sypkhtr">
+    <td>{$T.record.xuhao}</td>
+    <td class="huzhu">{$T.record.houseMember} </td>
+    <td>{$T.record.houseOwnerId} </td>
+    <td>{$T.record.village} </td>
+    <td>
+        <a href="#" class="detailJump xmxq" id="{$T.record.id}">详情</a>
+    </td>
+</tr>
+{#/for}

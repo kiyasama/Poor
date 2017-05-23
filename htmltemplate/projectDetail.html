@@ -1,0 +1,116 @@
+<div class="xqDiv pkc " id="pkcXqDiv" style="height: 500px;width: 618px;">
+    <div class="detailTitle">
+        <span class="titleSpan">扶贫项目详细信息</span>
+        <!-- <span class="imgSpan"><img
+            src="images/detailClose.png"  id="projectDetailClose" /></span> -->
+        <div class="box_tool">
+            <a class="max" href="javascript:;" title="最大化" style="display:none"></a>
+            <a class="revert" href="javascript:;" title="还原" style="display:none"></a>
+            <a class="close" href="javascript:;" id="projectDetailClose" title="关闭"></a>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="detailTabTitle1">
+        <span class="current">项目信息</span>
+        <span id="hid">过程监管</span><span>进度监管</span><span>受益贫困户</span>
+        <!--<span>   </span>-->
+    </div>
+    <div class="wrapDiv">
+        <div class="pkcDetail" id="cunBaseInfo">
+            <div class="pkcTop">
+                <div id="busiform" splitSize="0">
+                    <div splitSize="0" class="xmxxTableDiv">
+                        <table cellpadding="5" cellspacing="0" class="mytable">
+                            <tr>
+                                <td class="xmxhTD">项目编号：</td>
+                                <td id="proId">{$T.proId}</td>
+                                <td class="xmxhTD">项目名称：</td>
+                                <td id="proName">{$T.proName}</td>
+                            </tr>
+                            <tr>
+                                <td class="xmxhTD">扶持资金总额(万元)：</td>
+                                <td id="assistMoney">{$T.assistMoney}</td>
+                                <td class="xmxhTD">扶持单位：</td>
+                                <td id="investUnit">{$T.investUnit}</td>
+                            </tr>
+                            <!--<tr>
+                                <td class="xmxhTD">完成期限：</td>
+                                <td></td>
+
+                            </tr>-->
+                            <tr>
+                                <!--<td class="xmxhTD">以工代赈资金(万元)：</td>
+                                <td id="ygdz"></td>-->
+                                <td class="xmxhTD">项目到户年度：</td>
+                                <td id="createDate">{$T.createDate}</td>
+                                <td class="xmxhTD">行业扶持资金(万元)：</td>
+                                <td id="hyfc">{$T.industryFunds}</td>
+                            </tr>
+                            <tr>
+                                <td class="xmxhTD">社会帮扶资金(万元)：</td>
+                                <td id="shbf">{$T.socialFunds}</td>
+                                <td class="xmxhTD">帮扶单位自筹(万元)：</td>
+                                <td id="bfdwzc">{$T.unitSelfFunds}</td>
+                            </tr>
+                            <tr>
+                                <td class="xmxhTD">信贷资金(万元)：</td>
+                                <td id="xdzj">{$T.creditFunds}</td>
+                                <td class="xmxhTD">其他资金(万元)：</td>
+                                <td id="qtzj">{$T.otherFunds}</td>
+                            </tr>
+                            <tr>
+                                <td class="xmxhTD">信贷的金融机构:</td>
+                                <td id="xdjg">{$T.creditInstitution}</td>
+                                <td class="xmxhTD">项目说明：</td>
+                                <td id="xmsm">{$T.proContent}</td>
+                            </tr>
+                            <tr>
+                                <td class="xmxhTD">联系人：</td>
+                                <td id="lxr">{$T.contactMan}</td>
+                                <td class="xmxhTD">联系电话：</td>
+                                <td id="lxdh">{$T.contactPhone}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pkcDetail pkcTop zcgzd " id="cunDispatchDiv1" style="display:none;">
+            <div class="zcgzd-img">
+                <img src="images/lct-2.jpg" width="500" height="300">
+            </div>
+        </div>
+        <div class="pkcDetail pkcTop zcgzd " id="cunDispatchDiv2" style="display:none;">
+            <div class="syqkDiv" id="proAssPlans">
+            </div>
+            <div style="margin-top:10px; margin-left: 1%;" id="pkfbPagenav22"></div>
+        </div>
+        <div class="pkcDetail pkcTop1 zcgzd " id="cunDispatchDiv4" style="display:none;">
+            <div id="sypkhss">
+                <input type="text" id="sypkhsr" class="empty" style="color: black;" placeholder="请输入户成员名称查询" />
+                <img id="sypkhcx" src="images/search.png" alt="">
+                <span id="sypkhtj"></span>
+                <br/>
+            </div>
+            <div>
+                <div splitSize="0" id="sypkhdiv">
+                    <table cellpadding="5" cellspacing="0" class="mytable1" id="sypkhtable">
+                    </table>
+                </div>
+                <div style="margin-top:10px; margin-left: 1%;" id="pkfbPagenav"></div>
+                <div style="margin-top: 25px;text-align: center;" id="fhsypkh">
+                    <input type="button" style="width: 90px;background-color: #2282BF;" value="返回">
+                </div>
+            </div>
+        </div>
+        <div class="pkcDetail pkcTop zcgzd " id="cunDispatchDiv3" style="display:none;">
+            <div class="zcgzd-img">
+                <!-- <img src="images/lct-4.jpg" />
+                 <img src="images/lct-41.jpg" />-->
+            </div>
+        </div>
+    </div>
+    <div class="xqDiv6" style="display: none;" id="yczj">
+        <iframe src="yczj.html" frameborder="0" marginheight="0" marginwidth="0" frameborder="0" scrolling="no" style="width: 100%;height: 100%; top:25%;right: 400px;"></iframe>
+    </div>
+</div>

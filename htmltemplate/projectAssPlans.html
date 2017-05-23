@@ -1,0 +1,20 @@
+<table>
+    <thead>
+        <tr>
+            <th class="jdTH">节点</th>
+            <th>项目进度</th>
+        </tr>
+    </thead>
+    <tbody>
+        {#foreach $T as record}
+        <tr>
+            <td class="jdTD"><span>{$T.record.timePoint}</span><img src="images/jd_icon.png" alt=""></td>
+            <td class="syqkTD">
+                <div class="qkDiv">
+                    <p>{$T.record.content}</p>
+                </div>
+            </td>
+        </tr>
+        {#/for}
+    </tbody>
+</table>

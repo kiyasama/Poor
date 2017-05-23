@@ -1,0 +1,27 @@
+<!--帮扶计划详情 -->
+<div class="bfry" id="rzck">
+    <div class="detailTitle" id="detailTitle">
+        <span class="titleSpan">帮扶计划详细信息</span>
+        <!-- <span class="imgSpan return"><img src="images/box_return1.png" id="goback" /></span> -->
+        <div class="box_tool">
+            <a class="max" href="javascript:;" title="最大化" style="display:none;"></a>
+            <a class="revert" href="javascript:;" title="还原" style="display:none;"></a>
+            <a class="close" href="javascript:;" id="goback_hp" title="关闭"></a>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="rzDetail" style="overflow: auto; height:490px;">
+        <div class="hzxx">
+            <span class="hzSpan">项目名称：</span>
+            <span class="contSpan" id="holdname" style="width: 600px;">{$T.xmName}</span>
+        </div>
+        <div class="nrmsDiv">
+            <span>项目内容及规划：</span>
+            <p id="content">{$T.description}</p>
+        </div>
+        <div class="remarkDiv">
+            <span>计划投资（元）：</span>
+            <p id="remark">{$T.money}</p>
+        </div>
+    </div>
+</div>

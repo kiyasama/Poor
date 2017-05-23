@@ -1,0 +1,122 @@
+<!-- 贫困村详情 弹出框 -->
+<div class="xqDiv pkcInfo" id="pkcInfo">
+    <div class="detailTitle" id="detailTitle">
+        <span class="titleSpan">贫困村详细信息</span>
+        <div class="box_tool">
+            <a class="max" href="javascript:;" title="最大化" style="display:none;"></a>
+            <a class="revert" href="javascript:;" title="还原" style="display:none;"></a>
+            <a class="close" href="javascript:;" id="closepkc" title="关闭"></a>
+        </div>
+        <!--<span class="imgSpan"><img src="images/detailClose.png" onclick="closeDetailDiv('bfry');" /></span>-->
+        <div class="clear"></div>
+    </div>
+    <div class="bfryDetail" id="pkcInfoDetail">
+        <div class="commonTitle tabTitle">
+            <span id="base3" class="current">基本情况</span>
+            <span id="zcryTab" class="">驻村工作人员</span>
+        </div>
+        <div class="detailWrap">
+            <div class="contentWrap jbqk3">
+                <div class="tableDiv">
+                    <table class="table-striped pkc-table pkc-policy-table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <label>行政区划：</label>{$T.AREANAME}</th>
+                                <th>
+                                    <label>村负责人：</label>{$T.VILLAGEMANAGER}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <label>村属性：</label>{$T.VILLAGEATTRIBUTE}</td>
+                                <td>
+                                    <label>村办公电话：</label>{$T.PHONENUM}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table-striped pkc-table pkc-info-table">
+                        <thead>
+                            <tr>
+                                <th colspan="2">人口信息</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <label>自然村（村民小组）个数：</label>{$T.ZRCGS}</td>
+                                <td>
+                                    <label>总户数（户）：</label>{$T.ZHS}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>贫困户数（户）：</label>{$T.PKHS}</td>
+                                <td>
+                                    <label>低保户数（户）：</label>{$T.DBHS}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>五保户数（户）：</label>{$T.WBHS}</td>
+                                <td>
+                                    <label>总人数（人）：</label>{$T.ZRKS}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>贫困人数（人）：</label>{$T.PKRKS}</td>
+                                <td>
+                                    <label>低保人数（人）：</label>{$T.DBRKS}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>五保人数（人）：</label>{$T.WBRKS}</td>
+                                <td>
+                                    <label>残疾人数（人）：</label>{$T.CJRKS}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>劳动力人数（人）：</label>{$T.LDLRS}</td>
+                                <td>
+                                    <label>外出务工人数（人）：</label>{$T.WCWGRS}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table-striped pkc-table pkc-info-table">
+                        <thead>
+                            <tr>
+                                <th colspan="2">生产信息</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <label>耕地面积（亩）：</label>{$T.GDMJ}</td>
+                                <td>
+                                    <label>林果面积（亩）：</label>{$T.LGMJ}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <label>牲畜存栏数（头）：</label>{$T.XCCLS}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="contentWrap zcry" style="display: none;">
+                <div class="tableDiv" style="overflow:auto;">
+                    <table id="zcryTable">
+                        <thead>
+                            <th class="indexTH">序号</th>
+                            <th>姓名</th>
+                            <th>单位名称</th>
+                            <th>单位隶属关系</th>
+                            <th>联系电话</th>
+                            <th>驻村时间</th>
+                        </thead>
+                        <tbody id="zcryInfo"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

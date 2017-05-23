@@ -1,0 +1,56 @@
+
+
+body, ul, ol, li, p, h1, h2, h3, h4, h5, h6, form, fieldset, table, td, img, div, dl, dt, dd { margin: 0; padding: 0; border: 0; }
+body { font-size: 12px; font-family: "Microsoft YaHei UI", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif; margin: 0 auto; padding: 0; color: #4a4a4a;background-color: #f3f3f3; }
+table { border-collapse: collapse; border-spacing: 0; }
+ul, ol { list-style-type: none; }
+select, input, select, textarea { font: 12px tahoma, arial, sans-serif; vertical-align: middle; }
+fieldset, img { border: 0; }
+address, cite, dfn, em, var, caption, code, th, dfn { font-style: normal; font-style: normal; }
+a { text-decoration: none; color: #4a4a4a; }
+a:hover { text-decoration: underline; color: #0e66b0; }
+
+.checkbox-div input,.checkbox-div span{float: left;}
+.checkbox-div input{width: 14px !important;margin: 0 5px 0;}
+
+/*寮瑰嚭妗嗘悳绱�**/
+.search_header{height: 35px;border-bottom: 1px solid #9a9a9a;color: #295a82;font-weight: bold;line-height: 35px; margin-bottom: 10px;}
+.search_title { margin-left: 10px;}
+.search_content .search_filed {line-height: 25px;}
+.search_btn_on {background-color: #295a82;}
+.search_btn_on a{color: #fff;}
+.search_btn_on {background-color: #295a82;border-radius: 2px;line-height: 26px;margin: 10px 0;text-align: center;}
+.search_fileds{margin-bottom: 5px;}
+.search_fileds .title{ float: left;width: 40%;}
+.search_fileds .filed{ float: left;width: 60%;}
+.search_result{margin-top: 5px;}
+.search_btn_on{cursor: pointer;}
+.search_btn_on:hover{background-color: #3c6d7d;}
+.search_result .message{font-size: 12px; color: #e12020;}
+.search_result {line-height: 25px; margin: 10px 0;}
+.result_list em{font-weight: bold;background-color: #dff2ff;color: #4d83c3;display: inline-block;font: bold 10px tahoma,arial,sans-serif;height: 12px;margin-right: 5px;overflow: hidden;padding: 0 4px;}
+
+/*鎼滅储缁撴灉寮瑰嚭妗嗗拰鍚庡彴table鏍峰紡**/
+.result-table{width: 100%; line-height: 22px;}
+.result-table .title{font-weight:bold;line-height:20px;vertical-align:middle;}
+.result-table td {width: 200px}
+.result-table th {widht:150px;}
+.result-table img{height: 80px;width: 80px;margin-left: 40px;}
+.result-table tbody th {text-align: right;}
+.required,.bitian{color: #e12020;}
+.result-table{background: #f8f8f8 none repeat scroll 0 0;font-weight: normal;text-align: center;}
+.result-table th, .result-table td {border: 1px solid #8cacbb;padding: 3px 10px;text-align: left;}
+.result-table th {width: 20%;}
+.result-table label input[type="checkbox"]{margin-left: 15px;margin-right: 5px;width: 25px;}
+.result-table select,.result-table input,.result-table textarea{height:23px; line-height: 23px;color: #000;width: 100%;background-color: #fff;border: 1px solid #cdcdcd;padding-left: 5px;}
+.result-table select[disabled="disabled"], .result-table input[disabled="disabled"], .result-table textarea[disabled="disabled"],.result-table select[disabled="disabled"], .result-table input[disabled="disabled"], .result-table textarea[disabled="disabled"] {background-color: #eee;color: #666;/*text-shadow: 1px 1px 0 #fff;*/}
+.result-table select{width: 102%;}
+.result-table .btn{cursor:pointer;background-color: #295a82 !important; border-radius: 4px;color: #fff !important;line-height: 23px;height:25px; margin-left: 5px;width: 150px;text-shadow: 0px;}
+.xy-sign div,.xy_sign input{float: left;}
+.xy-sign input{width:80%;}
+.xy-sign-title {margin-right: 5px;}
+
+/*list.jsp*/
+.list-body{padding:0px;overflow:hidden;}
+
+

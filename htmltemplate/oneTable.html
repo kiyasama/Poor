@@ -1,0 +1,429 @@
+<!-- 一表清 弹出框-->
+<div class="xqDiv xxdjb" id="xxdjb">
+    <div class="detailTitle" id="detailTitle">
+        <span class="titleSpan">贫困户脱贫信息一表清</span>
+        <div class="box_tool">
+            <a class="max" href="javascript:;" title="最大化" style="display:none;"></a>
+            <a class="revert" href="javascript:;" title="还原" style="display:none;"></a>
+            <a class="close" href="#" id="oneClose" title="关闭"></a>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="tableDetail" id="tableDetail">
+        <h2 class="box_title">贫困户脱贫信息一表清</h2>
+        <div class="general_title">
+            一、基本信息
+        </div>
+        <div class="tableWrap">
+            <table id="">
+                <tr>
+                    <!--<td colspan="16" class="left_alignTD spanTD">
+                        <span>旬邑县</span>
+                        <span>马栏镇</span>
+                        <span>后义阳村</span>
+                        <span>一组</span>
+                    </td>-->
+                </tr>
+                <tr>
+                    <td colspan="12" class="left_alignTD spanTD">
+                        <span>户主姓名：{$T.list[0].NAME}</span>
+                        <span>联系电话：{$T.list[0].TEL}</span>
+                        <span>开户银行：{$T.list[0].BANK}</span>
+                        <span>银行账号（一卡通）：{$T.list[0].ACCOUNT}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="12" class="left_alignTD checkboxTD">
+                        <span class="sbbz">识别标准：</span>
+                        <input type="checkbox" checked="checked" /><span>国家标准</span>
+                        <input type="checkbox" /><span>省定标准</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>序号</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>年龄</th>
+                    <th>公民身份号码或残疾证号码</th>
+                    <th>与户主关系</th>
+                    <th>民族</th>
+                    <th>文化程度</th>
+                    <th>在校生状况</th>
+                    <th>健康状况</th>
+                    <th>劳动能力</th>
+                    <th>从业状况</th>
+                </tr>
+                <!--<tr>
+                    <th rowspan="2">健康</th>
+                    <th rowspan="2">患病</th>
+                    <th colspan="3">残疾人</th>
+                </tr>
+                <tr>
+                    <th>Ⅰ级</th>
+                    <th>Ⅱ级</th>
+                    <th>Ⅲ级</th>
+                </tr>-->
+                {#foreach $T.obj as record}
+                <tr>
+                    <td>{$T.index}</td>
+                    <td>{$T.record.NAME}</td>
+                    <td>{$T.record.SEX}</td>
+                    <td>{$T.record.age}</td>
+                    <td>{$T.record.CARDID}</td>
+                    <td>{$T.record.RELATION}</td>
+                    <td>{$T.record.NATION}</td>
+                    <td>{$T.record.EDUCATION}</td>
+                    <td>{$T.record.SCHOOL}</td>
+                    <td>{$T.record.HEALTH}</td>
+                    <td>{$T.record.WORKPOWER}</td>
+                    <td>{$T.record.WORKSTATUS}</td>
+                </tr>
+                {#/for}
+                <!--
+                <tr>
+                    <td>2</td>
+                    <td>王智军</td>
+                    <td>男</td>
+                    <td></td>
+                    <td>6104291982091*****</td>
+                    <td>之子</td>
+                    <td>汉族</td>
+                    <td>初中</td>
+                    <td>非在校生</td>
+                    <td></td>
+                    <td>患有大病</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>丧失劳动力</td>
+                    <td>其他</td>
+                </tr>-->
+                <!--<tr>
+                    <td>3</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>-->
+                <tr>
+                    <td colspan="4" class="titleTD">耕地面积（亩）</td>
+                    <td>{$T.list[0].FARMLAND}</td>
+                    <td colspan="3" class="titleTD">家庭总收入（元）</td>
+                    <td></td>
+                    <td colspan="2" class="titleTD thirdTD">③领取养老保险金（元）</td>
+                    <td>{$T.list[0].PENSIONS}</td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="titleTD">林地面积（亩）</td>
+                    <td>{$T.list[0].WOODLAND}</td>
+                    <td colspan="3" class="titleTD secondTD">a、全家务工收入（元）</td>
+                    <td>{$T.list[0].LANORINCOME}</td>
+                    <td colspan="2" class="titleTD thirdTD">④医疗救助金（元）</td>
+                    <td>{$T.list[0].MEDICIAL}</td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="titleTD secondTD">a、退耕还林面积（亩）</td>
+                    <td></td>
+                    <td colspan="3" class="titleTD secondTD">b、全家生产经营性净收入（元）</td>
+                    <td>{$T.list[0].PRODUCTINCOME}</td>
+                    <td colspan="2" class="titleTD thirdTD">⑤生态补偿金（含退耕还林等）（元）</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="titleTD secondTD">b、林果面积（亩）</td>
+                    <td>{$T.list[0].WOODLAND}</td>
+                    <td colspan="3" class="titleTD secondTD">c、财产性收入（元）</td>
+                    <td></td>
+                    <td colspan="2" class="titleTD thirdTD">⑥农业三项补贴（元）</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="titleTD">住房面积（平方米）</td>
+                    <td>{$T.list[0].HOUSEAREA}</td>
+                    <td colspan="3" class="titleTD secondTD">d、转移性收入（各类补贴）</td>
+                    <td>{$T.list[0].SUBSIDY}</td>
+                    <td colspan="2" class="titleTD thirdTD">⑦高龄补贴（元）</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="titleTD">主要住房是否危房</td>
+                    <td></td>
+                    <td colspan="3" class="titleTD">①残疾人补贴（元）</td>
+                    <td></td>
+                    <td colspan="2" class="titleTD thirdTD">⑧兜底补差（元）</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="titleTD">家庭人均纯收入（元）</td>
+                    <td>{$T.list[0].FAMILYINCOME}</td>
+                    <td colspan="3" class="titleTD thirdTD">②领取低保金（元）</td>
+                    <td>{$T.list[0].LOWLIVING}</td>
+                    <td colspan="2"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="titleTD center_alignTD">致贫原因</td>
+                    <td colspan="10" class="left_alignTD checkboxTD">
+                        {$T.list[0].POVERTYREASON}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="hideSquare">
+            <div class="general_title">
+                二、帮扶信息
+            </div>
+            <div class="tableWrap">
+                <table>
+                    <tr>
+                        <td class="titleTD center_alignTD">帮扶责任人</td>
+                        <td class="titleTD center_alignTD">姓名</td>
+                        <td></td>
+                        <td class="titleTD center_alignTD">所在单位</td>
+                        <td></td>
+                        <td class="titleTD center_alignTD">职务</td>
+                        <td></td>
+                        <td class="titleTD center_alignTD">联系电话</td>
+                        <td></td>
+                        <td class="titleTD center_alignTD">预脱贫时间</td>
+                        <td colspan="2"></td>
+                    </tr>
+                    <tr>
+                        <th rowspan="9" class="rowspanTD">脱贫路径及帮扶措施</th>
+                        <th>类别</th>
+                        <th>内容</th>
+                        <th>种类</th>
+                        <th colspan="3">规模</th>
+                        <th>总投资（元）</th>
+                        <th>自筹资金（元）</th>
+                        <th>帮扶资金（元）</th>
+                        <th>实施时间</th>
+                        <th>项目进度</th>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">产业发展</td>
+                        <td>种植业</td>
+                        <td>苹果种植</td>
+                        <td colspan="3"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>养殖业</td>
+                        <td></td>
+                        <td colspan="3"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>加工业</td>
+                        <td></td>
+                        <td colspan="3"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>转移就业</td>
+                        <td>就业人数</td>
+                        <td></td>
+                        <td>接受培训情况</td>
+                        <td></td>
+                        <td>就业行业</td>
+                        <td colspan="2"></td>
+                        <td>就业地点</td>
+                        <td colspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td>移民搬迁</td>
+                        <td>建房面积</td>
+                        <td></td>
+                        <td>总投资（元）</td>
+                        <td></td>
+                        <td>自筹资金（元）</td>
+                        <td></td>
+                        <td>补助资金（元）</td>
+                        <td></td>
+                        <td>建房时间</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>教育扶贫</td>
+                        <td>大学生补贴（元）</td>
+                        <td></td>
+                        <td>中职在校生补贴（元）</td>
+                        <td></td>
+                        <td>高中生补贴（元）</td>
+                        <td></td>
+                        <td>中小学生补贴（元）</td>
+                        <td></td>
+                        <td>学前教育补贴（元）</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>生态保护</td>
+                        <td>生态补偿金（元）</td>
+                        <td></td>
+                        <td>安置就业人数</td>
+                        <td></td>
+                        <td>其他</td>
+                        <td colspan="5"></td>
+                    </tr>
+                    <tr>
+                        <td>保障兜底</td>
+                        <td>低保金（元）</td>
+                        <td></td>
+                        <td>养老保险和高龄补贴（元）</td>
+                        <td></td>
+                        <td>残疾补贴（元）</td>
+                        <td></td>
+                        <td>大病救助（元）</td>
+                        <td></td>
+                        <td>兜底补差（元）</td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="tableWrap">
+                <table>
+                    <tr>
+                        <td colspan="3" class="titleTD center_alignTD">帮扶计划及帮扶措施</td>
+                    </tr>
+                    <tr>
+                        <th style="width: 220px;">帮扶时间</th>
+                        <th>帮扶计划</th>
+                        <th>帮扶措施</th>
+                    </tr>
+                    {#foreach $T.obj2 as record}
+                    <tr>
+                        <td>{$T.record.year}年</td>
+                        <td>{$T.record.assistplan}</td>
+                        <td>{$T.record.assistprecaution}</td>
+                    </tr>
+                    {#/for}
+                </table>
+            </div>
+            <div class="general_title">
+                三、脱贫成效
+            </div>
+            <div class="tableWrap">
+                <table>
+                    <tr>
+                        <th rowspan="6" class="rowspanTD">贫困户脱贫成效</th>
+                        <th>项目时间</th>
+                        <th>家庭总收入（现金收入）（元）</th>
+                        <th>经营性收入（元）</th>
+                        <th>工资性收入（元）</th>
+                        <th>财产性收入（元）</th>
+                        <th>转移性收入（元）</th>
+                        <th>年人均纯收入（元）</th>
+                    </tr>
+                    <tr>
+                        <td>2015年12月31日</td>
+                        <td>2880</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>2016年6月30日</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>2016年12月31日</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>2017年6月30日</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>2017年12月31日</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="titleTD center_alignTD">脱贫时间</td>
+                        <td colspan="6"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

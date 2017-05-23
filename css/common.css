@@ -1,0 +1,283 @@
+.gj,
+.bfry {
+    border: 1px solid #e4e4e4;
+    font-family: "微软雅黑";
+    height: 510px;
+    width: 720px;
+    background-color: #ffffff;
+    font-size: 13px;
+}
+
+.detailTitle {
+    background-color: #3a95c9;
+    padding-left: 20px;
+    height: 40px;
+    line-height: 40px;
+}
+
+.detailTitle span {
+    color: #ffffff;
+    font-size: 15px;
+    vertical-align: middle;
+}
+
+.detailTitle span.titleSpan {
+    float: left;
+}
+
+.detailTitle span.imgSpan {
+    float: right;
+    margin-top: 4px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.detailTitle span.imgSpan img {
+    vertical-align: middle;
+    margin-top: -8px;
+}
+
+.detailTitle span.return {
+    /*margin-top: 7px;*/
+}
+
+.optDiv {
+    height: 35px;
+    border-bottom: 1px solid #d7dadd;
+    background-color: #f3f9ff;
+    line-height: 35px;
+    padding: 0 5px;
+    font-size: 0;
+}
+
+.optDiv span {
+    font-size: 14px;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    height: 35px;
+    line-height: 33px;
+}
+
+.optDiv input {
+    border: none;
+}
+
+.optDiv input.date_input {
+    height: 24px;
+    line-height: 24px;
+    border: 1px solid #a0a0a0;
+    width: 105px;
+    border-radius: 3px;
+    padding-right: 30px;
+    font-size: 12px;
+    *margin-top: 2px;
+}
+
+.date,
+.playOpt,
+.btnDiv,
+.speedDiv {
+    float: left;
+    height: 35px;
+    height: 35px;
+}
+
+.date {
+    height: 35px;
+    line-height: 35px;
+    /*margin-right: 10px;*/
+}
+
+.btnDiv {
+    margin-left: 15px;
+}
+
+.date_btn {
+    height: 20px;
+    width: 25px;
+    background: url("../images/date_icon.png") no-repeat 0 3px;
+    cursor: pointer;
+    margin-left: -28px;
+}
+
+.img_btn {
+    vertical-align: middle;
+    cursor: pointer;
+    margin-left: -26px;
+    margin-top: -10px;
+    *margin-top: -17px;
+    margin-right: 10px;
+}
+
+.gjOpt {
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+    margin: 5px 0;
+    margin-right: 4px;
+}
+
+.playOpt {
+    /*margin-top: -4px;*/
+    height: 35px;
+}
+
+.play {
+    background: url("../images/play.png") no-repeat;
+}
+
+.play:hover {
+    background: url("../images/play_cur.png") no-repeat;
+}
+
+.pause {
+    background: url("../images/pause.png") no-repeat;
+}
+
+.pause:hover {
+    background: url("../images/pause_cur.png") no-repeat;
+}
+
+.stop {
+    background: url("../images/stop.png") no-repeat;
+}
+
+.stop:hover {
+    background: url("../images/stop_cur.png") no-repeat;
+}
+
+.speedDiv {
+    margin-left: 8px;
+}
+
+.speedDiv span.bfsd {
+    *margin-top: -6px;
+}
+
+.speedDiv span.speed {
+    margin: 0;
+}
+
+.speed {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    width: 80px;
+    height: 35px;
+    background: url("../images/speedBg.png") no-repeat 0 6px;
+}
+
+.speed img {
+    vertical-align: middle;
+    margin-left: 10px;
+    *margin-top: 10px;
+}
+
+
+/*帮扶日志查看样式*/
+
+.rzDetail {
+    padding: 0 10px;
+    font-size: 14px;
+}
+
+.hzxx {
+    height: 45px;
+    line-height: 45px;
+}
+
+.hzxx span {
+    font-size: 14px;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+.hzxx span.contSpan {
+    width: 225px;
+    padding-left: 15px;
+}
+
+.xctpDiv span,
+.nrmsDiv span,
+.remarkDiv span {
+    font-size: 15px;
+}
+
+.photo,
+.nrmsDiv p,
+.remarkDiv p {
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    margin: 0;
+    height: 75px;
+    padding: 5px;
+    margin-top: 4px;
+    overflow-y: auto;
+}
+
+.nrmsDiv,
+.remarkDiv {
+    margin-top: 12px;
+}
+
+.photo {
+    height: 125px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px 0;
+    /*margin: 6px 0;*/
+}
+
+.photo img {
+    width: 95px;
+    height: 95px;
+    margin-left: 10px;
+}
+
+
+/*最大化   还原   关闭   样式*/
+
+.box_tool {
+    float: right;
+    width: 70px;
+}
+
+.box_tool a {
+    margin-right: 8px;
+    display: block;
+    float: left;
+    width: 30px;
+    height: 30px;
+    background: url(../images/box_tool.png) no-repeat;
+    margin: 5px 0;
+}
+
+.box_tool a.max {
+    background-position: -32px 0px;
+}
+
+.box_tool a.max:hover {
+    background-position: -32px -27px;
+}
+
+.box_tool a.revert {
+    background-position: -1px 0;
+    display: none;
+}
+
+.box_tool a.revert:hover {
+    background-position: -1px -27px;
+}
+
+.box_tool a.close {
+    background-position: -63px 0;
+    margin-left: 30px;
+    /* 临时策略 */
+}
+
+.box_tool a.close:hover {
+    background-position: -63px -55px;
+}

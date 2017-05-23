@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>汉中扶贫</title>
+		<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<style type="text/css">
+			.datatable {
+				width: 100%;
+				height: auto;
+				padding: 10px;
+			}
+			.datatable input{
+				width:90%;
+				border-radius: 4px;
+			}
+			.datatable td{
+				width:15% !important;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="panel-group" id="accordion">
+			<!--<div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                href="#collapseOne">
+                产业扶贫
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in">
+            <div class="panel-body">
+            	产业扶贫内容
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                href="#collapseTwo">
+                资产扶贫
+            </a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse">
+        <div class="panel-body">
+            资产扶贫内容
+        </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                href="#collapseThree">
+                金融扶贫
+                </a>
+            </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse">
+            <div class="panel-body">
+                金融扶贫内容
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                href="#collapsefour">
+                 就业扶贫
+                </a>
+            </h4>
+        </div>
+        <div id="collapsefour" class="panel-collapse collapse in">
+            <div class="panel-body">
+            	就业扶贫内容
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                href="#collapsefive">
+                技术扶贫
+            </a>
+            </h4>
+        </div>
+        <div id="collapsefive" class="panel-collapse collapse">
+        <div class="panel-body">
+            技术扶贫内容
+        </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                href="#collapsesix">
+                金融扶贫
+                </a>
+            </h4>
+        </div>
+        <div id="collapsesix" class="panel-collapse collapse">
+            <div class="panel-body">
+                金融扶贫内容
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                href="#collapse7">
+                搬迁扶贫
+                </a>
+            </h4>
+        </div>
+        <div id="collapse7" class="panel-collapse collapse in">
+            <div class="panel-body">
+            	搬迁扶贫内容
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                href="#collapse8">
+                教育扶贫
+            </a>
+            </h4>
+        </div>
+        <div id="collapse8" class="panel-collapse collapse">
+        <div class="panel-body">
+            教育扶贫内容
+        </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                href="#collapse9">
+                社保扶贫
+                </a>
+            </h4>
+        </div>
+        <div id="collapse9" class="panel-collapse collapse">
+            <div class="panel-body">
+                社保扶贫内容
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                href="#collapse9">
+				健康扶贫
+                </a>
+            </h4>
+        </div>
+        <div id="collapse9" class="panel-collapse collapse">
+            <div class="panel-body">
+                健康扶贫内容
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                href="#collapse9">
+                生态扶贫
+                </a>
+            </h4>
+        </div>
+        <div id="collapse9" class="panel-collapse collapse">
+            <div class="panel-body">
+                生态扶贫内容
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                href="#collapse9">
+                交通扶贫
+                </a>
+            </h4>
+        </div>
+        <div id="collapse9" class="panel-collapse collapse">
+            <div class="panel-body">
+                交通扶贫内容
+            </div>
+        </div>
+    </div>
+    div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                href="#collapse9">
+                水利扶贫
+                </a>
+            </h4>
+        </div>
+        <div id="collapse9" class="panel-collapse collapse">
+            <div class="panel-body">
+                水利扶贫内容
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                href="#collapse9">
+                电力扶贫
+                </a>
+            </h4>
+        </div>
+        <div id="collapse9" class="panel-collapse collapse">
+            <div class="panel-body">
+                电力扶贫内容
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                href="#collapse9">
+                文化扶贫
+                </a>
+            </h4>
+        </div>
+        <div id="collapse9" class="panel-collapse collapse">
+            <div class="panel-body">
+                文化扶贫内容
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                href="#collapse9">
+                电商扶贫
+                </a>
+            </h4>
+        </div>
+        <div id="collapse9" class="panel-collapse collapse">
+            <div class="panel-body">
+                电商扶贫内容
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                href="#collapse9">
+                旅游扶贫
+                </a>
+            </h4>
+        </div>
+        <div id="collapse9" class="panel-collapse collapse">
+            <div class="panel-body">
+                旅游扶贫内容
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                href="#collapse9">
+                环境扶贫
+                </a>
+            </h4>
+        </div>
+        <div id="collapse9" class="panel-collapse collapse">
+            <div class="panel-body">
+                环境扶贫内容
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                href="#collapse9">
+                干部人才扶贫
+                </a>
+            </h4>
+        </div>
+        <div id="collapse9" class="panel-collapse collapse">
+            <div class="panel-body">
+                干部人才扶贫内容
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                href="#collapse9">
+                法律扶贫
+                </a>
+            </h4>
+        </div>
+        <div id="collapse9" class="panel-collapse collapse">
+            <div class="panel-body">
+                法律扶贫内容
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                href="#collapse9">
+              公益扶贫
+                </a>
+            </h4>
+        </div>
+        <div id="collapse9" class="panel-collapse collapse">
+            <div class="panel-body">
+                公益扶贫内容
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                href="#collapse9">
+                光伏扶贫
+                </a>
+            </h4>
+        </div>
+        <div id="collapse9" class="panel-collapse collapse">
+            <div class="panel-body">
+                光伏扶贫内容
+            </div>
+        </div>
+    </div>-->
+
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				initpage();
+			});
+			var panelTitle = [
+				"产业扶贫", "资产扶贫", "金融扶贫", "就业扶贫", "技术扶贫", "搬迁扶贫", "教育扶贫", "社保扶贫", "健康扶贫", "交通扶贫", "水利扶贫", "文化扶贫", "电商扶贫", "旅游扶贫", "环境扶贫", "干部人才扶贫", "法律扶贫", "公益扶贫", "光伏扶贫"
+			]
+			var tableInfo = {
+				"产业扶贫": {
+					children: [
+						"户主姓名", "致贫原因", "产业名称", "产业规模", "扶持标准", '扶持金额', "预计年收入", "实际收入", "是否有企业（合作社/园区）带动", "企业（合作社/园区）名称"
+					]
+				},
+				"资产扶贫": {
+					children: [
+						"户主姓名", "致贫原因", "资产名称", "投资类型", "资产规模", "预计年收入", "实际年收入"
+					]
+				},
+				"金融扶贫": {
+					children: [
+						"户主姓名", "致贫原因", "贷款金额", "贷款时间", "贷款年限", "年利率",
+						"贷款机构", "贷款用途", "是否参加互助资金合作社", "是否参加精准扶贫保险业务"
+					]
+				},
+				"就业扶贫": {
+					children: [
+						"户主姓名", "帮扶对象姓名", "致贫原因", "就业企业名称", "就业区域", "就业(务工)地址", "就业类型（工种）", "预计年收入", "实际年收入"
+					]
+				},
+				"技术扶贫": {
+					children: [
+						"户主姓名", "帮扶对象姓名", "致贫原因", "培训类型", "其他培训需求"
+					]
+				},
+				"搬迁扶贫": {
+					children: [
+						"户主姓名", "致贫原因", "安置方式", "安置地类型", "搬迁方式", "搬迁进度", "安置面积", "享受建（购）房补助资金", "计划搬迁年度", "预计入住时间", "搬迁可能存在的困难"
+					]
+				},
+				"教育扶贫": {
+					children: [
+						"户主姓名", "帮扶对象姓名", "致贫原因", "在校情况", "就读学校", "入学时间", "教育支持措施", "教育支持资金"
+					]
+				},
+				"社保扶贫": {
+					children: [
+						"户主姓名", "致贫原因", "领取养老保险待遇金额", "低保金", "五保金", "残疾人补助金", "高龄补贴", "优抚对象补助金", "医疗救助金", "临时救助金"
+					]
+				},
+				"健康扶贫": {
+					children: [
+						"户主姓名", "致贫原因", "计生家庭奖扶金", "失独家庭一次性补助", "扶贫对象姓名", "参保类型", "医疗费用合计", "报销金额", "自付金额", "病种", "是否九种大病", "大病名称"
+					]
+				},
+				"生态扶贫": {
+					children: [
+						"户主姓名", "致贫原因", "生态补偿补偿面积", "生态补偿补偿金额", "退耕还林面积", "退耕还林补助金额", "参与护林员人数", "护林面积", "护林补助资金"
+					]
+				},
+				"交通扶贫": {
+					children: [
+						"与村/组干路距离", "入户路类型"
+					]
+				},
+				"水利扶贫": {
+					children: [
+						"是否饮水困难", "是否饮水安全", "饮水类型", "是否为水库移民对象", "享受帮扶措施类型", "补助金额"
+					]
+				},
+				"电力扶贫": {
+					children: [
+						"是否通生活用电", "是否通成产用电", "是否接受赠照明设备（前提是五保户）", "是否享受10度免费用电额度（前提是五保户）"
+					]
+				},
+				"文化扶贫": {
+					children: [
+						"是否有有线电视", "是否接入网络", "收视费补贴金"
+					]
+				},
+				"电商扶贫": {
+					children: [
+						"是否开设网店", "网络交易额", "是否享受补助", "补助金额"
+					]
+				},
+				"旅游扶贫": {
+					children: [
+						"旅游扶贫类型", "名称", "预计年收入", "实际收入"
+					]
+				},
+				"环境扶贫": {
+					children: [
+						"是否有卫生厕所", "是否设置禽畜粪污治理措施", "是否设置污水处理处置措施", "生活垃圾处理防方式", "环境保洁员人数", "预计年收入"
+					]
+				},
+				"干部人才扶贫": {
+					children: [
+						"是否有帮扶人", "帮扶人姓名", "帮扶年限", "单位", "职务", "联系电话"
+					]
+				},
+				"法律扶贫": {
+					children: [
+						"是否享受法律援助"
+					]
+				},
+				"公益扶贫": {
+					children: [
+						"是否愿意接受社会捐赠", "帮扶类型", "组织/个人名称", "帮扶类型", "现金捐赠金额", "物品捐赠折合金额", "捐赠日期"
+					]
+				},
+				"光伏扶贫": {
+					children: [
+						"是否设置户建光伏电站", "装机瓦数", "政府支持资金", "光伏电站年收益", "是否如入股光伏企业", "入股方式", "入股资金", "年收益"
+					]
+				}
+			}
+
+			function initpage() {
+				var html = '';
+				debugger;
+				console.log(panelTitle);
+				console.log(panelTitle[0]);
+				for(var i = 0; i < panelTitle.length; i++) {
+					if(i % 5 === 0){
+						html += '<div class="panel panel-info">' + '<div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" 							data-parent="#accordion" href="#collapse' + panelTitle[i] + '">' +
+						panelTitle[i] + '</a></h4></div><div id="collapse' + panelTitle[i] +
+						'" class="panel-collapse collapse"><div class="panel-body">';
+					}else{
+						html += '<div class="panel panel-default">' + '<div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" 							data-parent="#accordion" href="#collapse' + panelTitle[i] + '">' +
+						panelTitle[i] + '</a></h4></div><div id="collapse' + panelTitle[i] +
+						'" class="panel-collapse collapse"><div class="panel-body">';
+					}
+					var children = tableInfo[panelTitle[i]].children;
+					html += '<table class="datatable">'
+					var j = 0;
+					while(j < children.length){
+						var k = j + 1;
+						html += '<tr><td>' + children[j] +
+							'</td><td><input type="text" readonly="readonly" placeholder="' +
+							children[j] + 'value" />'
+							'</td>'
+						if(children[k] && children[k].length > 0){
+							html +='<td>' + children[k] +
+							'</td><td><input type="text" readonly="readonly" placeholder="' +
+							children[k] + 'value" />' + '</td></tr>';
+						}else{
+							html += '';
+						}
+							j = k + 1;
+					}
+//					for(var j = 0; j < children.length; j++) {
+//						var k = j + 1;
+//						html += '<tr><td>' + children[j] +
+//							'</td><td><input type="text" readonly="readonly" placeholder="' +
+//							children[j] + 'value" />'
+//							'</td><td>' +children[k] + 
+//							'</td><td><input type="text" readonly="readonly" placeholder="' +
+//							children[k] + 'value" />' + '</td></tr>';
+//					}
+					html += '</table></div></div></div>';
+				}
+				$("#accordion").html(html);
+
+			};
+			/*			var inputType = {
+
+						}*/
+			/*var FamilyPovertyAlleviation = {
+				Industry: {
+					name: "产业扶贫",
+					children: {
+						HouseholdName: {
+							name: "户主姓名",
+							type: type_1
+						},
+						PovertyCauses: "致贫原因",
+						IndustryMuti: {
+							IndustryName: "产业名称",
+							IndustrySize: "产业规模",
+							SupportStandard: "扶持标准",
+							SupportAmount: "扶持金额"
+						},
+						ExpectedIncome: "预计年收入",
+						RealIncome: "实际收入",
+						HasEnterprise: "是否有企业（合作社/园区）带动",
+						EnterpriseName: "企业（合作社/园区）名称"
+					}
+				},
+				Assets: {
+					name: "资产扶贫",
+					children: {
+						HouseholdName: "户主姓名",
+						PovertyCauses: "致贫原因",
+
+					}
+				}
+			}*/
+		</script>
+
+	</body>
+
+</html>

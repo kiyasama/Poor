@@ -1,0 +1,10 @@
+<!--帮扶计划列表 -->
+{#foreach $T as record}
+<tr>
+    <td> {$T.record.index}</td>
+    <td> {$T.record.xmName}</td>
+    <td> {$T.record.money}</td>
+    <td> {$T.record.description}</td>
+    <td><a href="#" id="{$T.record.id}" class="jhxq">查看</a></td>
+</tr>
+{#/for}

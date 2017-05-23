@@ -1,0 +1,530 @@
+body {
+	position: absolute;
+	width: 100%;
+	min-height: 100%;
+}
+/*共用*/
+.approvedmap .goto {
+	width: 100%;
+	height: 47px;
+	line-height: 47px;
+	/*background-color: #ebebeb;*/
+	/*background-color: #e7f1fd;*/
+	font-size: 16px;
+	font-weight: bold;
+	/*padding: 4px 0px 4px 10px;*/
+	cursor: pointer;
+	background: url("../images/fpqkbg.png") no-repeat;
+	text-align: center;
+	background-size: 100% 100%;
+}
+.approvedmap .goto:hover {
+	background-color: #b4e6ff;
+}
+.approvedmap .goto.active {
+	background-color: #b4e6ff;
+}
+.approved-track-detail .icon-arrows-right, .violate-project-detail .icon-arrows-right {
+	float: right;
+	margin-right: 10px;
+	font-size: 16px;
+	padding: 3px 0px;
+	color: #a0a0a0;
+}
+
+.icon-arrows-right:before {
+	content: "\e627";
+}
+
+.approved-track-detail .summary, .violate-project-detail .summary {
+	width: 100%;
+	height: auto;
+	padding: 10px 20px;
+	font-size: 12px;
+	color: #505050;
+}
+
+.approved-track-detail .table, .approved-track-detail .table {
+	margin-bottom: 0px;
+}
+.approved-track-detail .table > thead > tr, .violate-project-detail .table > thead > tr, .approved-track-detail .table > tbody > tr, .violate-project-detail .table > tbody > tr {
+	min-height: 30px;
+	height: 30px;
+}
+.approved-track-detail .table > thead > tr > th, .violate-project-detail .table > thead > tr > th {
+	border-bottom: none;
+	vertical-align: middle;
+	text-align: center;
+	background-color: #f0f0f0;
+	font-weight: normal;
+	padding: 4px 4px;
+}
+/*.approved-track-detail .table > tbody > tr > td, .violate-project-detail .table > tbody > tr > td {
+	vertical-align: middle;
+	text-align: center;
+	font-weight: normal;
+	font-size: 12px;
+	padding: 4px 4px;
+}*/
+.approved-track-detail .approvedPie, .violate-project-detail .violatePie {
+	width: 100%;
+	height: 150px; /*padding: 0px 20px 0px 0px;*/
+}
+.approved-track-detail .table > thead > tr > th.region, .violate-project-detail .table > thead > tr > th.region {
+	font-weight: bold;
+}
+
+.title {
+	font-family: "微软雅黑";
+	/*color: #6baedb;*/
+	color: #ffffff;
+	/*background: url("images/tip_icon.png") no-repeat;*/
+	font-size: 14px;
+	font-weight: normal;
+}
+.o_subst_info {
+	height: 80% !important;
+	padding: 4px 4px 0;
+}
+.info {
+	padding: 6px 8px;
+	/*font: 14px/16px Arial, Helvetica, sans-serif;*/
+	font-family: "microsoft yahei";
+	background: white;
+	background: rgba(255, 255, 255, 0.8);
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+}
+
+.info h4 {
+	margin: 0 0 5px;
+	color: #777;
+}
+
+.legend {
+	text-align: left;
+	line-height: 18px;
+	color: #555;
+}
+
+.legend i {
+	width: 18px;
+	height: 18px;
+	float: left;
+	margin-right: 8px;
+	opacity: 0.7;
+}
+
+.detailDiv {
+	width: 118px;
+	height: 118px;
+	float: right;
+	margin-left: 8px;
+	opacity: 0.7;
+}
+
+.my-div-icon {
+	z-index: 10000 !important;
+	color: #0000ff;
+	font-size: 12px;
+	width: 75px !important;
+	font-weight: bold;
+	font-family: "微软雅黑";
+}
+
+.my-div-icon1 {
+	z-index: 10000 !important;
+	color: #2a69b4;
+	font-size: 10px;
+	width: 55px !important;
+}
+
+.mapchart {
+	width: 50px;
+	height: 50px;
+}
+
+table.imagetable {
+	font-family: verdana, arial, sans-serif;
+	font-size: 11px;
+	color: #333333;
+	border-width: 1px;
+	width: 100%;
+	border-color: #999999;
+	border-collapse: collapse;
+}
+
+table.imagetable th {
+	background: #b5cfd2 url('cell-blue.jpg');
+	border-width: 1px;
+	padding: 12px;
+	border-style: solid;
+	border-color: #999999;
+}
+
+table.imagetable td {
+	background: #dcddc0 url('cell-grey.jpg');
+	border-width: 1px;
+	padding: 12px;
+	border-style: solid;
+	border-color: #999999;
+}
+
+table.gridtable {
+	font-family: verdana, arial, sans-serif;
+	font-size: 9px;
+	color: #333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+
+table.gridtable th {
+	border-width: 1px;
+	padding: 5px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+	width: 135px;
+}
+
+table.gridtable td {
+	border-width: 1px;
+	padding: 5px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+	width: 135px;
+}
+
+.dtdiv1 {
+	top: 0px;
+}
+
+#fpxmDiv .pkcTop1 table tr th,#fpxmDiv .pkcTop1 table tr td {
+	border: 1px solid #d5d3d4;
+
+}
+#fpxmDiv .pkcTop1 table tr th{
+	font-weight: 400;
+	background-color: #dfdfe0;
+	padding-left: 0;
+    padding-right: 0;
+}
+.pkcTop table tr td span {
+
+}
+
+#fpxmDiv .pkc .pkzbDiv p {
+	display: inline-block;
+	zoom: 1;
+	width: 85px;
+	height: 10px;
+	font-size: 14px;
+	text-align: center;
+	border-bottom: 3px solid #0e85ed;
+	color: #0d84ec;
+}
+
+#fpxmDiv .pkcTop1 table tr td   #fuze {
+	margin-left: 197px;
+}
+
+#fpxmDiv .pkcTop1 table tr td span input {
+	width: 42px;
+}
+
+#fpxmDiv .detailTabTitle p {
+	background: rgba(0, 0, 0, 0) url("../images/xqTabBg.png") no-repeat scroll 0 8px;
+	display: inline-block;
+	font-size: 13px;
+	height: 25px;
+	padding-left: 6px;
+	margin-top: 11px;
+	width: 75px;
+}
+
+#a table {
+	margin-left: 2px;
+	width: 216px;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+#b tr td {
+
+}
+
+
+#fpxmDiv .pkzbDiv p {
+	color: #0d84ec;
+	font-size: 15px;
+}
+
+#busiform {/*
+	width: 601px;
+	height: 409px;
+	padding-bottom: 10px;*/
+	/*padding: 10px 5px;*/
+}
+
+.pkcTop1 fieldset legend {
+	color: #2a69b4;
+	font-size: 15px;
+}
+
+.pkcTop1 fieldset {
+	width: 565px;
+	padding-bottom: 15px;;
+}
+
+.mytable {
+	width: 100%;
+	text-align: center;
+	table-layout: fixed;
+	font-size: 13px;
+}
+
+.mytable1 {
+	width: 100%;
+}
+
+.mytable1 tr td {
+	width: 100px;
+	height: 30px;
+	text-align: center;
+}
+#fpxmDiv .pkcTop1 table.mytable td, .mytable1 tr td {
+	height: 35px;
+	padding: 0;
+}
+
+.chartDiv {/* background-color: #8b64d2; */
+	border-radius: 5px;
+	margin: 8px 0;
+	/* width: 222px; */
+}
+/*.pkcDetail {
+	border: 0;
+}*/
+.tabRight1 {
+    float: left;
+    width: 25px;
+    position: absolute;
+    right: -24px;
+    top: 35%;
+}
+.content_wrap {
+	width: 100%;
+    height: 568px;
+    overflow-y: auto;
+}
+
+
+.showLeftDiv {
+    left: 0px;
+    top: 50%;
+    position: absolute;
+    z-index: 2;
+    width: 25px;
+    height: 120px;
+    font-size: 13px;
+    text-align: center;
+}
+
+.showLeftDiv span {
+    font-size: 13px;
+    background: url("../images/leftTabbg2.png") no-repeat -8px 0;
+    display: inline-block;
+    font-size: 13px;
+    text-align: center;
+    width: 25px;
+    height: 120px;
+    cursor: pointer;
+    line-height: 17px;
+    padding-top: 43px;
+    color: #ffffff;
+    padding-top: 23px;
+}
+
+.leftdiv1 {
+    width: 300px;
+    height: 92%;
+    top: 120px;
+    position: absolute;
+    z-index: 2;
+    /* background-color: #FFF; */
+}
+
+.tabRight1 span.rightTitle1 {
+    padding-top: 40px;
+    height: 120px;
+}
+
+.tabRight1 span {
+    background: url("../images/leftTabbg1_new.png") no-repeat -8px 0;
+    display: inline-block;
+    font-size: 13px;
+    text-align: center;
+    width: 25px;
+    height: 120px;
+    cursor: pointer;
+    line-height: 14px;
+}
+
+.detailTabTitle1 {
+    height: 35px;
+    border-bottom: 1px solid #d5d3d4;
+}
+.detailTabTitle1, .rightTitle {
+    /* background-color: #d3e7ef; */
+    background-color: #f3f8fe;
+    height: 35px;
+    line-height: 35px;
+    padding-left: 15px;
+}
+
+.xqDiv6 {
+    border: 1px solid #e4e4e4;
+    position: absolute;
+    top: 2%;
+    right: 69px;
+    z-index: 2;
+    font-family: "微软雅黑";
+    height: 483px;
+    width: 681px;
+    background-color: #ffffff;
+    font-size: 13px;
+    display: none;
+}
+
+#fpxmDiv .pkc .detailTitle1 span {
+    font-size: 13px;
+}
+.detailTabTitle1 span.current {
+    /* background: url("../images/xqTabBg_cur.png") no-repeat 0 8px; */
+    border-bottom: 3px solid #0e85ed;
+    color: #0d84ec;
+    font-size: 15px;
+}
+.detailTabTitle1 span{
+    /* background: url("../images/xqTabBg.png") no-repeat 0 8px; */
+    display: inline-block;
+    zoom: 1;
+    width: 100px;
+    height: 32px;
+    cursor: pointer;
+    font-size: 15px;
+    text-align: center;
+}
+.wrapDiv {
+    overflow: auto;
+    overflow-x: hidden;
+}
+#fpxmDiv .pkcTop1 table/*, .zcgzd table, .pkzb table, .xmcx table, .bfjh table */{
+    border: 1px solid #d5d3d4;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-collapse: collapse;
+    /*table-layout: fixed;*/
+}
+
+.select-div {
+    height: 30px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.year-span,
+.year-select {
+    font-size: 15px;
+    font-family: "Microsoft YaHei";
+}
+
+.year-span {
+    margin-left: 10px;
+}
+
+.year-select {
+    height: 30px;
+    width: 225px;
+    border-radius: 4px;
+    padding-left: 5px;
+    border: 1px solid #5395e3;
+}
+
+.zksx{
+	cursor: pointer;
+    color: #0e85ed;
+    text-decoration: underline;
+}
+.zksx:hover{
+	color: #6ab5f3;
+}
+
+#cunDispatchDiv2 .syqkDiv {
+    height: 295px;
+    overflow-y: auto;
+}
+
+#cunDispatchDiv2 .syqkDiv table {
+    width: 100%;
+    table-layout: fixed;
+    border: none;
+    border-collapse: collapse;
+}
+
+#cunDispatchDiv2 .syqkDiv table th,
+#cunDispatchDiv2 .syqkDiv table td {
+    text-align: center;
+    border: none;
+}
+
+#cunDispatchDiv2 .syqkDiv table th,
+#cunDispatchDiv2 .syqkDiv table td.jhjeTD {
+    color: #0c85eb;
+}
+
+#cunDispatchDiv2 .syqkDiv table th {
+    font-size: 15px;
+    background-color: transparent;
+    height: 35px;
+}
+
+#cunDispatchDiv2 .syqkDiv table th.jdTH {
+    width: 145px;
+}
+
+#cunDispatchDiv2 .syqkDiv table th.jhjeTH {
+    width: 170px;
+}
+
+#cunDispatchDiv2 .syqkDiv table th.moreTH {
+    width: 50px;
+}
+
+#cunDispatchDiv2 .syqkDiv table td.jdTD {
+    background: url("../images/jd_bg.png") no-repeat 112px -2px;
+}
+
+#cunDispatchDiv2 .syqkDiv table td.jdTD span {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    width: 78px;
+    font-size: 13px;
+}
+
+#cunDispatchDiv2 .syqkDiv table td.jdTD img {}
+
+#cunDispatchDiv2 .syqkDiv table td.syqkTD {
+    text-align: left;
+}
+
+#cunDispatchDiv2 .syqkDiv table td.syqkTD p {
+    font-size: 13px;
+    padding: 0;
+    margin: 0;
+    line-height: 20px;
+}
+

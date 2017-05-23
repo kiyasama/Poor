@@ -1,0 +1,70 @@
+.ztree *{
+	font-family: Microsoft Yahei;
+}
+.ztree li ul{
+	background: url("zTreeStyle/img/line_conn.gif") 0 0 repeat-y;
+}
+.ztree li span.button{
+	background-image: url("../images/zTree_new/zTreeBg.png");
+}
+.ztree li span.button.roots_close,.ztree li span.button.bottom_close,.ztree li span.button.center_close{
+    background-position: -53px 8px;
+}
+.ztree li span.button.roots_open,.ztree li span.button.bottom_open,.ztree li span.button.center_open{
+	background-position: -75px 8px;
+}
+.ztree li span.button.root_close,.ztree li span.button.level11.center_close{
+	background-position: -51px 8px;
+}
+.ztree li span.button.root_open{
+	background-position: -75px 8px;
+}
+.ztree li span.button.level2.center_close{
+	/*height: 0;*/
+}
+.ztree li span.button.center_docu{
+	    background-position: 6px 8px;
+}
+.ztree li span.button.ico_open,.ztree li span.button.ico_close,.ztree li span.button.ico_docu{
+	width:5px;
+}
+.ztree li span.button.center_docu{
+	width:2px;
+}
+.ztree li span.button.level2.bottom_docu{
+	width:2px;
+}
+.ztree li span.button.switch{
+	height:22px;
+}
+.ztree li a{
+	padding:5px;
+}
+.ztree li a.level2.curSelectedNode,.ztree li a.curSelectedNode{
+	background-color: #e9f0f6;
+	border: 1px #e9f0f6 solid; 
+	padding-top: 5px;
+}
+.ztree li a.level2.curSelectedNode{
+	/*background: #e9f0f6 url("../images/zTree_new/icon_level2_cur.png") no-repeat 5px 5px;*/
+}
+.ztree li a.level2{
+	/*background: url("../images/zTree_new/icon_level2.png") no-repeat 5px 10px;
+	padding-left:15px;*/
+	/*padding-left: 0;
+    margin-left: -5px;*/
+}
+.ztree li a.level0 span{
+	font-size:15px;
+}
+.ztree li a.level1 span{
+	font-size:14px;
+	width: 0;
+}
+.ztree li a.level2 span{
+	font-size:13px;
+}
+/*.ztree li a.level12 span.button.ico_close{
+	width: 17px;
+	background-position: 5px 6px;
+}*/

@@ -1,0 +1,16 @@
+<!--帮扶对象列表 -->
+{#foreach $T as record}
+<tr>
+    <td> {$T.record.id}</td>
+    <td> {$T.record.name}</td>
+    <td> {$T.record.tel}</td>
+    <td> {$T.record.povertyreason}</td>
+    <td> {$T.record.visitnum}</td>
+    <td>
+        <a href="#" class="detailJump xq" id="{$T.record.personId}">详情</a>
+    </td>
+    <td>
+        <a href="#" class="detailJump ybq" id="{$T.record.personId}">一表清</a>
+    </td>
+</tr>
+{#/for}

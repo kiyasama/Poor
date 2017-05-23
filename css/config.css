@@ -1,0 +1,493 @@
+/* CSS Document */
+html {
+	width: 100%;
+	height: 100%;
+}
+body {
+	margin: 0px auto;
+	width: 100%;
+	height: 100%;
+	background-color: #d6d6d6
+}
+/*地图配置*/
+.bg {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: auto;
+}
+.nbg {
+	background-color: #FFF;
+	margin: 14px auto;
+	width: 1021px;
+	height: 631px
+}
+.ntop {
+	width: 1005px;
+	height: 115px;
+	margin: auto;
+	line-height: 115px;
+}
+/*.top {
+	width: 100%;;
+	height: 71px;
+	padding-top: 8px
+}*/
+.topleft {
+	line-height: 33px;
+	margin-left: 20px;
+	color: #FFF;
+	font-size: 12px;
+	float: left;
+	font-family: "微软雅黑"
+}
+.topjt {
+	float: left;
+	background: url(../images/config/jt.png) no-repeat center center;
+	height: 33px;
+	width: 6px;
+	margin-left: 10px
+}
+.topright {
+	line-height: 33px;
+	margin-left: 10px;
+	color: #FFF;
+	font-size: 12px;
+	float: left;
+	font-family: "微软雅黑"
+}
+.content {
+	width: 933px;
+	height: 105px;
+	margin: 9px auto
+}
+.mytitle {
+	margin-left: 40px;
+	font-family: "宋体";
+	font-size: 14px;
+	color: #808080;
+	margin-top: 10px
+}
+.mycontent {
+	margin-left: 40px;
+	font-family: "宋体";
+	font-size: 14px;
+	color: #808080;
+	float: left;
+	margin-top: 23px
+}
+.myradio {
+	font-family: "宋体";
+	font-size: 14px;
+	color: #808080;
+	float: left;
+	margin-top: 20px;
+}
+.righttitle {
+	font-family: "宋体";
+	font-size: 14px;
+	color: #808080;
+	float: left;
+	margin-left: 120px;
+	margin-top: 5px
+}
+.righttitle1 {
+	font-family: "宋体";
+	font-size: 14px;
+	color: #808080;
+	float: left;
+	margin-left: 20px;
+	margin-top: 5px
+}
+.rightcontent {
+	font-family: "宋体";
+	font-size: 14px;
+	color: #808080;
+	float: left;
+	margin-left: 5px
+}
+.leftcontent {
+	margin-left: 40px;
+	font-family: "宋体";
+	font-size: 14px;
+	color: #808080;
+	float: left;
+	margin-top: 20px
+}
+.fg {
+	width: 966px;
+	height: 1px;
+	background-color: #e1e1e1;
+	margin: 20px auto
+}
+.mytable {
+	border: 1px solid #e0e0e0;
+	border-collapse: collapse;
+	font-family: "宋体";
+	font-size: 14px;
+	color: #808080;
+	text-align: center
+}
+.mytable td {
+	border: solid 1px #e0e0e0
+}
+.mycheck {
+	font-family: "宋体";
+	font-size: 14px;
+	color: #808080;
+	float: left;
+	margin-top: 11px
+}
+/*单选样式*/
+.radio {
+	float: left;
+	background: url(../images/config/Icon_BG.png)
+}
+.radio {
+	width: 18px;
+	height: 18px;
+	background-position: 0px 0px;
+	cursor: pointer;
+	font-size: 9px;
+}
+.radio.checked {
+	background: url(../images/config/Icon_XZ.png)
+}
+.radio_txt {
+	float: left;
+	margin: 0px 0 0 10px;
+	cursor: pointer;
+	line-height: 18px;
+	font-size: 12px;
+}
+.radio_txt .radio {
+	margin-right: 5px;
+}
+
+/*复选框样式*/
+.squaredThree {
+	width: 20px;
+	margin-top: 10px;
+	margin-left: 40px;
+	position: relative;
+	float: left
+}
+.squaredThree label {
+	width: 17px;
+	height: 17px;
+	cursor: pointer;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: url(../images/config/check.png);
+}
+.squaredThree label:after {
+	content: '';
+	width: 17px;
+	height: 17px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: url(../images/config/check1.png);
+	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+	opacity: 0;
+}
+.squaredThree label:hover::after {
+	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+	opacity: 0.3;
+}
+.squaredThree input[type=checkbox] {
+	visibility: hidden;
+	float: left;
+}
+.squaredThree input[type=checkbox]:checked + label:after {
+	filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+	opacity: 1;
+}
+/*复选框样式*/
+.squaredThree1 {
+	width: 20px;
+	margin-top: 10px;
+	margin-left: 10px;
+	position: relative;
+	float: left
+}
+.squaredThree1 label {
+	width: 17px;
+	height: 17px;
+	cursor: pointer;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: url(../images/config/check.png);
+}
+.squaredThree1 label:after {
+	content: '';
+	width: 17px;
+	height: 17px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: url(../images/config/check1.png);
+	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+	opacity: 0;
+}
+.squaredThree1 label:hover::after {
+	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+	opacity: 0.3;
+}
+.squaredThree1 input[type=checkbox] {
+	visibility: hidden;
+	float: left;
+}
+.squaredThree1 input[type=checkbox]:checked + label:after {
+	filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+	opacity: 1;
+}
+
+/*配置主界面*/
+.znbg {
+	background-color: #FFF;
+	margin: 14px auto;
+	width: 1021px;
+	height: 1350px
+}
+.bjradio {
+	font-family: "宋体";
+	font-size: 14px;
+	color: #808080;
+	float: left;
+	margin-top: 20px;
+	margin-left: 40px
+}
+.jmbjbg {
+	width: 933px;
+	height: 145px;
+	margin: 9px auto
+}
+.gjlbg {
+	width: 933px;
+	height: 70px;
+	margin: 9px auto
+}
+.jmbj {
+	background: url(../images/config/bj.jpg) no-repeat center center;
+	width: 97px;
+	height: 55px;
+	float: left;
+	margin-left: 40px
+}
+.jmbj1 {
+	background: url(../images/config/bj.jpg) no-repeat center center;
+	width: 97px;
+	height: 55px;
+	float: left;
+	margin-left: 100px
+}
+.fgbj {
+	background: url(../images/config/fg.jpg) no-repeat center center;
+	width: 97px;
+	height: 55px;
+	float: left;
+	margin-left: 40px
+}
+.fgbj1 {
+	background: url(../images/config/fg1.jpg) no-repeat center center;
+	width: 97px;
+	height: 55px;
+	float: left;
+	margin-left: 100px
+}
+.fgbj2 {
+	background: url(../images/config/fg2.jpg) no-repeat center center;
+	width: 97px;
+	height: 55px;
+	float: left;
+	margin-left: 100px
+}
+.toplab {
+	float: left;
+	font-family: "宋体";
+	font-size: 14px;
+	color: #808080;
+	margin-left: 40px;
+	margin-top: 25px;
+}
+.topcxbt {
+	float: left;
+	font-family: "宋体";
+	font-size: 14px;
+	color: #FFF;
+	margin-top: 20px;
+	width: 48px;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	background-color: #4da0d4;
+	cursor: pointer
+}
+.topimg {
+	margin-left: 40px;
+	width: 490px;
+	height: 71px;
+	background: url(../images/topbg.png) no-repeat center center;
+	background-size: 450px 71px;
+}
+.xxpz {
+	margin-top: 10px;
+	cursor: pointer;
+	float: left;
+	background-color: #4da0d4;
+	font-family: "宋体";
+	font-size: 14px;
+	color: #FFF;
+	width: 78px;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	margin-left: 127px
+}
+.xxpz1 {
+	margin-top: 10px;
+	cursor: pointer;
+	float: left;
+	background-color: #4da0d4;
+	font-family: "宋体";
+	font-size: 14px;
+	color: #FFF;
+	width: 78px;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	margin-left: 99px
+}
+.combox {
+	height: 20px;
+	width: 175px;
+	float: left;
+	margin-top: 8px;
+	margin-left: 10px
+}
+
+/*复选框样式*/
+.squaredThree2 {
+	width: 20px;
+	margin-top: 10px;
+	margin-left: 10px;
+	position: relative;
+	float: left
+}
+.squaredThree2 label {
+	width: 17px;
+	height: 17px;
+	cursor: pointer;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: url(../images/config/check.png);
+}
+.squaredThree2 label:after {
+	content: '';
+	width: 17px;
+	height: 17px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: url(../images/config/check1.png);
+	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+	opacity: 0;
+}
+.squaredThree2 label:hover::after {
+	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+	opacity: 0.3;
+}
+.squaredThree2 input[type=checkbox] {
+	visibility: hidden;
+	float: left;
+}
+.squaredThree2 input[type=checkbox]:checked + label:after {
+	filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+	opacity: 1;
+}
+
+/*复选框样式*/
+.squaredThree3 {
+	width: 20px;
+	margin-top: 10px;
+	margin-left: 10px;
+	position: relative;
+	float: left
+}
+.squaredThree3 label {
+	width: 17px;
+	height: 17px;
+	cursor: pointer;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: url(../images/config/check.png);
+}
+.squaredThree3 label:after {
+	content: '';
+	width: 17px;
+	height: 17px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: url(../images/config/check1.png);
+	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+	opacity: 0;
+}
+.squaredThree3 label:hover::after {
+	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+	opacity: 0.3;
+}
+.squaredThree3 input[type=checkbox] {
+	visibility: hidden;
+	float: left;
+}
+.squaredThree3 input[type=checkbox]:checked + label:after {
+	filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+	opacity: 1;
+}
+
+/*复选框样式*/
+.squaredThree4 {
+	width: 20px;
+	margin-top: 10px;
+	margin-left: 10px;
+	position: relative;
+	float: left
+}
+.squaredThree4 label {
+	width: 17px;
+	height: 17px;
+	cursor: pointer;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: url(../images/config/check.png);
+}
+.squaredThree4 label:after {
+	content: '';
+	width: 17px;
+	height: 17px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: url(../images/config/check1.png);
+	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+	opacity: 0;
+}
+.squaredThree4 label:hover::after {
+	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+	opacity: 0.3;
+}
+.squaredThree4 input[type=checkbox] {
+	visibility: hidden;
+	float: left;
+}
+.squaredThree4 input[type=checkbox]:checked + label:after {
+	filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+	opacity: 1;
+}

@@ -1,0 +1,10 @@
+<!--帮扶日志列表 -->
+{#foreach $T as record}
+<tr>
+    <td> {$T.record.index}</td>
+    <td> {$T.record.holdname}</td>
+    <td> {$T.record.servicetime}</td>
+    <td> {$T.record.content}</td>
+    <td><a href="#" id="{$T.record.id}" class="rzxq">查看</a></td>
+</tr>
+{#/for}

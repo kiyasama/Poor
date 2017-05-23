@@ -1,0 +1,423 @@
+<html>
+	<head>
+		<title>后台管理地图</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+		<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+		<html >
+			<head>
+				<meta charset="utf-8">
+				<meta http-equiv="X-UA-Compatible" content="IE=edge">
+				<meta name="viewport" content="width=device-width, initial-scale=1">
+				<link rel="stylesheet" type="text/css" href="common/css/themes/default/easyui.css" id="swicth-style">
+				<link rel="stylesheet" type="text/css" href="common/css/themes/icon.css">
+				<link rel="stylesheet" type="text/css" href="common/css/base.css">
+				<link rel="stylesheet" type="text/css" href="common/css/common.css">
+				<link rel="stylesheet" href="common/css/main_web.css" type="text/css" />
+				<script type="text/javascript" src="common/js/jquery-1.7.2.js"></script>
+				<script type="text/javascript" src="common/js/jquery-1.7.2.min.js"></script>
+				<script type="text/javascript" src="common/js/jquery.easyui.min.js"></script>
+				<script type="text/javascript" src="common/js/lhgdialog.min.js?skin=default"></script>
+				<script type="text/javascript" src="common/js/My97DatePicker/WdatePicker.js"></script>
+				<script type="text/javascript" src="common/js/validateForm.js"></script>
+			</head>
+
+			<body>
+
+			</body>
+
+		</html>
+		<script type="text/javascript" src="common/component/COMP_DataGridataPicker.js"></script>
+		<script type="text/javascript" src="common/component/COMP_OparetionPicker.js"></script>
+		<script type="text/javascript" src="common/component/COMP_SelectPicker.js"></script>
+		<script type="text/javascript" src="common/component/COMP_ComponetSelectPicker.js"></script>
+
+		<script type="text/javascript" src="api/OMAP-source.js"></script>
+		<script type="text/javascript" src="api/js/mapManager.js"></script>
+		<script type="text/javascript" src="api/js/coordtransform.js"></script>
+		<script type="text/javascript" src="api/js/measure.js"></script>
+		<script type="text/javascript" src="js/OGIS/smallMapSearch4index.js"></script>
+		<script type="text/javascript" src="js/OGIS/ui.js"></script>
+		<script type="text/javascript">
+			var mapConfig = {};
+			mapConfig = {
+				"apiPath" : "/api/",
+				"apiSrc" : "mapapi_v3_utf8.js",
+				"blogPath" : "",
+				"code" : "610430",
+				"createTime" : {
+					"date" : 27,
+					"day" : 2,
+					"hours" : 16,
+					"minutes" : 25,
+					"month" : 9,
+					"nanos" : 0,
+					"seconds" : 44,
+					"time" : 1445934344000,
+					"timezoneOffset" : -480,
+					"year" : 115
+				},
+				"createUserId" : "7a8a8f3947ed85e50147ed8bae0e0000",
+				"d" : 3,
+				"dataAreaCode" : "610400",
+				"delFlag" : 0,
+				"description" : "",
+				"divisionCode" : "610430",
+				"domain" : "",
+				"entityPath" : "",
+				"homePath" : "",
+				"host" : "",
+				"hsLoadLevel" : 3,
+				"hsLoadType" : 0,
+				"hsPath" : "/resource/js",
+				"hsViewLevel" : 100,
+				"id" : "ff808081497defd00149837668070004",
+				"imagePath" : "/image",
+				"indexPath" : "/index/",
+				"infoLoadLevel" : 0,
+				"infoLoadType" : 0,
+				"infoViewLevel" : 0,
+				"isLoadAd" : false,
+				"isLoadBusStation" : false,
+				"isLoadHotspot" : true,
+				"isLoadInfo" : true,
+				"isLoadMiniMap" : true,
+				"isLoadRoadLine" : false,
+				"isLoadRoadName" : false,
+				"isLoadScreenInfo" : false,
+				"isLoadZoomBar" : true,
+				"isShowAUInfo" : false,
+				"loadType" : 1,
+				"locale" : "zh_cn",
+				"localeExt" : "",
+				"mapJsPath" : "/u03/data/comm/resource/js",
+				"mapPath" : "/resource/mappic/",
+				"mapid" : 5,
+				"maxLevel" : 6,
+				"miniMapState" : 1,
+				"minimapSize" : 0,
+				"mpx" : 0.31475,
+				"mpy" : 0.43738,
+				"name" : "淳化县",
+				"orderNumber" : 0,
+				"remark" : "",
+				"resourcePage" : "",
+				"resourcePath" : "/resource/",
+				"ruler" : 200,
+				"tdtImgMapPath" : "http://61.185.20.73:8808/TDTAggreMapXY/rest/services/tdtsximg/MapServer",
+				"tdtMapPath" : "http://210.74.129.78:8399/arcgis/rest/services/tdtNewMap/MapServer",
+				"type" : 1,
+				"unitPath" : "",
+				"updateTime" : {
+					"date" : 30,
+					"day" : 5,
+					"hours" : 9,
+					"minutes" : 9,
+					"month" : 9,
+					"nanos" : 41000000,
+					"seconds" : 52,
+					"time" : 1446167392041,
+					"timezoneOffset" : -480,
+					"year" : 115
+				},
+				"updateUserId" : "7a8a8f3947ed85e50147ed8bae0e0000",
+				"uploadPath" : "",
+				"x" : 7748377.5406,
+				"x2" : "108.586777",
+				"y" : 4739849.4212,
+				"y2" : "34.805713",
+				"z" : 3
+			};
+			;
+		</script>
+		<script type="text/javascript">
+			var oWinZindex = 10010;
+			var userlabel = eval('');
+			var mapUiParams = {
+				leftW : 0,
+				topH : 0,
+				zoomBarLeft : 10,
+				zoomBarTop : 10
+			};
+
+		</script>
+	</head>
+	<body style="padding:0px;">
+		<div id="mapDiv"></div>
+	</body>
+	<script type="text/javascript">
+		function loadCusControl() {
+			if ('' != null && '' != '') {
+				drawGridLabel('gridLabels_jsonList.html?orgCode=');
+				var center = popomap.getCenter();
+				popomap.zoomAndCenter(center.lon, center.lat.y, 6);
+
+			} else if ('' != null && '' != '') {
+				drawAreaWithUrl(userlabel[0].id, userlabel[0].name, userlabel[0].x, userlabel[0].y, userlabel[0].xs, userlabel[0].ys, userlabel[0].lineweight, userlabel[0].lineColor, userlabel[0].bgColor, 'statistics_commonStatisticsMain.html?dataAreaCode=610400' + '&ids=' + userlabel[0].id, 900, 505);
+				if (userlabel[0].x != 0 && userlabel[0].y != 0)
+					popomap.zoomAndCenter(userlabel[0].x, userlabel[0].y, 5);
+				else
+					COMP_OparetionPicker.autoMessage("请为该信息添加坐标,默认坐标为(0,0)!");
+				drawGridLabel('gridLabels_allGridInDataArea.html?dataAreaCode=');
+			} else {
+				drawAreaWithUrl(userlabel[0].id, userlabel[0].name, userlabel[0].x, userlabel[0].y, userlabel[0].xs, userlabel[0].ys, userlabel[0].lineweight, userlabel[0].lineColor, userlabel[0].bgColor, 'statistics_commonStatisticsMain.html?dataAreaCode=610400' + '&ids=' + userlabel[0].id, 900, 505);
+				if (userlabel[0].x != 0 && userlabel[0].y != 0)
+					popomap.go2xy(userlabel[0].x, userlabel[0].y);
+				else
+					COMP_OparetionPicker.autoMessage("请为该信息添加坐标,默认坐标为(0,0)!");
+			}
+			/* {
+			 if(typeof(userlabel) != "undefined" && userlabel != null){
+			 if(''!=null  && ''!=''){
+			 myDrawLineOnly(userlabel[0].orgId,userlabel[0].name,userlabel[0].x,userlabel[0].y,userlabel[0].xs,userlabel[0].ys,userlabel[0].strokeWeight,userlabel[0].strokeColor,true);
+			 if(userlabel != null && typeof(userlabel) != 'undefined' && typeof(userlabel) != 'undefined' && userlabel != null)
+			 {
+			 popomap.zoomAndCenter(userlabel[0].x,userlabel[0].y,6);
+			 }
+			 }else {
+			 drawAreaWithUrl(userlabel[0].id,userlabel[0].name,userlabel[0].x,userlabel[0].y,userlabel[0].xs,userlabel[0].ys,userlabel[0].lineweight,userlabel[0].lineColor,userlabel[0].bgColor,'statistics_commonStatisticsMain.html?dataAreaCode=610400'+'&ids='+userlabel[0].id,900,505);
+			 if(userlabel[0].x!=0 && userlabel[0].y!=0)
+			 popomap.go2xy(userlabel[0].x,userlabel[0].y);
+			 else
+			 COMP_OparetionPicker.autoMessage("请为该信息添加坐标,默认坐标为(0,0)!");
+			 }
+			 }
+			 } */
+		}
+
+		function drawGridLabel(murl) {
+			var url = murl;
+			$.ajax({
+				type : 'post',
+				url : url,
+				dataType : 'json',
+				success : function(result) {
+					//console.log(result);
+					if (result.success) {
+						var line = result.data;
+						if (line) {
+							wanggelength = line.length;
+							for (var i = 0; i < line.length; i++) {
+								var lid = line[i].orgId;
+								var start_x, start_y;
+								if (line[i].xs.indexOf(",") != -1) {
+									start_x = line[i].xs.split(",")[0];
+									start_y = line[i].ys.split(",")[0];
+								} else {
+									start_x = line[i].xs;
+									start_y = line[i].ys;
+								}
+
+								var o = {
+									id : lid,
+									closed : true,
+									x : line[i].x,
+									y : line[i].y,
+									xs : line[i].xs,
+									ys : line[i].ys,
+									strokeweight : line[i].strokeWeight,
+									strokecolor : line[i].strokeColor,
+									fillcolor : line[i].fillColor,
+									autoZoom : true,
+									endarrow : 'classic'
+								};
+								var accountid = '';
+								//画网格员
+								if ( typeof (line[i].gridPersonses) != "undefined" && line[i].gridPersonses.length > 0) {
+									drawPoint(line[i].gridPersonses, lid);
+									accountid = line[i].gridPersonses[0].accountId;
+								}
+								popomap.drawLine(o);
+								//画网格名称
+								popomap.createPop('pop_wangge_' + lid, '<div class="ibox" onmousemove="this.parentNode.style.zIndex=200" onmouseout="this.parentNode.style.zIndex=100">' + '<div _child="body" class="red"><a href="javascript:void(0)"><span _child="title" onclick="viewDetails(\'' + 'gridLabels_viewwanggeinfo.html?gridAccountID=' + accountid + '&id=' + '\',\'' + line[i].uuid + '\',\'' + line[i].name + '\',' + 520 + ',' + 355 + ');">' + line[i].name + '</span></a></div><div class="ipoint" ><img _child="point" src="/img/txtRedAw.gif"/></div></div>', line[i].x, line[i].y, 0, -10, 100);
+
+								popomap.go2xy(line[i].x, line[i].y);
+							}
+						}
+					}
+				}
+			});
+		}
+
+		function showCustomDetial(pt, entity) {
+			var id = entity.id;
+			var name = entity.name;
+			var x = pt.x;
+			var y = pt.y;
+			var gridCode = entity.gridcode;
+			var emapid = entity.mapid;
+			var mapid = 5;
+			var divisionCode = '610400';
+			if (divisionCode.length == 12) {//街道办要把最后一个0去除
+				divisionCode = divisionCode.substr(0, 9);
+			}
+
+			if ('administrator' == 'administrator') {
+				buildingIfrShow(id, name, x, y);
+			} else if (gridCode != '' && gridCode != null) {
+				if (gridCode.indexOf(divisionCode) >= 0) {
+					buildingIfrShow(id, name, x, y);
+				}
+			}
+		}
+
+		/**
+		 * 画网格员
+		 * @param data
+		 * @param lid
+		 */
+		function drawPoint(data, lid) {
+			var str = buildFlashHtml("/gis/images/front/layerlabel/wanggeyuan.swf", 30, 60);
+			if (data.length > 0) {
+				for (var i = 0; i < data.length; i++) {
+					popomap.createPop('pop_swf_' + lid, '<div onmousemove="this.parentNode.style.zIndex=201" onmouseout="this.parentNode.style.zIndex=100" style="width:60;height:60;background:transparent;border:0;padding:0;cursor:hand;" onmousedown="showWanggeyuan(\'' + data[i].id + '\',\'' + data[i].userName + '\');">' + str + '</div>', data[i].x, data[i].y, -30, -30, 100);
+				}
+			}
+		}
+
+		function showWanggeyuan(id, gridPersonName) {
+			viewDetails('gridPerson_getGridPersonsById.html?id=', id, '网格员信息--' + gridPersonName, 500, 200);
+		}
+
+		function buildFlashHtml(url, width, height) {
+			var str = '<OBJECT classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0"';
+			str += 'WIDTH=' + width + ' HEIGHT=' + height + '" id="myFlash">';
+			str += '<PARAM NAME=movie VALUE="' + url + '">';
+			str += '<PARAM NAME=wmode VALUE="transparent">';
+			str += '<PARAM NAME=loop VALUE=true>';
+			str += '<PARAM NAME=quality VALUE="high">';
+			str += '<PARAM NAME=menu VALUE=false>';
+			str += '<EMBED src="' + url + '" wmode="transparent" loop=true quality="high" swLiveConnect=false name="myFlash" WIDTH=' + width + ' HEIGHT=' + height;
+			str += ' TYPE="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"></EMBED>';
+			str += '</OBJECT>';
+			return str;
+		}
+
+		function myDrawLineOnly(id, name, x, y, xss, yss, strokeWeight, strokeColor, closed) {
+			alert("id=" + id + "  name=" + name + "   x=" + x + "   y=" + y + "   xss=" + xss + "   yss=" + yss + "   strokeWeight=" + strokeWeight + "   strokeColor=" + strokeColor);
+			if (x && y && xss && yss) {
+				var start_x, start_y;
+				if (xss.indexOf(",") != -1) {
+					start_x = xss.split(",")[0];
+					start_y = yss.split(",")[0];
+				} else {
+					start_x = xss;
+					start_y = yss;
+				}
+				if ( typeof (strokeColor) == "undefined" || strokeColor == null || strokeColor == '') {
+					strokeColor = "#00EC00";
+				}
+				var o = null;
+				if (closed) {
+					o = {
+						id : 'myline_' + id,
+						xs : xss,
+						ys : yss,
+						strokecolor : strokeColor,
+						strokeweight : strokeWeight,
+						autoZoom : true,
+						endarrow : 'classic'
+					};
+				} else {
+					o = {
+						id : 'myline_' + id,
+						xs : xss,
+						ys : yss,
+						strokecolor : strokeColor,
+						strokeweight : strokeWeight,
+						autoZoom : true,
+						endarrow : 'classic',
+						closed : false
+					};
+				}
+
+				// 调用画线功能
+				popomap.removePop("pop_" + id);
+				popomap.destroyG("linemyline_" + id);
+				popomap.drawLine(o);
+
+				popomap.createPop('pop_' + id, '<div class="ibox" onmousemove="this.parentNode.style.zIndex=200" onmouseout="this.parentNode.style.zIndex=100"><div _child="body" class="red"><a href="javascript:void(0)"><span _child="title" style="background:#eae4b9;color:red;" onclick="">' + name + '</span></a></div><div class="ipoint"><img _child="point" src="/img/txtRedAw.gif"/></div></div>', x, y, 0, -10, 101);
+				popomap.go2xy(x, y);
+			}
+		}
+
+		//strokeWeight 线条粗线  strokeWeight 线条颜色  fillcolor 填充颜色 url标题弹出链接地址
+		function drawAreaWithUrl(id, name, x, y, xss, yss, strokeWeight, strokeColor, fillcolor, url, width, heigth) {
+			if (x && y && xss && yss) {
+				var start_x, start_y;
+				if (xss.indexOf(",") != -1) {
+					start_x = xss.split(",")[0];
+					start_y = yss.split(",")[0];
+				} else {
+					start_x = xss;
+					start_y = yss;
+				}
+				var o = null;
+				if (fillcolor) {
+					o = {
+						id : 'myline_' + id,
+						xs : xss,
+						ys : yss,
+						strokecolor : strokeColor,
+						strokeweight : strokeWeight,
+						fillcolor : fillcolor,
+						autoZoom : true,
+						endarrow : 'classic'
+					};
+				} else {
+					o = {
+						id : 'myline_' + id,
+						xs : xss,
+						ys : yss,
+						strokecolor : strokeColor,
+						strokeweight : strokeWeight,
+						autoZoom : true,
+						endarrow : 'classic',
+						closed : false
+					};
+				}
+				if (!width)
+					width = 700;
+				if (!heigth)
+					heigth = 300;
+				// 调用画线功能
+				popomap.removePop("pop_wangge_" + id);
+				popomap.destroyG("linemyline_" + id);
+				popomap.drawLine(o);
+				//画网格名称
+				if (url != undefined && url != null) {
+					popomap.createPop('pop_wangge_' + id, '<div class="ibox" onmousemove="this.parentNode.style.zIndex=200" onmouseout="this.parentNode.style.zIndex=100"><div _child="body" class="red"><a href="javascript:void(0)"><span _child="title" onclick="viewDetails(\'' + url + '\',\'' + '' + '\',\'' + name + '\',' + width + ',' + heigth + ');">' + name + '</span></a></div><div class="ipoint"><img _child="point" src="/img/txtRedAw.gif"/></div></div>', x, y, 0, -10, 101);
+				} else {
+					popomap.createPop('pop_' + id, '<div class="ibox" onmousemove="this.parentNode.style.zIndex=200" onmouseout="this.parentNode.style.zIndex=100"><div _child="body" class="red"><a href="javascript:void(0)"><span _child="title" onclick="">' + name + '</span></a></div><div class="ipoint"><img _child="point" src="/img/txtRedAw.gif"/></div></div>', x, y, 0, -10, 101);
+				}
+
+				//popomap.go2xy(x,y);
+			}
+		}
+
+		function viewDetails(url, id, title, weight, height, top, left) {
+			if (height == undefined || weight == undefined || weight == null || height == null) {
+				height = 500;
+				weight = 700;
+			}
+			if (top == undefined || left == undefined || top == null || left == null) {
+				top = 50;
+				left = 400;
+			}
+			var src = url + id;
+			$.dialog({
+				id : src,
+				title : title,
+				content : 'url:' + src,
+				//zIndex: oWinZindex,
+				top : top,
+				left : left,
+				width : weight,
+				height : height,
+				close : function() {
+				}
+			});
+			oWinZindex += 1;
+		}
+	</script>
+</html>

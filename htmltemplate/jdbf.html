@@ -1,0 +1,32 @@
+<!--结对帮扶管理列表 -->
+{#foreach $T as record}
+<div class="detailContent">
+    <div class="detailLeft">
+        <table>
+            <tr>
+                <td class="firstCol">人员姓名：</td>
+                <td>{$T.record.name}</td>
+            </tr>
+            <tr>
+                <td class="firstCol">单位名称：</td>
+                <td>{$T.record.orgname}</td>
+            </tr>
+            <tr>
+                <td class="firstCol">联系电话：</td>
+                <td>{$T.record.tel}</td>
+            </tr>
+            <tr>
+                <td class="firstCol">职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务：</td>
+                <td>{$T.record.position}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="detailRight">
+        <a href="#" class="iconLink"><img src="images/dw_icon.png" class="locateClass" alt="" id="{$T.record.id}" x="{$T.record.x}" y="{$T.record.y}" name="{$T.record.name}" /></a>
+        <a href="#" id="{$T.record.id}" class="xqLink tpcxXq" name="jdbfxq" style="margin-top: 5px;">详情</a> {#if $T.record.linkStr == '#'}
+        <a class="gjLink" target="" href="{$T.record.linkStr}"><img border="0" style="width:78px;" src="{$T.record.imgStr}" alt="暂无QQ" title="点击这里给我发消息" /></a> {#else}
+        <a class="gjLink" target="_blank" href="{$T.record.linkStr}"><img border="0" style="width:78px;" src="{$T.record.imgStr}" alt="暂无QQ" title="点击这里给我发消息" /></a> {#/if}
+    </div>
+    <div class="clear"></div>
+</div>
+{#/for}

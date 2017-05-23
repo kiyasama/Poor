@@ -1,0 +1,247 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: "Œ¢»Ì—≈∫⁄";
+    color: #7c7c7c;
+}
+a{
+    text-decoration: none;
+}
+.clear{
+    clear: both;
+}
+.header{
+    /*width: 100%;*/
+    height: 110px;
+    background-color: #e8f5fb;
+    border-bottom: 1px solid #adb8be;
+    padding: 10px 20px 0 20px;
+}
+.logo{
+    float: left;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+.optEntry{
+    float: right;
+    margin-top: 15px;
+    margin-right: 35px;
+}
+.optEntry a{
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    margin: 0 3px;
+}
+/*.optEntry a img{
+	margin: 0 5px;
+}*/
+.menu ul{
+    font-size: 0;
+    margin: 0;
+    padding: 0;
+}
+.menu ul li{
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    width: 100px;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+}
+.menu ul li a{
+    color: #333333;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.menu ul li:visited a,.menu ul li:hover a,.menu ul li:active a{
+    color: #2e83d7;
+    text-decoration: none;
+}
+
+
+/*”“≤‡—˘ Ω*/
+.rightdiv{
+    width: 351px;
+    height: 100%;
+    right:0px;
+    /*top: 121px;*/
+    /*top: 0px;*/
+    position: absolute;
+    z-index: 2;
+    /*background-color: #FFF;*/
+}
+.tabLeft span{
+    background: url("../images/rightTabbg2.png") no-repeat -8px 0;
+    display: inline-block;
+    font-size: 13px;
+    text-align: center;
+    width: 25px;
+    height: 120px;
+    cursor: pointer;
+    line-height: 14px;
+    color: #ffffff;
+}
+.tabLeft span.leftTitle{
+    padding-top: 12px;
+    height: 105px;
+    line-height: 16px;
+}
+.tabLeft span.leftTitle2{
+    padding-top: 25px;
+}
+.tabLeft span.current{
+    /*color: #2a69b4;*/
+    font-weight: bold;
+    font-size: 14px;
+}
+.tabLeft{
+    float: left;
+    width: 25px;
+    position: absolute;
+    left: -25px;
+    top: 25%;
+}
+.tabRight{
+    float: left;
+    border-left: 1px solid #e4e4e4;
+    width: 350px;
+    height: 100%;
+    background-color: #f9f9f9;
+}
+.allDetail{
+    display: none;
+    /*padding: 0 10px;*/
+}
+
+.conditions{
+    margin-top: 15px;
+}
+.conditions span{
+    font-size: 15px;
+}
+.conditions span span{
+    color: red;
+}
+.conditions .select1,.conditions .select2{
+    border: 1px solid #cccccc;
+    height: 30px;
+    font-size: 13px;
+}
+.conditions .select1{
+    width: 135px;
+    margin-left: 10px;
+}
+
+.detail{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.detailContent{
+    border-bottom: 1px solid #cccccc;
+    padding: 5px 0px 5px 0px;
+}
+.detailLeft{
+    float: left;
+    width: 270px;
+}
+.detailLeft table,.detailLeft table td{
+    border:none;
+    font-size: 13px;
+    /*padding-right: 25px;*/
+}
+.detailLeft table{
+    width: 100%;
+}
+.detailLeft table tr{
+    height: 22px;
+}
+.detailLeft table td.firstCol{
+    width: 75px;
+}
+.detailLeft table td.zjfirstCol{
+    width: 105px;
+}
+.detailRight{
+    float: left;
+}
+.detailRight a{
+    width: 40px;
+    display: block;
+    color: #7c7c7c;
+    width: 45px;
+    text-align: center;
+    /*margin-top: 10px;*/
+}
+.detailRight a.iconLink{
+    margin-top: 4px;
+}
+.detailRight a.xqLink{
+    border: 1px solid #919191;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 14px;
+    height: 25px;
+    line-height: 25px;
+    margin-top: 8px;
+}
+.detailRight a.gjLink{
+    margin-top: 8px;
+}
+.detailRight a.xqLink:hover{
+    background-color: #159ff3;
+    border: 1px solid #159ff3;
+    color: #ffffff;
+}
+.pageList{
+    float: right;
+    margin-top: 40px;
+}
+.pageList ul{
+    border: 1px solid #dddddd;
+    font-size: 0px;
+    border-radius: 3px;
+    padding: 0;
+}
+.pageList ul li{
+    display: inline-block;
+    zoom:1;
+    *display: inline;
+    width: 35px;
+    height: 35px;
+    color: #327ab7;
+    /*border-left: 1px solid #dddddd;
+    border-top: 1px solid #dddddd;*/
+    border-right: 1px solid #dddddd;
+    font-size: 15px;
+    text-align: center;
+    line-height: 35px;
+
+}
+.pageList ul li a{
+    color: #327ab7;
+    font-size: 15px;
+    text-decoration: none;
+}
+.pageList ul li.current{
+    background-color: #327ab7;
+    color: #ffffff;
+}
+.pageList ul li.current a{
+    color: #ffffff;
+}
+.pageList ul li.pre,.pageList ul li.next{
+    background-color: #efefef;
+}
+/*.pageList ul li.pre{
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+}*/
+.pageList ul li.next{
+    /*border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;*/
+    border-right: 0px;
+}

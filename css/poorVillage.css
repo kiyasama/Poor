@@ -1,0 +1,105 @@
+#tpcxDiv .pkcInfo {
+    width: 840px;
+    height: 600px;
+}
+
+#tpcxDiv .contentWrap .pkc-table {
+    margin-bottom: 10px;
+    border: none;
+}
+
+#tpcxDiv .contentWrap .pkc-table th,
+#tpcxDiv .contentWrap .pkc-table td {
+    border: none;
+    text-align: left;
+    padding-left: 15px
+}
+
+#tpcxDiv .contentWrap .pkc-table th label,
+#tpcxDiv .contentWrap .pkc-table td label {
+    display: inline-block;
+    width: 165px;
+}
+
+#tpcxDiv .contentWrap .pkc-policy-table th {
+    background-color: #f5f5f5;
+}
+
+#tpcxDiv .contentWrap .pkc-info-table {
+    border-top: 2px solid #86c3f8;
+}
+
+#tpcxDiv .contentWrap .pkc-info-table th {
+    background-color: #f3f9ff;
+    height: 46px;
+    font-weight: normal;
+    color: #518acd;
+    text-align: left;
+    padding-left: 20px
+}
+//进度监管
+#tpcxDiv .bfjd .syqkDiv {
+    height: 295px;
+    overflow-y: auto;
+}
+
+#tpcxDiv .bfjd .syqkDiv table {
+    width: 100%;
+    table-layout: fixed;
+    border: none;
+    border-collapse: collapse;
+}
+
+#tpcxDiv .bfjd .syqkDiv table th,
+#tpcxDiv .bfjd .syqkDiv table td {
+    text-align: center;
+    border: none;
+}
+
+#tpcxDiv .bfjd .syqkDiv table th,
+#tpcxDiv .bfjd .syqkDiv table td.jhjeTD {
+    color: #0c85eb;
+}
+
+#tpcxDiv .bfjd .syqkDiv table th {
+    font-size: 15px;
+    background-color: transparent;
+    height: 35px;
+}
+
+#tpcxDiv .bfjd .syqkDiv table th.jdTH {
+    width: 145px;
+}
+
+#tpcxDiv .bfjd .syqkDiv table th.jhjeTH {
+    width: 170px;
+}
+
+#tpcxDiv .bfjd .syqkDiv table th.moreTH {
+    width: 50px;
+}
+
+#tpcxDiv .bfjd .syqkDiv table td.jdTD {
+    background: url("../images/jd_bg.png") no-repeat 112px -2px;
+}
+
+#tpcxDiv .bfjd .syqkDiv table td.jdTD span {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    width: 78px;
+    font-size: 13px;
+}
+
+#tpcxDiv .bfjd .syqkDiv table td.jdTD img {}
+
+#tpcxDiv .bfjd .syqkDiv table td.syqkTD {
+    text-align: left;
+}
+
+#tpcxDiv .bfjd .syqkDiv table td.syqkTD p {
+    font-size: 13px;
+    padding: 0;
+    margin: 0;
+    line-height: 20px;
+}

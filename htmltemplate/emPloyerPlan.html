@@ -1,0 +1,14 @@
+ {#foreach $T as record}
+<tr>
+    <td class="jdTD"><span>{$T.record.timePoint}</span><img src="images/jd_icon.png" alt=""></td>
+    <td class="syqkTD">
+        <div class="qkDiv">
+            <p>{$T.record.content}</p>
+        </div>
+        <div class="moreDiv">
+            <a href="#" class="pics">图片</a>
+            <span style="display: none;">{$T.record.photopath}</span>
+        </div>
+    </td>
+</tr>
+{#/for}

@@ -1,0 +1,73 @@
+.xxdjb{
+	color: #111111;
+	top: 0;
+	left: 0;
+}
+.tableDetail{
+	overflow-y: auto;
+	margin-bottom: 10px;
+}
+.box_title{
+	font-size: 18px;
+	font-weight: 400;
+	text-align: center;
+	height: 40px;
+    line-height: 40px;
+}
+.general_title{
+	background-color: #f3f8fe;
+	font-size: 16px;
+	padding-left: 20px;
+	height: 30px;
+	line-height: 30px;
+    margin-top: 10px;
+}
+.tableWrap table,.tableWrap table th,.tableWrap table td{
+	border: 1px solid #c9c9c9;
+}
+.tableWrap table{
+	width: 100%;
+	border-collapse: collapse;
+}
+.tableWrap table th,.tableWrap table td{
+	height: 25px;
+	text-align: center;
+	font-size: 14px;
+	color: #333333;
+}
+.tableWrap table td span{
+	color: #333333;
+}
+.tableWrap table th,.tableWrap table td.titleTD{
+	color: #111111;
+}
+.tableWrap table th{
+	background-color: #dfdfdf;
+    font-weight: 400;
+}
+.tableWrap table td.titleTD,.tableWrap table td.left_alignTD{
+	text-align: left;
+	padding-left: 10px;
+}
+.tableWrap table td.titleTD,.tableWrap table th.rowspanTD{
+	background-color: #f9f9fa;
+}
+.tableWrap table td input[type="checkbox"]{
+	vertical-align: middle;
+	margin-top: -1px;
+}
+.tableWrap table td.spanTD span{
+	display: block;
+	float: left;
+	width: 315px;
+}
+.tableWrap table td.checkboxTD span{
+	margin: 0 10px 0 5px;
+}
+.tableWrap table td.checkboxTD span.sbbz{
+	padding: 0;
+}
+.tableWrap table td.center_alignTD{
+	text-align: center;
+	padding: 0;
+}

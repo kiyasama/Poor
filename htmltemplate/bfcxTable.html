@@ -1,0 +1,34 @@
+{#foreach $T as record}
+<table class="bfzt_Table commonTableStyle">
+    <tr>
+        <td class="titleTD">项目序号：</td>
+        <td>{$T.record.projectId}</td>
+        <td class="titleTD">项目类别：</td>
+        <td>{$T.record.projectType}</td>
+    </tr>
+    <tr>
+        <td class="titleTD">项目名称：</td>
+        <td>{$T.record.projectName}</td>
+        <td class="titleTD">贫困户姓名：</td>
+        <td>{$T.record.povertyHouseName}</td>
+    </tr>
+    <tr>
+        <td class="titleTD">项目效果：</td>
+        <td id="gzgc">{$T.record.projectEffect}</td>
+        <td class="titleTD">项目收益（万元）：</td>
+        <td>{$T.record.projectProfit}</td>
+    </tr>
+    <tr>
+        <td class="titleTD photoTitleTD" colspan="2">帮扶前照片</td>
+        <td class="titleTD photoTitleTD" colspan="2">帮扶后照片</td>
+    </tr>
+    <tr>
+        <td colspan="2" class="imgTD"><img class="bfzp_img" src="../{$T.record.assistBeforePath}" id="bfq" width="118" height="75" alt="暂无图片"></td>
+        <td colspan="2" class="imgTD"><img class="bfzp_img" src="../{$T.record.assistAfterPath}" id="bfh" width="118" height="75" alt="暂无图片"></td>
+    </tr>
+</table>
+{#/for}
+<!-- <td class="xmxhTD">帮扶前照片</td>
+        <td class="imgTD"><img src="images/11019.JPEG" id="bfq" width="100" height="75"></td>
+        <td class="xmxhTD">帮扶后照片</td>
+        <td class="imgTD"><img src="images/11020.JPEG" id="bfh" width="100" height="75"></td> -->

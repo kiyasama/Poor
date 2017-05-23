@@ -1,0 +1,11 @@
+<!--贫困村列表 -->
+{#foreach $T as record}
+<tr>
+    <td> {$T.record.index}</td>
+    <td> {$T.record.AREANAME}</td>
+    <td> {$T.record.VILLAGEMANAGER}</td>
+    <td> {$T.record.VILLAGEATTRIBUTE}</td>
+    <td> {$T.record.PHONENUM}</td>
+    <td><a href="#" id="{$T.record.id}" class="pkcxq">查看</a></td>
+</tr>
+{#/for}

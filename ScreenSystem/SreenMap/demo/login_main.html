@@ -1,0 +1,5334 @@
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<title>
+网格化管理综合服务平台
+</title>
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html >
+<head>
+ 	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="/common/css/themes/default/easyui.css" id="swicth-style">
+	<link rel="stylesheet" type="text/css" href="/common/css/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="/common/css/base.css">
+	<link rel="stylesheet" type="text/css" href="/common/css/common.css">
+	<link rel="stylesheet" href="/common/css/main_web.css" type="text/css" />
+	<script type="text/javascript" src="/common/js/jquery-1.7.2.js"></script>
+	<script type="text/javascript" src="/common/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/common/js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/common/js/lhgdialog.min.js?skin=default"></script>
+	<script type="text/javascript" src="/common/js/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="/common/js/validateForm.js"></script>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script type="text/javascript" src="/js/base.js"></script>
+<script type="text/javascript" src="/common/js/menu.js"></script>
+<script type="text/javascript" src="/common/js/waiting.js"></script>
+<script type="text/javascript" src="/common/js/window.js"></script>
+<script type="text/javascript" src="/common/js/ajax-pushlet-client.js"></script>
+<script type="text/javascript" src="/common/component/COMP_OparetionPicker.js"></script>
+<script type="text/javascript" src="/common/js/activemq/amq_jquery_adapter.js"></script>
+<script type="text/javascript" src="/common/js/activemq/amq.js"></script>
+<script type="text/javascript"> 
+maskDiv=null;//遮罩
+windowDiv=null;//窗体对象
+waiting=null;//等待图标对象
+amenu=null;//功能菜单
+menuArr=null;//功能菜单内容数
+
+//var titleWindow=null;//子页面表格设置窗体
+//var blist=null;//子页面的表格头设置列表
+gisInfoWindow=null;//搜索弹窗
+mapWindow=null;//地图相关窗口
+imgWindow=null;
+   
+
+
+	//用于数据过滤跳转的url，解决参数无法多个传递问题
+	var dataSecurityMenuUrl = '';
+   //接收后台推送的提醒 
+   	var scheduleId;
+	$(function() {
+	pushletEvent();
+	//setTimeout(pushletEvent1, 6000);
+	
+	  windowDiv=new ModalWindow("添加用户"," ",650,460);
+	  mapWindow=new ModalWindow("地图"," ",400,460);
+	  gisInfoWindow=new ModalWindow("详细信息"," ",670,400);
+	waiting=new Waiting();//临时
+	});
+
+	function pushletEvent() {
+		PL._init();
+		PL.joinListen('/schedule/notice');
+	}
+
+	function pushletEvent1()
+	{	
+		PL._init();    
+		PL.joinListen('/emergmentAccident/new');
+	}
+	function onData(event) {
+	   var eventJson = event.get("eventJson");
+	   var dataObj=eval("("+eventJson+")");
+	   if(dataObj.eventType == "bpm" && typeof(dataObj) != "undefined" && dataObj!= null && dataObj !='' ){
+		   var eventType = dataObj.eventType;
+		   if('7a8a8f3947ed85e50147ed8bae0e0000' == dataObj.nestId){//如果要处理的事件不属于当前账号
+			   message({data:dataObj.nestId});
+			   return;
+		   }
+		   return;
+	   }
+		try {
+			var action = event.get("action");
+
+			scheduleId = event.get("id");
+			//读取内容
+			var context = event.get("mes");
+			var title = event.get("mesTitle");
+			//解决汉字乱码问题
+			//alert(action+"--"+scheduleId+"--"+context+"--"+title);
+			context = decodeURIComponent(context);
+			title = decodeURIComponent(title);
+			if (null != context && "undefined" != context) {
+				context = context + "<a href='#' onclick=opendetail('" + action + "') >" + title + "</a>";
+				COMP_OparetionPicker.autoMessage(context);
+			}
+		} catch (e) {
+		}
+	}
+	function opendetail(action) {
+		
+		var detailOptions = {
+			title : '提醒详情',
+			href : action,
+			width : 680,
+			height : 450
+		};
+		COMP_OparetionPicker.detail(detailOptions);
+		addNotifySign(scheduleId,1);
+	}
+
+	function addNotifySign(scheduleId,sign) {
+		//alert(1);
+		$.ajax({
+			type : 'post',
+			dataType : 'text',
+			url : "schedule_addNotifySign.html",
+			data : {
+				scheduleId : scheduleId,
+				sign:sign
+			},
+			success : function(result) {
+				//alert("标记修改成功");
+			},
+			error : function(result) {
+				alert("标记修改失败！:" + result);
+			}
+		});
+	}
+	
+	function changePassword(){
+		var passwordOptions = {
+				title : '修改当前用户密码',
+				href : 'account_changePassword.html?account.id=' + '',
+				saveUrl:'account_updatePassword.html',
+				width : 650,
+				height : 400
+			};
+			COMP_OparetionPicker.changePassword(passwordOptions);
+	}
+	
+	function systemSetup(){
+		var passwordOptions = {
+				title : '设置用户信息',
+				href : 'account_systemSetup.html?ids='+'7a8a8f3947ed85e50147ed8bae0e0000',
+				saveUrl:'account_updateSetup.html',
+				width : 750,
+				height : 500
+			};
+			COMP_OparetionPicker.changePassword(passwordOptions);
+	}
+	
+</script>
+<style type="text/css">
+
+body {
+	font: 12px/20px "微软雅黑", "宋体", Arial, sans-serif, Verdana, Tahoma;
+	padding: 0;
+	margin: 0;
+}
+
+	
+a:link {
+ text-decoration: none;
+}
+a:visited {
+ text-decoration: none;
+}
+a:hover {
+ text-decoration: none;
+}
+a:active {
+ text-decoration: none;
+}
+.cs-north {
+	height:63px;
+}
+.cs-north-bg{
+	width: 100%;
+	height: 100%;
+    background:url(common/images/main/header_bg.jpg) repeat-x;
+	}
+.cs-north-logo{
+	position:absolute; left:2px; top:1px; width:163px;
+	}
+.logo_tille{
+	position:absolute; left:170px; top:20px;
+	}	
+.logo_tille h2{
+	font:bold 18px/20px "微软雅黑"; color:#FFF;
+	}	
+.header_right_info{
+	float:right; width:425px; height:60px; background:url(common/images/main/header_right_bg.jpg) no-repeat; position:relative;
+	}
+.header_right_info p{
+	position:absolute; right:20px; top:30px; font-size:12px;
+	}
+.header_right_info p a{
+	color:#FFF; text-decoration:none;
+	}	
+.header_right_info p a:hover{
+	color:#FF0;
+	}	
+.header_right_info p b{
+	color:#1753a2;
+	}	
+
+.cs-west {
+	width:220px;padding:0px;background-color:#e1ecff;
+}
+.cs-south {
+	height:25px;background:url('common/css/themes/pepper-grinder/images/ui-bg_fine-grain_15_ffffff_60x60.png') repeat-x;padding:0px;text-align:center;
+}
+.cs-navi-tab {
+	padding: 5px;
+}
+ul{list-style:none}
+ul.nav {padding: 0; margin: 0; font-size: 1em; line-height: 0.5em; list-style: none;background:#E0ECFF;} 
+ul.nav li {border-bottom: 1px solid #8DB2E3; } 
+ul.nav li a {line-height: 10px;font-size: 14px; color: #000; padding:10px 0px 10px 20px;display: block;font-weight: bolder;}
+ul.nav li a:hover {background-color:#3370c1;color:white;}
+ul.nav li a img{border-width:0px;height:16px;margin-right:5px;vertical-align:middle;width:16px;}
+ul.nav ul { margin: 0; padding: 0;display: none;} 
+ul.nav ul li {border-bottom:1px solid #ccc;background-color:#eee; margin: 0; padding: 0; clear: both;} 
+ul.nav ul li a {font-size: 12px; color: #000;}
+ul.nav ul li a:hover {background-color:#3370c1;color:#444;} 
+ul.nav ul li a img{padding:0px 0px 0px 20px;border-width:0px;height:16px;margin-right:5px;vertical-align:middle;width:16px;}
+ul.nav ul ul li a {background-color:#FFFFFF;color:#000; font-size:12px;} 
+ul.nav ul ul li a img{border-width:0px;padding:0px 0px 0px 40px;height:16px;margin-right:5px;vertical-align:middle;width:16px;}
+ul.nav ul ul li a:hover { background-color:#3370c1; color:#444;} 
+ul.nav ul ul ul li a {background-color:#FFFFFF;color:#000; font-size:12px;} 
+ul.nav ul ul ul li a img{border-width:0px;padding:0px 0px 0px 60px;height:16px;margin-right:5px;vertical-align:middle;width:16px;}
+ul.nav ul ul ul li a:hover { background-color:#3370c1; color:#444;} 
+ul.nav span{float:right;}
+ 
+.cs-tab-menu {
+	width:120px;
+}
+
+.cs-home-remark {
+	padding: 10px;
+}
+.wrapper {
+    float: right;
+    height: 30px;
+    margin-left: 10px;
+}
+.ui-skin-nav {
+    float: right;
+	padding: 0;
+	margin-right: 10px;
+	list-style: none outside none;
+	height: 30px;
+}
+.ui-skin-nav .li-skinitem {
+    float: left;
+    font-size: 12px;
+    line-height: 30px;
+	margin-left: 10px;
+    text-align: center;
+}
+.ui-skin-nav .li-skinitem span {
+	cursor: pointer;
+	width:10px;
+	height:10px;
+	display:inline-block;
+}
+.ui-skin-nav .li-skinitem span.cs-skin-on{
+	border: 1px solid #FFFFFF;
+}
+.ui-skin-nav .li-skinitem span.gray{background-color:gray;}
+.ui-skin-nav .li-skinitem span.pepper-grinder{background-color:#BC3604;}
+.ui-skin-nav .li-skinitem span.blue{background-color:blue;}
+.ui-skin-nav .li-skinitem span.cupertino{background-color:#D7EBF9;}
+.ui-skin-nav .li-skinitem span.dark-hive{background-color:black;}
+.ui-skin-nav .li-skinitem span.sunny{background-color:#FFE57E;}
+</style>
+<script type="text/javascript">
+var currentMenuId = '';
+function addTab(title, url, dataArea, menuId){
+	setCacheMenuId(menuId);
+	if ($('#tabs').tabs('exists', title)){
+		$('#tabs').tabs('select', title);//选中并刷新
+		var currTab = $('#tabs').tabs('getSelected');
+		if(url != undefined && currTab.panel('options').title != 'Home') {
+			$('#tabs').tabs('update',{
+				tab:currTab,
+				menuid:menuId,
+				options:{
+					content:createFrame(url,dataArea,menuId)
+				}
+			});
+		}
+	} else {
+		var content = createFrame(url,dataArea,menuId);
+		$('#tabs').tabs('add',{
+			title:title,
+			menuid:menuId,
+			content:content,
+			closable:true
+		});
+	}
+	tabClose();
+}
+
+function setCacheMenuId(menuId){
+	var url = "commonAjax_setMenuId.html?code="+menuId;
+	$.ajax({
+		type : 'post',
+		async:false,
+		dataType : 'text',
+		url: url,
+		success : function(result){
+			if(result=='success'){
+				setCurrentMenuId(menuId);
+			}
+		},
+		error : function(result){
+			setCurrentMenuId(menuId);
+			COMP_DataGridataPicker.autoMessage('设置菜单Id失败！');	
+		}
+	});
+}
+
+function urlEscape(url){
+	var menuUrl= new Array();   
+	menuUrl=url.split("?");      
+    if(menuUrl.length>1){
+    	var backUrl= new Array(); 
+    	backUrl=menuUrl[1].split("&");
+    	if(backUrl.length>1){
+    		rUrl=menuUrl[0]+'?';
+    		rUrl= rUrl+ backUrl[0];
+   		 	for (var i=1;i<backUrl.length ;i++ )   
+   		    {   
+   		     rUrl=rUrl+'%2526'+backUrl[i];
+   		    }
+    	}else{
+    		rUrl=url;
+    	}
+    }else{
+    	rUrl=url;
+    }
+	return rUrl;
+}
+function createFrame(url, dataArea,menuId) {
+	/* dataSecurityMenuUrl = url;
+	var s = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>';
+	if(dataArea>0){
+		s= '<iframe scrolling="auto" frameborder="0"  src="dataSecurity_dataSecurityFrame.html?menuId='+menuId+'&menuType='+dataArea+'" style="width:100%;height:100%;"></iframe>';
+	}
+	return s; */
+	
+	var s = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>';
+	if(dataArea>0){
+		s= '<iframe scrolling="auto" frameborder="0"  src="dataSecurity_dataSecurityFrame.html?menuId='+menuId+'&menuUrl='+urlEscape(url)+'&menuType='+dataArea+'" style="width:100%;height:100%;"></iframe>';
+	}
+	return s;
+}
+
+function setCurrentMenuId($menuId){
+	if(typeof $menuId != 'undefined' && $menuId != ''){
+		currentMenuId = $menuId;
+	} else{
+		var currTab = $('#tabs').tabs('getSelected');
+		currentMenuId = currTab.panel('options').menuid;
+	}
+}
+		
+function tabClose() {
+	/*双击关闭TAB选项卡*/
+	$(".tabs-inner").dblclick(function(){
+		var subtitle = $(this).children(".tabs-closable").text();
+		$('#tabs').tabs('close',subtitle);
+		setCurrentMenuId();
+	});
+	/*点击切换TAB选项卡更改menuId*/
+	$(".tabs-inner").click(function(){
+		setTimeout(function(){
+			var currTab = $('#tabs').tabs('getSelected');
+			var menuId = currTab.panel('options').menuid;
+			setCacheMenuId(menuId);
+		}, 200);
+	});
+	/*为选项卡绑定右键*/
+	$(".tabs-inner").bind('contextmenu',function(e){
+		$('#mm').menu('show', {
+			left: e.pageX,
+			top: e.pageY
+		});
+
+		var subtitle =$(this).children(".tabs-closable").text();
+
+		$('#mm').data("currtab",subtitle);
+		$('#tabs').tabs('select',subtitle);
+		return false;
+	});
+	/*点击TAB选项卡关闭按钮*/
+	$(".tabs-close").click(function(){
+		setCurrentMenuId();
+	});
+}		
+//绑定右键菜单事件
+function tabCloseEven() {
+	//刷新
+	$('#mm-tabupdate').click(function(){
+		var currTab = $('#tabs').tabs('getSelected');
+		var url = $(currTab.panel('options').content).attr('src');
+		var dataArea = $(currTab.panel('options').content).attr('dataarea');
+		var menuId = currTab.panel('options').menuid;
+		
+		setCurrentMenuId(menuId);
+		if(url != undefined && currTab.panel('options').title != 'Home') {
+			$('#tabs').tabs('update',{
+				tab:currTab,
+				options:{
+					content:createFrame(url, dataArea, menuId)
+				}
+			});
+		}
+	});
+	//关闭当前
+	$('#mm-tabclose').click(function(){
+		var currtab_title = $('#mm').data("currtab");
+		$('#tabs').tabs('close',currtab_title);
+		setCurrentMenuId();
+	});
+	//全部关闭
+	$('#mm-tabcloseall').click(function(){
+		$('.tabs-inner span').each(function(i,n){
+			var t = $(n).text();
+			if(t != 'Home') {
+				$('#tabs').tabs('close',t);
+			}
+		});
+		setCurrentMenuId();
+	});
+	//关闭除当前之外的TAB
+	$('#mm-tabcloseother').click(function(){
+		var prevall = $('.tabs-selected').prevAll();
+		var nextall = $('.tabs-selected').nextAll();		
+		if(prevall.length>0){
+			prevall.each(function(i,n){
+				var t=$('a:eq(0) span',$(n)).text();
+				if(t != 'Home') {
+					$('#tabs').tabs('close',t);
+				}
+			});
+		}
+		if(nextall.length>0) {
+			nextall.each(function(i,n){
+				var t=$('a:eq(0) span',$(n)).text();
+				if(t != 'Home') {
+					$('#tabs').tabs('close',t);
+				}
+			});
+		}
+		setCurrentMenuId();
+		return false;
+	});
+	//关闭当前右侧的TAB
+	$('#mm-tabcloseright').click(function(){
+		var nextall = $('.tabs-selected').nextAll();
+		if(nextall.length==0){
+			//msgShow('系统提示','后边没有啦~~','error');
+			alert('后边没有啦~~');
+			return false;
+		}
+		nextall.each(function(i,n){
+			var t=$('a:eq(0) span',$(n)).text();
+			$('#tabs').tabs('close',t);
+		});
+		setCurrentMenuId();
+		return false;
+	});
+	//关闭当前左侧的TAB
+	$('#mm-tabcloseleft').click(function(){
+		var prevall = $('.tabs-selected').prevAll();
+		if(prevall.length==0){
+			alert('到头了，前边没有啦~~');
+			return false;
+		}
+		prevall.each(function(i,n){
+			var t=$('a:eq(0) span',$(n)).text();
+			$('#tabs').tabs('close',t);
+		});
+		setCurrentMenuId();
+		return false;
+	});
+
+	//退出
+	$("#mm-exit").click(function(){
+		$('#mm').menu('hide');
+		setCurrentMenuId();
+	});
+}
+
+$(function() {
+	//listenEventStartTopic();
+	tabCloseEven();
+	//setTimeout("$.post('businessSearch_checkISHaveFlowTodo.html', {})", 6000);
+	$('.cs-navi-tab').click(function() {
+		var $this = $(this);
+		var href = $this.attr('src');
+		var title = $this.text();
+		var dataArea = $this.attr('dataarea');
+		var menuId = $this.attr('menuid');
+		addTab(title, href, dataArea, menuId);
+	});
+
+	var themes = {
+		'gray' : 'common/css/themes/gray/easyui.css',
+		'pepper-grinder' : 'common/css/themes/pepper-grinder/easyui.css',
+		'blue' : 'common/css/themes/default/easyui.css',
+		'cupertino' : 'common/css/themes/cupertino/easyui.css',
+		'dark-hive' : 'common/css/themes/dark-hive/easyui.css',
+		'sunny' : 'common/css/themes/sunny/easyui.css'
+	};
+
+	var skins = $('.li-skinitem span').click(function() {
+		var $this = $(this);
+		if($this.hasClass('cs-skin-on')) return;
+		skins.removeClass('cs-skin-on');
+		$this.addClass('cs-skin-on');
+		var skin = $this.attr('rel');
+		$('#swicth-style').attr('href', themes[skin]);
+		setCookie('cs-skin', skin);
+		skin == 'dark-hive' ? $('.cs-north-logo').css('color', '#FFFFFF') : $('.cs-north-logo').css('color', '#000000');
+	});
+
+	if(getCookie('cs-skin')) {
+		var skin = getCookie('cs-skin');
+		$('#swicth-style').attr('href', themes[skin]);
+		$this = $('.li-skinitem span[rel='+skin+']');
+		$this.addClass('cs-skin-on');
+		skin == 'dark-hive' ? $('.cs-north-logo').css('color', '#FFFFFF') : $('.cs-north-logo').css('color', '#000000');
+	}
+});
+
+
+function setCookie(name,value) {//两个参数，一个是cookie的名子，一个是值
+    var Days = 30; //此 cookie 将被保存 30 天
+    var exp = new Date();    //new Date("December 31, 9998");
+    exp.setTime(exp.getTime() + Days*24*60*60*1000);
+    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+}
+
+function getCookie(name) {//取cookies函数        
+    var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
+     if(arr != null) return unescape(arr[2]); return null;
+}
+
+function createCheckedArr(arrName) {//创建一个子页面的记录选中项的数组
+    eval(arrName+"=new Array()");
+}
+
+function listenEventStartTopic(){
+	$.post("businessSearch_checkISHaveFlowTodo.html", {});
+	var clientId = (new Date()).getTime().toString();
+	var amq = org.activemq.Amq;
+	amq.init({ uri: 'amq', timeout: 45, clientId:clientId});  
+	amq.addListener('111', 'topic://eventStartTopic', message); 
+}
+
+function message(msg){
+	var context = "您有事件需要处理点击<a onclick=openTodoList('" + msg.data + "') style='cursor:pointer;'><font color='red'>这里</font></a>查看";
+	if(msg.data.indexOf('7a8a8f3947ed85e50147ed8bae0e0000') > -1){
+		COMP_OparetionPicker.autoMessage(context);
+	}
+}
+
+function openTodoList(action){
+	var title = '我的待办';
+	var url = 'businessSearch_todolist.html';
+	var dod = $.dialog({
+		title:title,
+	    content: 'url:'+url,
+	    width: 1300, 
+	    height: 450,
+	    lock: true,
+	    cache:false,
+	    cancelVal: '关闭',
+	    cancel: true
+	}).max();  
+}
+
+</script>
+
+</head>
+<body class="easyui-layout">	
+	<div region="north" border="true" class="cs-north">
+	<div class="cs-north-bg">
+    	<div class="cs-north-logo">
+        	<img src="common/images/main/logo.png"/>
+        </div>
+        <div class="logo_tille">
+        	<h2>网格化管理综合服务平台</h2>
+        </div>
+        <div class="header_right_info">
+        	<p>
+                <a>欢迎您：</a><a href="#">administrator</a>
+                <b>|</b>
+                <a href="#" onclick='systemSetup();'>设置</a>
+                <b>|</b>
+                <a href="#" onclick='changePassword();'>修改密码</a>
+                
+				   	
+				   
+
+				   
+				   		<b>|</b>
+				   		<a href="login_index.html">首页</a>
+			   	   
+				
+                <b>|</b>
+                <a href="login_logout.html">退出</a>
+            </p>
+        </div>
+    </div>
+    </div>
+	<div region="west" border="true" split="true" title="系统菜单" class="cs-west">
+		<div class="easyui-accordion" fit="true" border="false">
+			<ul class="nav"><!-- 一级菜单 -->
+				
+					
+						<li><a menuid="8a8a8ffe480c014d01480c0642720011" dataarea="0" href="javascript:void(0);" src="#"><img src="common/images/menu/house.png">基础平台</a>
+						
+							<ul><!-- 二级菜单 -->
+							
+									
+									<li>
+											<a menuid="8a8a8ffe480c014d01480c07f2c20025" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/bulb2.png">日志管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="8a8a8ffe480c014d01480c08df93002d" dataarea="1" href="javascript:void(0);" src="loginLog_list.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">登录日志
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8a8a8ffe480c014d01480c094e3b0031" dataarea="1" href="javascript:void(0);" src="exceptionLog_list.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/b.png">错误日志
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8a8a8ffe480c014d01480c09af660035" dataarea="1" href="javascript:void(0);" src="operationLog_list.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/d.png">操作日志
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8a8a8ffe480c014d01480c0a29e50039" dataarea="1" href="javascript:void(0);" src="operationLogSetting_list.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/r.png">操作日志配置
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8a8a8ffe480c014d01480c0ac1ff003d" dataarea="0" href="javascript:void(0);" src="orgDeptPost_orgDeptPostList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/l.png">组织机构管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8a8a8f1c481544020148155219320019" dataarea="1" href="javascript:void(0);" src="schedule_meetingList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/j.png">会议管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8a8a8f71481058c80148106383ac0002" dataarea="0" href="javascript:void(0);" src="dictionary_dictionaryList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/j.png">数据字典管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8a8a8f71481058c801481065d0500003" dataarea="0" href="javascript:void(0);" src="dictionary_systemcodeList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/j.png">系统编码管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8a8a8ffe480c014d01480c127b69005c" dataarea="0" href="javascript:void(0);" src="menu_list.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/k.png">菜单管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8a8a8f71481058c8014810667dc50004" dataarea="1" href="javascript:void(0);" src="function_list.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/a.png">操作项管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8a8a8f674810e8f7014810ebdb770000" dataarea="0" href="javascript:void(0);" src="schedule_scheduleMain.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/k.png">日程管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8a8a8f394810ebc9014810f30b300020" dataarea="1" href="javascript:void(0);" src="account_accountList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/k.png">帐号管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8a8a8f394810ebc90148110f409f0026" dataarea="1" href="javascript:void(0);" src="role_roleList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/k.png">角色管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff8080814a0b9aa1014a0b9d8c9d0005" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/h.png">数据权限管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="ff8080814a0b9aa1014a0b9e9e76000c" dataarea="0" href="javascript:void(0);" src="dataSecurity_listAccountDataSecurity.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">用户数据权限
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814a0b9aa1014a0b9f0f4d000d" dataarea="0" href="javascript:void(0);" src="dataSecurity_listRoleDataSecurity.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">角色数据权限
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814a0b9aa1014a0b9f787a000e" dataarea="0" href="javascript:void(0);" src="dataSecurity_listGroupDataSecurity.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">群组数据权限
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814a0b9aa1014a0b9fe2550010" dataarea="0" href="javascript:void(0);" src="dataSecurity_listOrgDataSecurity.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">组织机构数据权限
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8a8a8f394810ebc90148110f7aab0027" dataarea="1" href="javascript:void(0);" src="group_groupList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/k.png">群组管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff8080814a34ff47014a373cc3371f02" dataarea="0" href="javascript:void(0);" src="systemVariables_systemVariablesList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/j.png">系统变量管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8ab0e3a3485e3e5901485e42e00e0002" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/h.png">菜单权限管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="8ab0e3a3485e3e5901485e465d840003" dataarea="0" href="javascript:void(0);" src="menuSecurity_listOrgSecurity.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">组织机构权限
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0e3a3485e3e5901485e47794a0004" dataarea="0" href="javascript:void(0);" src="menuSecurity_listGroupSecurity.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">群组权限
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0e3a3485e3e5901485e47bccb0005" dataarea="0" href="javascript:void(0);" src="menuSecurity_listRoleSecurity.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">角色权限
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0e3a3485e3e5901485e47f5740006" dataarea="0" href="javascript:void(0);" src="menuSecurity_listAccountSecurity.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">用户权限
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff8080814d2df52f014d2e01b3770049" dataarea="0" href="javascript:void(0);" src="user_userList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/h.png">用户信息管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8ab0e3d548f4451b0148f4894cca0046" dataarea="0" href="javascript:void(0);" src="fileManager_fileManagerList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/h.png">文件管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff8080814d4bb6f1014d4c6b4ffb2596" dataarea="0" href="javascript:void(0);" src="fieldRequest_list.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/k.png">字段申请管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff80808149c2af7b0149c6d601e94526" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/h.png">适配器
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="ff80808149c72e1c0149cb5c89d96a79" dataarea="1" href="javascript:void(0);" src="adapterDataSource_adapterDataSourceList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/r.png">适配器配置管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808149c72e1c0149cb5d269a6a9f" dataarea="1" href="javascript:void(0);" src="adapterDatabase_adapterDatabaseList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/r.png">适配器类型管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808149c2af7b0149c6d6e0ca4527" dataarea="1" href="javascript:void(0);" src="datatype_datatypeList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/r.png">数据类型管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+							</ul>
+						
+						</li>
+					
+				
+					
+						<li><a menuid="ff80808151d39e020151d6c7de290290" dataarea="0" href="javascript:void(0);" src="#"><img src="common/images/menu/house.png">我的工作</a>
+						
+							<ul><!-- 二级菜单 -->
+							
+									
+									<li>
+											<a menuid="ff80808151d39e020151d6c8e2c006b3" dataarea="0" href="javascript:void(0);" src="businessSearch_todolist.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/j.png">我的待办
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff80808151d39e020151d6c9efb606b9" dataarea="0" href="javascript:void(0);" src="businessSearch_jblist.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/j.png">我的经办
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff80808151d39e020151d6caac9906c1" dataarea="0" href="javascript:void(0);" src="businessSearch_bjlist.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/j.png">我的办结
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff80808151a9eecb0151aa76ff53080f" dataarea="0" href="javascript:void(0);" src="businessSearch_listAll.html?seachOuttime=no" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/j.png">事件查询
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff80808151d39e020151d6cc1e100ba8" dataarea="0" href="javascript:void(0);" src="eventCom_listOverTime.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/j.png">超时监控
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="4028403d5113644801511417097f01d7" dataarea="1" href="javascript:void(0);" src="eventDetail_list.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/j.png">事件查看
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff8080814cd44675014cd487c3e71a9c" dataarea="0" href="javascript:void(0);" src="/businessStart/businessStart_list.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/j.png">事件上报
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+							</ul>
+						
+						</li>
+					
+				
+					
+						<li><a menuid="8a8a8ffe480c014d01480c069a170015" dataarea="0" href="javascript:void(0);" src="#"><img src="common/images/menu/house.png">基础库</a>
+						
+							<ul><!-- 二级菜单 -->
+							
+									
+									<li>
+											<a menuid="8a8a8ffe480c014d01480c1144220058" dataarea="1" href="javascript:void(0);" src="building_buildingList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/house.png">建筑信息管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8a8a8f394810d1bc014810e10da80002" dataarea="1" href="javascript:void(0);" src="unit_unitList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/house.png">建筑单元信息管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8a8a8f3e481bc2d901481bc54ccb0000" dataarea="1" href="javascript:void(0);" src="house_houseList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/house.png">房屋信息管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8a8a8f394810d1bc014810d9dd440001" dataarea="1" href="javascript:void(0);" src="resident_residentList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/house.png">居民户信息管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8a8a8f71481058c80148106729370005" dataarea="1" href="javascript:void(0);" src="enterprise_enterpriseList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/bulb2.png">企业单位信息管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8a8a8f674810d9eb014810e19a480001" dataarea="1" href="javascript:void(0);" src="population_populationList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/house.png">人口信息管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff8080814ae6b969014aeb8ce3ff2136" dataarea="1" href="javascript:void(0);" src="cityComponent_cityComponentList.html?isSubSystem=false" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/bulb2.png">城市部件信息管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8ab0e3d5492dc35a01492dc990c00001" dataarea="1" href="javascript:void(0);" src="populationsmall_populationSmallList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/bulb2.png">人口管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff80808149f47fb80149f6179bcc735c" dataarea="1" href="javascript:void(0);" src="enterprisesmall_enterpriseSmallList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/bulb2.png">企业管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+							</ul>
+						
+						</li>
+					
+				
+					
+						<li><a menuid="8a8a8ffe480c014d01480c071d03001a" dataarea="0" href="javascript:void(0);" src="#"><img src="common/images/menu/house.png">业务系统</a>
+						
+							<ul><!-- 二级菜单 -->
+							
+									
+									<li>
+											<a menuid="8a8a8ffe480c014d01480c0ff6450046" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/bulb2.png">综治维稳
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="8a8a8ffe480c014d01480c107866004f" dataarea="1" href="javascript:void(0);" src="specialGroups_list.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">特殊人群管控
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8a8a8f674810e8f7014810ece47b0001" dataarea="1" href="javascript:void(0);" src="importantMatters_imprtMattersList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">重大事项管理登记
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8a8a8f674810e8f7014810efc4710007" dataarea="2" href="javascript:void(0);" src="securityIssues_listSecurityIssues.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">重点治安管控
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8a8a8f674810e8f7014810ef60f40006" dataarea="1" href="javascript:void(0);" src="importantTrace_imprtTracelist.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">重大事项稳控追踪
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8a8a8f674810e8f7014810eee8880005" dataarea="1" href="javascript:void(0);" src="importantRiskRating_importantRiskRatingList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">重大事项风险评估
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8a8a8f674810e8f7014810f016790008" dataarea="1" href="javascript:void(0);" src="dispute_listDispute.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">纠纷管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8a8a8f1c4811883d01481189bf300000" dataarea="2" href="javascript:void(0);" src="dispute_listDisputeDetails.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">矛盾纠纷详情
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808149566b4f014956759ab6002a" dataarea="1" href="javascript:void(0);" src="petitionStabilityDuty_petitionStabilityDutyList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">信访案件稳控责任
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8a8a8f674810e8f7014810ededdc0003" dataarea="1" href="javascript:void(0);" src="focusYouth_focusYouthList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">重点青少年信息
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8a8a8f674810e8f7014810ee7abb0004" dataarea="1" href="javascript:void(0);" src="school_schoolList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">学校信息
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8a8a8f674810e8f7014810ed93490002" dataarea="1" href="javascript:void(0);" src="routeInfo_routeInfoList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">路线信息
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808149566b4f014956791f680036" dataarea="1" href="javascript:void(0);" src="fightingMen_fightingMenList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">参战人员管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808149566b4f014956799154003a" dataarea="1" href="javascript:void(0);" src="nuclearMen_nuclearMenList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">涉核人员管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808149566b4f01495679f52b0047" dataarea="1" href="javascript:void(0);" src="communityCorrection_communityCorrectionList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">社区矫正管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808149566b4f0149567a5bcb0052" dataarea="1" href="javascript:void(0);" src="petitionPerson_petitionPersonList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">信访人员管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808149566b4f0149567ac7990053" dataarea="1" href="javascript:void(0);" src="heresyPeople_listHeresyPeople.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">邪教人员
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808149566b4f0149567bd1b7005b" dataarea="1" href="javascript:void(0);" src="disabilitySoldier_listDisabilitySoldier.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">伤残军人
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814a5c3973014a5dc4d5a32fb3" dataarea="1" href="javascript:void(0);" src="communityPolice_communityPoliceList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">社区治安队伍
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814d415e09014d4b72669d22d0" dataarea="1" href="javascript:void(0);" src="minorCriminal_minorCriminalList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">未成年人违法犯罪
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814d4bb6f1014d4c6e44c32757" dataarea="1" href="javascript:void(0);" src="releasePerson_list.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">刑满释放人员
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814d4bb6f1014d4c6ecf12277b" dataarea="1" href="javascript:void(0);" src="executedPerson_list.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">法院失信被执行人员
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814d4bb6f1014d4ce8c4b9329a" dataarea="1" href="javascript:void(0);" src="psychopath_psychopathList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">精神病患者管控
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814d4d6dc3014d4d7469130012" dataarea="1" href="javascript:void(0);" src="drug_drugList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">吸毒人员
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8a8a8f394810d1bc014810e26f7a0003" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/bulb2.png">计生服务
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="8a8a8f394810d1bc014810e4d29f0006" dataarea="0" href="javascript:void(0);" src="fertileWoman_fertileWomanList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">育龄妇女
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8a8a8f394810d1bc014810e5d0b60007" dataarea="0" href="javascript:void(0);" src="childrenCondition_childrenConditionList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">子女情况
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8a8a8f1c4811939f0148119b27de0000" dataarea="0" href="javascript:void(0);" src="contraceptiveProvide_listContraceptiveProvide.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">药具发放
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8a8a8f1c4811939f0148119c0fc70001" dataarea="0" href="javascript:void(0);" src="contraceptiveTrack_listContraceptiveTrack.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">药具使用跟踪
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8a8a8f394810d1bc014810e322cd0004" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/bulb2.png">劳动保障
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="8a8a8f394810d1bc014810e66b700008" dataarea="0" href="javascript:void(0);" src="unemployed_unemployedList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">失业人员信息
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8a8a8f674815003f0148151848ec0004" dataarea="0" href="javascript:void(0);" src="retire_retireList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">退休人员信息
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8a8a8f394810d1bc014810e3574a0005" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/bulb2.png">民政服务
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="8a8a8f394810d1bc014810e72d290009" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff8080814a146caf014a158d5d353801, ff8080814a146caf014a158e2b8d3802, ff8080814a146caf014a158e8c623835, ff8080814a843598014a8521471539d7, ff8080814a843598014a8520a09939d6, ff8080814a853309014a8542b9d2002b]
+												 			>
+															<img src="common/images/menu/f.png">救助信息
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff8080814a146caf014a158d5d353801" dataarea="1" href="javascript:void(0);" src="helpRecord_helpRecordList.html?helpClass=1"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">农村医疗救助
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814a146caf014a158e2b8d3802" dataarea="1" href="javascript:void(0);" src="helpRecord_helpRecordList.html?helpClass=2"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">慢性病救助
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814a146caf014a158e8c623835" dataarea="1" href="javascript:void(0);" src="helpTempRecord_helpTempRecordList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">城乡临时救助
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814a843598014a8521471539d7" dataarea="1" href="javascript:void(0);" src="hospitalRescue_hospitalRescueList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">一站式住院救助
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814a843598014a8520a09939d6" dataarea="1" href="javascript:void(0);" src="hospitalMedicalRescue_hospitalMedicalRescueList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">医后住院救助
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814a853309014a8542b9d2002b" dataarea="1" href="javascript:void(0);" src="helpChronicDisease_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">慢性病医疗救助
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8a8a8f394810d1bc014810e805a7000a" dataarea="1" href="javascript:void(0);" src="oldMan_oldManList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">辖区老人信息
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8a8a8f394810d1bc014810e85917000b" dataarea="1" href="javascript:void(0);" src="oldManFamily_oldManFamilyList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">辖区老人家人信息
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8a8a8f394810d1bc014810e8a4c6000c" dataarea="1" href="javascript:void(0);" src="serviceInstitution_serviceInstitutionList.html?serviceInstitution.institutionCategory=1" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">服务机构信息
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8a8a8f394810d1bc014810e8e895000d" dataarea="1" href="javascript:void(0);" src="veteran_veteranList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">退伍军人信息
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff808081492e4b2f014932b4dbc938cd" dataarea="1" href="javascript:void(0);" src="nursingHome_nursingHomeList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">养老院信息
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814a108c6d014a1097deac0116" dataarea="1" href="javascript:void(0);" src="serviceInstitution_serviceInstitutionList.html?serviceInstitution.institutionCategory=2" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">志愿者机构信息
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814a48c5c2014a4bda4d0e2893" dataarea="1" href="javascript:void(0);" src="privateNonEnterprise_privateNonEnterpriseList.html?type=2" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">社会团体
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814960fdaf0149a3afea09607e" dataarea="1" href="javascript:void(0);" src="privateNonEnterprise_privateNonEnterpriseList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">民办非企业单位
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814960fdaf0149a3aedf51607d" dataarea="1" href="javascript:void(0);" src="#" 
+															[ff8080814a0f62f6014a1071aa395e45, ff8080814a0f62f6014a1073cb515f56]
+												 			>
+															<img src="common/images/menu/f.png">服务对象
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff8080814a0f62f6014a1071aa395e45" dataarea="1" href="javascript:void(0);" src="serviceRecipient_serviceRecipientList.html?serviceRecipient.serviceRecipients=1"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社会服务人群
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814a0f62f6014a1073cb515f56" dataarea="1" href="javascript:void(0);" src="serviceRecipient_serviceRecipientList.html?serviceRecipient.serviceRecipients=2"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">呼叫终端人群
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814a0f62f6014a1031fd5547c2" dataarea="1" href="javascript:void(0);" src="#" 
+															[ff8080814a0f62f6014a1032bae247f7, ff8080814a0f62f6014a10337c1a4829, ff8080814a0f62f6014a1033f9f0483d, ff8080814a146caf014a15aac1b34098]
+												 			>
+															<img src="common/images/menu/f.png">社会救助对象
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff8080814a0f62f6014a1032bae247f7" dataarea="1" href="javascript:void(0);" src="insured_insuredList.html?insuredClass=1"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">城市低保
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814a0f62f6014a10337c1a4829" dataarea="1" href="javascript:void(0);" src="insured_insuredList.html?insuredClass=2"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">农村低保
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814a0f62f6014a1033f9f0483d" dataarea="1" href="javascript:void(0);" src="fiveGuaranteed_fiveGuaranteedList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">五保户
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814a146caf014a15aac1b34098" dataarea="1" href="javascript:void(0);" src="cityOrphan_cityOrphanList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">城市孤儿
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808149a790c50149a85a825a42bc" dataarea="1" href="javascript:void(0);" src="disabledPerson_disabledPersonList.html 	" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">残疾人信息
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808149a884570149aa4ab9981d35" dataarea="1" href="javascript:void(0);" src="oldAgePeople_list.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">高龄老人补贴
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808149b1b7940149b1d8284e0011" dataarea="1" href="javascript:void(0);" src="#" 
+															[ff80808149fa84940149fab6258300dc, ff80808149fa84940149fab6bfa100e9, ff80808149fa84940149fab7073500ea, ff80808149fa84940149fab75c8e00eb]
+												 			>
+															<img src="common/images/menu/f.png">双拥优抚
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff80808149fa84940149fab6258300dc" dataarea="1" href="javascript:void(0);" src="disabilitySoldier_listDisabilitySoldier.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">伤残军人
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff80808149fa84940149fab6bfa100e9" dataarea="1" href="javascript:void(0);" src="fightingMen_fightingMenList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">作战人员
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff80808149fa84940149fab7073500ea" dataarea="1" href="javascript:void(0);" src="nuclearMen_nuclearMenList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">涉核人员
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff80808149fa84940149fab75c8e00eb" dataarea="1" href="javascript:void(0);" src="threeGeneraPersonnel_threeGeneraPersonnelList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">三属人员
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808149f47fb80149f619299a7375" dataarea="2" href="javascript:void(0);" src="communityAgency_communityAgencyList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">社区机构信息
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814a0a7917014a0b3e92ec08ce" dataarea="1" href="javascript:void(0);" src="marriages_divorceList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">离婚登记信息
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814a0f62f6014a0fb7ecb71c7e" dataarea="1" href="javascript:void(0);" src="marriages_marriageList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">结婚登记信息
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814a34edb4014a34f5645800bc" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff8080814a34edb4014a34f8702c0114, ff8080814a34edb4014a34f8f6870121, ff8080814a34edb4014a34f971b70122, ff8080814a34edb4014a34f9fb5a013c, ff8080814cdadb60014cdc40d91b4b65]
+												 			>
+															<img src="common/images/menu/f.png">订单管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff8080814a34edb4014a34f8702c0114" dataarea="1" href="javascript:void(0);" src="orderManagement_orderManagementList.html?receiveStatus=0&orderClass=MZFUJG"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">未接收订单
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814a34edb4014a34f8f6870121" dataarea="1" href="javascript:void(0);" src="orderManagement_orderManagementList.html?receiveStatus=1&orderClass=MZFUJG"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">未处理订单
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814a34edb4014a34f971b70122" dataarea="1" href="javascript:void(0);" src="orderManagement_orderManagementList.html?receiveStatus=2&orderClass=MZFUJG"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">处理中订单
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814a34edb4014a34f9fb5a013c" dataarea="1" href="javascript:void(0);" src="orderManagement_orderManagementList.html?receiveStatus=3&orderClass=MZFUJG"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">已完成订单
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814cdadb60014cdc40d91b4b65" dataarea="1" href="javascript:void(0);" src="orderManagement_orderManagementList.html?receiveStatus=4&orderClass=MZFUJG"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">已失败订单
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814d50a697014d511fd55609dd" dataarea="1" href="javascript:void(0);" src="adisControl_adisControlList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">艾滋病防控信息
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff808081511a752201511d78eae60654" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff80808150f0221b0150f0ab07420644, ff80808150f3f5360150f5181ead024f, ff80808150f3f5360150f56a10540324, ff80808150f3f5360150fa8b427f0a60, ff808081513ee4e801514312ee3c16d5, ff808081513ee4e801514313ed5416db, ff808081513ee4e801514314e4ca16e8]
+												 			>
+															<img src="common/images/menu/bulb2.png">社区综合治理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff80808150f0221b0150f0ab07420644" dataarea="1" href="javascript:void(0);" src="communitEducateCase_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区帮教信息
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff80808150f3f5360150f5181ead024f" dataarea="1" href="javascript:void(0);" src="communitRegistration_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区出租屋信息
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff80808150f3f5360150f56a10540324" dataarea="1" href="javascript:void(0);" src="communitResidentUnit_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区驻地单位
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff80808150f3f5360150fa8b427f0a60" dataarea="1" href="javascript:void(0);" src="communitRetiree_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区退休人员信息
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513ee4e801514312ee3c16d5" dataarea="1" href="javascript:void(0);" src="communitySecurityPat_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区治安巡逻员
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513ee4e801514313ed5416db" dataarea="1" href="javascript:void(0);" src="communityKeyConPeople_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区重点控制人员
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513ee4e801514314e4ca16e8" dataarea="1" href="javascript:void(0);" src="communityCivilDispute_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区民事纠纷调节
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff808081511a752201511d8e0c920946" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff808081511a752201511d8f5657096b, ff808081511a752201511d9024cf0982]
+												 			>
+															<img src="common/images/menu/bulb2.png">社区帮扶救助活动
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff808081511a752201511d8f5657096b" dataarea="1" href="javascript:void(0);" src="communityMutualInfo_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区互助人员信息
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081511a752201511d9024cf0982" dataarea="1" href="javascript:void(0);" src="communityMutualRecord_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区互助活动记录
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff808081511a752201511d932e240a2b" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff808081511a752201511d953a220aac, ff808081511a752201511d9611b30ad5]
+												 			>
+															<img src="common/images/menu/bulb2.png">社区工作人员信息
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff808081511a752201511d953a220aac" dataarea="1" href="javascript:void(0);" src="communityWorkers_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区两委会工作人员
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081511a752201511d9611b30ad5" dataarea="1" href="javascript:void(0);" src="communityAllied_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区专职工作人员
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff808081511a752201511d97e2040b20" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff808081511a752201511d9911610b40, ff808081511a752201511d99d14d0b64]
+												 			>
+															<img src="common/images/menu/bulb2.png">社区服务体系项目
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff808081511a752201511d9911610b40" dataarea="1" href="javascript:void(0);" src="communityCityEntry_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">城市项目录入信息
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081511a752201511d99d14d0b64" dataarea="1" href="javascript:void(0);" src="communityProjectExec_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">城市项目执行信息
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff808081513ee4e8015142589e471098" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff808081513ee4e80151425a801810a2, ff808081513ee4e80151425ba20010ab]
+												 			>
+															<img src="common/images/menu/bulb2.png">志愿者服务
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff808081513ee4e80151425a801810a2" dataarea="1" href="javascript:void(0);" src="communityVoluntInfo_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">志愿者服务队伍
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513ee4e80151425ba20010ab" dataarea="1" href="javascript:void(0);" src="communityVoluntRecord_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">志愿者服务记录
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff808081513771c2015138a7bdf40ca9" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff808081513771c2015138a8f5b10cbc, ff808081513771c2015138aceebf0d38, ff808081513771c2015138adba030d4e, ff808081513771c2015138ae80ba0d69, ff808081513771c2015138af12c70d82, ff808081513771c2015138afcd0e0d98, ff808081513771c2015138b06ee00db1, ff808081513771c2015138b11d250dc8, ff808081513771c2015138b21e130de8, ff808081513771c2015138a9e6b60cdd, ff808081513771c2015138aaad9c0cfe, ff808081513771c2015138ab88c00d12, ff808081513771c2015138ac56ba0d27]
+												 			>
+															<img src="common/images/menu/bulb2.png">社区管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138a8f5b10cbc" dataarea="1" href="javascript:void(0);" src="communityCommitteeElect_listCommunityCommitteeElect.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区居民委员会换届选举
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138aceebf0d38" dataarea="1" href="javascript:void(0);" src="communityConsultatMeet_listCommunityConsultatMeet.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区协商议事会
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138adba030d4e" dataarea="1" href="javascript:void(0);" src="communityDailyWork_listCommunityDailyWork.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区日常工作
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138ae80ba0d69" dataarea="1" href="javascript:void(0);" src="communityFinanceInfo_listCommunityFinanceInfo.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区财务信息
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138af12c70d82" dataarea="1" href="javascript:void(0);" src="communityFixedAsset_listCommunityFixedAsset.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区固定资产
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138afcd0e0d98" dataarea="1" href="javascript:void(0);" src="communityHonestCulture_listCommunityHonestCulture.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">廉政文化进社区活动
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138b06ee00db1" dataarea="1" href="javascript:void(0);" src="communityHonestGove_listCommunityHonestGove.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区党风廉政建设
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138b11d250dc8" dataarea="1" href="javascript:void(0);" src="communityJuWuDisclose_listCommunityJuWuDisclose.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区居务公开
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138b21e130de8" dataarea="1" href="javascript:void(0);" src="communityPartyAssociatMeet_listCommunityPartyAssociatMeet.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区党建联席会
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138a9e6b60cdd" dataarea="1" href="javascript:void(0);" src="communityPartyElectMeet_listCommunityPartyElectMeet.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区党支部换届选举大会
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138aaad9c0cfe" dataarea="1" href="javascript:void(0);" src="communityRepresentMeet_listCommunityRepresentMeet.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区居民代表会议
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138ab88c00d12" dataarea="1" href="javascript:void(0);" src="communityResidentMeet_listCommunityResidentMeet.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区居民大会
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138ac56ba0d27" dataarea="1" href="javascript:void(0);" src="communityResidentPact_listCommunityResidentPact.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区居民公约
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff808081513771c2015138abfc090d22" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff808081513ee4e8015141e8085a0e74, ff808081513ee4e80151426981eb10e6, ff808081513ee4e80151426df7501108, ff808081513ee4e80151426f53ea111a, ff808081513ee4e80151427163c81132, ff808081513ee4e8015142744ea91156, ff808081513ee4e801514272a87d1149, ff808081513ee4e801514277eab2117b, ff808081513ee4e80151427641721167, ff808081513ee4e8015142791cd1118d, ff808081513ee4e8015141f5cc530eee, ff80808151471f6201514787399f025d, ff808081513771c2015138adf6090d57, ff808081513771c2015138aeead00d7b, ff808081513771c2015138af7a3d0d90, ff808081513771c2015138aff6a50da0, ff808081513771c2015138b08a940db7, ff808081513771c2015138b132480dd0, ff808081513771c2015138b1b7540dd9, ff808081513771c2015138b261a70df0, ff808081513771c2015138b2e5130dff, ff808081513771c2015138b478ee0e22, ff808081513771c2015138b50d260e30, ff808081513771c2015138b5d2de0e4c, ff808081513771c2015138b665680e5a, ff808081513ee4e8015142cc7a8d148c, ff808081513ee4e8015142cd77dc14a2, ff808081513ee4e8015142ce4e3314b1]
+												 			>
+															<img src="common/images/menu/bulb2.png">社区服务
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff808081513ee4e8015141e8085a0e74" dataarea="1" href="javascript:void(0);" src="preventServicesInfo_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">预防服务信息
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513ee4e80151426981eb10e6" dataarea="1" href="javascript:void(0);" src="communityReproductive_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区育龄妇女信息
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513ee4e80151426df7501108" dataarea="1" href="javascript:void(0);" src="communityMulticultTeam_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区文化团队信息
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513ee4e80151426f53ea111a" dataarea="1" href="javascript:void(0);" src="communityIndoorVenues_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区室内外设施
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513ee4e80151427163c81132" dataarea="1" href="javascript:void(0);" src="communityCivilizedSchool_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区市民文明学校
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513ee4e8015142744ea91156" dataarea="1" href="javascript:void(0);" src="communityAgedService_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">为老服务信息
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513ee4e801514272a87d1149" dataarea="1" href="javascript:void(0);" src="communityAgedServiceRecord_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">为老服务记录
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513ee4e801514277eab2117b" dataarea="1" href="javascript:void(0);" src="communityCareerService_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">就业再就业服务
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513ee4e80151427641721167" dataarea="1" href="javascript:void(0);" src="communityCareerSRecord_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">就业再就业记录
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513ee4e8015142791cd1118d" dataarea="1" href="javascript:void(0);" src="communityHouseService_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区廉租房服务
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513ee4e8015141f5cc530eee" dataarea="1" href="javascript:void(0);" src="communityDisabledService_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">助残服务
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff80808151471f6201514787399f025d" dataarea="1" href="javascript:void(0);" src="communityDisabledSRecord_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">助残服务记录
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138adf6090d57" dataarea="1" href="javascript:void(0);" src="communityThreshold_communityThresholdList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">低保救助
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138aeead00d7b" dataarea="1" href="javascript:void(0);" src="communityStrandsSupport_communityStrandsSupportList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">特困人员供养
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138af7a3d0d90" dataarea="1" href="javascript:void(0);" src="communityAffectedRescue_communityAffectedRescueList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">受灾人员救助
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138aff6a50da0" dataarea="1" href="javascript:void(0);" src="communityHouseAssist_communityHouseAssistList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">住房救助
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138b08a940db7" dataarea="1" href="javascript:void(0);" src="communityEducateAssist_communityEducateAssistList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">教育救助
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138b132480dd0" dataarea="1" href="javascript:void(0);" src="communityJobAssist_communityJobAssistList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">就业救助
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138b1b7540dd9" dataarea="1" href="javascript:void(0);" src="communitySubAllow_communitySubAllowList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">最低生活保障
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138b261a70df0" dataarea="1" href="javascript:void(0);" src="communityTempAssist_communityTempAssistList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">临时救助
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138b2e5130dff" dataarea="1" href="javascript:void(0);" src="communityMedicalAssist_communityMedicalAssistList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">医疗救助
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138b478ee0e22" dataarea="1" href="javascript:void(0);" src="communityWorkRecord_communityWorkRecordList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社会救助工作记录
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138b50d260e30" dataarea="0" href="javascript:void(0);" src="communityMinorService_communityMinorServiceList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">未成年人保护服务
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138b5d2de0e4c" dataarea="1" href="javascript:void(0);" src="communityMinorSRecord_communityMinorSRecordList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">未成年人保护记录
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138b665680e5a" dataarea="1" href="javascript:void(0);" src="communityLibraryBuild_communityLibraryBuildList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">图书室建设
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513ee4e8015142cc7a8d148c" dataarea="1" href="javascript:void(0);" src="communityReadActivity_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">万象社区读书活动
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513ee4e8015142cd77dc14a2" dataarea="1" href="javascript:void(0);" src="communityConventService_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区便民利民服务
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513ee4e8015142ce4e3314b1" dataarea="1" href="javascript:void(0);" src="communityMerchantReg_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区商家服务登记
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff808081513771c2015138b823240e8d" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff808081513771c2015138b9fbe30ea7, ff80808151471f6201514789f0560263, ff80808151471f620151478ab86b026a]
+												 			>
+															<img src="common/images/menu/bulb2.png">社区概况
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138b9fbe30ea7" dataarea="1" href="javascript:void(0);" src="communityProfile_communityProfileList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区简介
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff80808151471f6201514789f0560263" dataarea="1" href="javascript:void(0);" src="communityMemorabilia_communityMemorabiliaList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区大事记
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff80808151471f620151478ab86b026a" dataarea="1" href="javascript:void(0);" src="communityAwards_communityAwardsList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区获奖情况
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff808081513771c2015138b897940e95" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff808081513771c2015138ba9f340ebf, ff80808151471f620151478b9a760275, ff80808151471f620151478c3a8f027e, ff80808151471f620151478cbb630286, ff80808151471f620151478d2976028e, ff80808151471f620151478db5b50297, ff80808151471f620151478e31a502a1, ff80808151471f620151478eaa3b02a9]
+												 			>
+															<img src="common/images/menu/bulb2.png">社区组织
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff808081513771c2015138ba9f340ebf" dataarea="1" href="javascript:void(0);" src="communityOrganization_communityOrganizationList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区组织架构
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff80808151471f620151478b9a760275" dataarea="1" href="javascript:void(0);" src="communityCommonOrgan_communityCommonOrganList.html?orgType=1"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区党组织
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff80808151471f620151478c3a8f027e" dataarea="1" href="javascript:void(0);" src="communityCommonOrgan_communityCommonOrganList.html?orgType=2"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区居民委员会
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff80808151471f620151478cbb630286" dataarea="1" href="javascript:void(0);" src="communityCommonOrgan_communityCommonOrganList.html?orgType=3"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区居民监管委员
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff80808151471f620151478d2976028e" dataarea="1" href="javascript:void(0);" src="communityCommonOrgan_communityCommonOrganList.html?orgType=4"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区服务站
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff80808151471f620151478db5b50297" dataarea="1" href="javascript:void(0);" src="communitySocialOrgan_communitySocialOrganList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区社会组织
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff80808151471f620151478e31a502a1" dataarea="1" href="javascript:void(0);" src="communityEstateOrgan_communityEstateOrganList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区物业组织
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff80808151471f620151478eaa3b02a9" dataarea="1" href="javascript:void(0);" src="communityOtherOrgan_communityOtherOrganList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">社区其他组织
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff808081513ee4e80151425d82ea10b2" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff808081513ee4e80151425f5d0110bf, ff808081513ee4e80151426072e910c6]
+												 			>
+															<img src="common/images/menu/bulb2.png">工作人员报酬待遇
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff808081513ee4e80151425f5d0110bf" dataarea="1" href="javascript:void(0);" src="communityCommitSubse_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">居委会成员岗位补贴
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff808081513ee4e80151426072e910c6" dataarea="1" href="javascript:void(0);" src="communityTreatRem_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">专职工作人员报酬待遇
+																	</a>
+																
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8a8a8f674810e8f7014810f126a10009" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/bulb2.png">环境卫生
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="8a8a8f674815003f014815172dd70002" dataarea="1" href="javascript:void(0);" src="sanitationWorker_sanitationWorkerList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">环卫人员管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8a8a8f674815003f01481517a70e0003" dataarea="1" href="javascript:void(0);" src="sanitationEquipment_sanitationEquipmentList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">环卫设备管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814880f29201488252b3d60112" dataarea="1" href="javascript:void(0);" src="rubbishStation_rubbishStationList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">垃圾站点信息
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0e3be488294e9014882e09adb0003" dataarea="1" href="javascript:void(0);" src="roadCleaning_roadCleaningList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">道路清扫保洁信息
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0e3be48830715014883f3331e0067" dataarea="1" href="javascript:void(0);" src="publicToilet_publicToiletList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">公共厕所信息
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814b222d7b014b24090b2e0105" dataarea="0" href="javascript:void(0);" src="roadCleaning_sanitationWorkTimeList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">环卫工作时间
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814b222d7b014b2700ef2d0aef" dataarea="1" href="javascript:void(0);" src="roadCleaning_listAwardTickets.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">道路清扫奖罚单
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814c5c1aea014c6f37e3d72207" dataarea="0" href="javascript:void(0);" src="sanitationWorker_sanitationWorkerCheckStatistics.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="">环卫工人考勤统计
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8a8a8f1c4811939f0148119d83370002" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/bulb2.png">城市管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="8a8a8f1c4811939f0148119f3c160003" dataarea="0" href="javascript:void(0);" src="illegalBuiltInfo_illegalBuiltInfoList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">违规信息管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8a8a8f1c4811939f0148119ffeed0004" dataarea="0" href="javascript:void(0);" src="illegalBuiltInfo_illegalBuiltInfoTrackList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">违规跟踪信息管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8a8a8f1c4811939f014811a0a4950005" dataarea="0" href="javascript:void(0);" src="hazardSource_hazardSourceList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">隐患源头信息
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8a8a8f1c4811939f014811a116f40006" dataarea="0" href="javascript:void(0);" src="hazardTrace_hazardTraceList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">隐患整改跟踪
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8ab0e3be486d058001486d1c00060001" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/bulb2.png">安全生产
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="ff80808148a122920148a12f0eb20015" dataarea="1" href="javascript:void(0);" src="accident_accidentList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">安全事故
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808148a122920148a12d499f000c" dataarea="1" href="javascript:void(0);" src="inspectionStandard_inspectionStandardList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">排查标准
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808148a122920148a12dcb62000d" dataarea="1" href="javascript:void(0);" src="specialEquipment_specialEquipmentList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">特种设备
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808148a122920148a12e47c60010" dataarea="1" href="javascript:void(0);" src="inspection_inspectionList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">安全检查
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808148a122920148a12c91320007" dataarea="1" href="javascript:void(0);" src="hiddenDanger_list.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">隐患记录
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808148a122920148a13233ae001b" dataarea="1" href="javascript:void(0);" src="ajEnterprise_ajEnterpriseList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">安全生产企业
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808148a122920148a133868c001d" dataarea="1" href="javascript:void(0);" src="personnel_personnelList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">安全生产企业人员持证情况
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808148a122920148a1350d64001e" dataarea="1" href="javascript:void(0);" src="qualificationCert_qualificationCertList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">资质证照情况
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808148a122920148a135e70d0021" dataarea="1" href="javascript:void(0);" src="miningInfo_miningInfoList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">矿山类信息
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808148a122920148a136b2ff0022" dataarea="1" href="javascript:void(0);" src="tailingsStore_tailingsStoreList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">尾矿库类
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808148a122920148a137a0890025" dataarea="1" href="javascript:void(0);" src="hazardArticle_hazardArticleList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">危险源
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814ac802d1014ac96d969b0a7b" dataarea="1" href="javascript:void(0);" src="expertStock_expertStockList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">专家库
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff80808148f293a70148f3a417d974b4" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/bulb2.png">智慧党建
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="ff80808148f293a70148f3a7f76874b5" dataarea="1" href="javascript:void(0);" src="partyDynamicNews_partyDynamicNewsList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">党建动态
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808148f293a70148f3a9da8774b6" dataarea="0" href="javascript:void(0);" src="orgDeptPost_orgDeptPostList.html?orgType=2" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">党组织机构
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808148f293a70148f3aadb2274b7" dataarea="1" href="javascript:void(0);" src="partyPossy_partyPossyList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">党建阵地
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808148f293a70148f3abc16d74f6" dataarea="1" href="javascript:void(0);" src="partyStudio_partyStudioList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">党建工作室
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0e3b64907c07f014907c2b3dc0001" dataarea="1" href="javascript:void(0);" src="partyManagement_partyManagementList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">党员管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814d9f6dad014da28aa2cc086f" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff8080814d9f6dad014da28b32470870, ff8080814d9f6dad014da28bdaee0871, ff8080814d9f6dad014da28c51a40872, ff8080814d9f6dad014da28cb48e087b, ff8080814d9f6dad014da28d0fdf087c]
+												 			>
+															<img src="common/images/menu/f.png">党员入党档案管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff8080814d9f6dad014da28b32470870" dataarea="1" href="javascript:void(0);" src="partyMemberRecord_partyMemberRecordList.html?partyMemberRecord.status=1"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">入党申请阶段
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814d9f6dad014da28bdaee0871" dataarea="1" href="javascript:void(0);" src="partyMemberRecord_partyMemberRecordList.html?partyMemberRecord.status=2"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">培养教育阶段
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814d9f6dad014da28c51a40872" dataarea="1" href="javascript:void(0);" src="partyMemberRecord_partyMemberRecordList.html?partyMemberRecord.status=3"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">考察阶段
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814d9f6dad014da28cb48e087b" dataarea="1" href="javascript:void(0);" src="partyMemberRecord_partyMemberRecordList.html?partyMemberRecord.status=4"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">接收预备党员阶段
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814d9f6dad014da28d0fdf087c" dataarea="1" href="javascript:void(0);" src="partyMemberRecord_partyMemberRecordList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">党员入党档案
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814d9f6dad014da2f4214e0f4d" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff8080814d6b1e2f014d6b8c90fa42d9, ff8080814d6b1e2f014d6b8e3075430b]
+												 			>
+															<img src="common/images/menu/f.png">党费收缴管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff8080814d6b1e2f014d6b8c90fa42d9" dataarea="0" href="javascript:void(0);" src="paymentReminder_paymentReminderList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">党费交纳提醒单
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814d6b1e2f014d6b8e3075430b" dataarea="0" href="javascript:void(0);" src="paymentLedger_paymentLedgerList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">党费收缴台账
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814d9001a8014d93a229ed5ed3" dataarea="0" href="javascript:void(0);" src="partyUpgradejd_listPartyOrganization.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">党组织升级晋档管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814d9d0005014d9d88f6023cac" dataarea="1" href="javascript:void(0);" src="scoreTable_scoreTableList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">评分表
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814d9d0005014d9d8a36573de0" dataarea="0" href="javascript:void(0);" src="score_scoreList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">评分管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814d9d0005014d9d8b0d313e8f" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff8080814da3bbc5014da4591d6410ce, ff8080814da3bbc5014da459b8c410cf, ff8080814da3bbc5014da45a286d10d0]
+												 			>
+															<img src="common/images/menu/f.png">活动管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff8080814da3bbc5014da4591d6410ce" dataarea="0" href="javascript:void(0);" src="activityManage_activityManageList.html?activityState=1"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">未开始
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da3bbc5014da459b8c410cf" dataarea="0" href="javascript:void(0);" src="activityManage_activityManageList.html?activityState=2"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">进行中
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da3bbc5014da45a286d10d0" dataarea="0" href="javascript:void(0);" src="activityManage_activityManageList.html?activityState=3"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">已结束
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814d9d0005014d9d8bf5903ee7" dataarea="1" href="javascript:void(0);" src="starRecommend_starRecommendList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">测试星级推荐表
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814d9d0005014d9d8cc86b3f8b" dataarea="0" href="javascript:void(0);" src="distanceEducation_distanceEducationList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">远程教育
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814da3bbc5014da448234b0e77" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff8080814da3bbc5014da448f66a0e78, ff8080814da3bbc5014da449c4870ed0, ff8080814da3bbc5014da44a2f4f0ed1, ff8080814da3bbc5014da44aa6a30ed2, ff8080814da3bbc5014da44b13d80eeb]
+												 			>
+															<img src="common/images/menu/f.png">党建工作任务
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff8080814da3bbc5014da448f66a0e78" dataarea="0" href="javascript:void(0);" src="partyTask_list.html?taskState=1"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">未审核
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da3bbc5014da449c4870ed0" dataarea="0" href="javascript:void(0);" src="partyTask_list.html?taskState=2"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">进行中
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da3bbc5014da44a2f4f0ed1" dataarea="0" href="javascript:void(0);" src="partyTask_list.html?taskState=3"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">已办结
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da3bbc5014da44aa6a30ed2" dataarea="0" href="javascript:void(0);" src="partyTask_list.html?taskState=4"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">已超时
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da3bbc5014da44b13d80eeb" dataarea="0" href="javascript:void(0);" src="partyTask_list.html?taskState=5"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">已中止
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814da3bbc5014da4c944811598" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff8080814da3bbc5014da4cc947415bc, ff8080814da58134014da7ed84c90f7b, ff8080814da58134014da7ee34560f7c, ff8080814da58134014da7eed0a2102b, ff8080814da3bbc5014da4cd09d615bd, ff8080814da58134014da7ef528b102c, ff8080814da58134014da7f017e7102d, ff8080814da58134014da7f080a4102e]
+												 			>
+															<img src="common/images/menu/f.png">承诺践诺
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff8080814da3bbc5014da4cc947415bc" dataarea="0" href="javascript:void(0);" src="partyPromise_listPartyOrgPromise.html?partyPromise.state=1"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">党组织承诺- 已提交
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da58134014da7ed84c90f7b" dataarea="0" href="javascript:void(0);" src="partyPromise_listPartyOrgPromise.html?partyPromise.state=2"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">党组织承诺 - 已通过
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da58134014da7ee34560f7c" dataarea="0" href="javascript:void(0);" src="partyPromise_listPartyOrgPromise.html?partyPromise.state=3"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">党组织承诺 - 未完成
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da58134014da7eed0a2102b" dataarea="0" href="javascript:void(0);" src="partyPromise_listPartyOrgPromise.html?partyPromise.state=4"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">党组织承诺 - 已完成
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da3bbc5014da4cd09d615bd" dataarea="0" href="javascript:void(0);" src="partyPromise_listPartyMemberPromise.html?partyPromise.state=1"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">党员承诺- 已提交
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da58134014da7ef528b102c" dataarea="0" href="javascript:void(0);" src="partyPromise_listPartyMemberPromise.html?partyPromise.state=2"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">党员承诺 - 已通过
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da58134014da7f017e7102d" dataarea="0" href="javascript:void(0);" src="partyPromise_listPartyMemberPromise.html?partyPromise.state=3"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">党员承诺 - 未完成
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da58134014da7f080a4102e" dataarea="0" href="javascript:void(0);" src="partyPromise_listPartyMemberPromise.html?partyPromise.state=4"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">党员承诺 - 已完成
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814da3bbc5014da4c9d77c1599" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff8080814da3bbc5014da4d7d5371613, ff8080814da3bbc5014da4d9c0b6162c, ff8080814da3bbc5014da4daff171638, ff8080814da3bbc5014da4dbf2241646, ff8080814da3bbc5014da4dd68e11654, ff8080814da3bbc5014da4de7e3b1657, ff8080814da3bbc5014da4df01f01665, ff8080814da3bbc5014da4df752b1666, ff8080814da3bbc5014da4dfec871669]
+												 			>
+															<img src="common/images/menu/f.png">三会一课
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff8080814da3bbc5014da4d7d5371613" dataarea="0" href="javascript:void(0);" src="partyMeetingLesson_list.html?partyMeetingLesson.type=0&operation=partyMemberMeeting"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">党员大会
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da3bbc5014da4d9c0b6162c" dataarea="0" href="javascript:void(0);" src="partyMeetingLesson_list.html?partyMeetingLesson.type=0&operation=partyOrgMeeting"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">支委会
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da3bbc5014da4daff171638" dataarea="0" href="javascript:void(0);" src="partyMeetingLesson_list.html?partyMeetingLesson.type=0&operation=partyTeamMeeting"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">党小组工作会
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da3bbc5014da4dbf2241646" dataarea="0" href="javascript:void(0);" src="partyMeetingLesson_list.html?partyMeetingLesson.type=0&operation=partyLesson"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">讲党课
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da3bbc5014da4dd68e11654" dataarea="0" href="javascript:void(0);" src="partyMeetingLesson_list.html?partyMeetingLesson.type=0&operation=partyMemberActivity"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">党员活动日
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da3bbc5014da4de7e3b1657" dataarea="0" href="javascript:void(0);" src="partyMeetingLesson_list.html?partyMeetingLesson.type=0&operation=meetingIssues"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">会议议题单
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da3bbc5014da4df01f01665" dataarea="0" href="javascript:void(0);" src="partyMeetingLesson_list.html?partyMeetingLesson.type=0&operation=meetingNote"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">会议记录
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da3bbc5014da4df752b1666" dataarea="0" href="javascript:void(0);" src="partyMeetingLesson_list.html?partyMeetingLesson.type=0&operation=approvalList"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">审批单
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da3bbc5014da4dfec871669" dataarea="0" href="javascript:void(0);" src="partyMeetingLesson_list.html?partyMeetingLesson.type=0&operation=partySummary"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">工作总结
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814da3bbc5014da4ca4a9915a5" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff8080814da3bbc5014da4ce003a15c9, ff8080814da3bbc5014da4ce781615d5, ff8080814da3bbc5014da4cf6f3715d6, ff8080814da3bbc5014da4cfe39415e2, ff8080814da3bbc5014da4d296df15f0]
+												 			>
+															<img src="common/images/menu/f.png">活动场所管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff8080814da3bbc5014da4ce003a15c9" dataarea="0" href="javascript:void(0);" src="activityPlace_list.html?operation=equipmentAssets"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">固定资产登记表
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da3bbc5014da4ce781615d5" dataarea="0" href="javascript:void(0);" src="activityPlace_list.html?operation=leadingGroup"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">领导小组
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da3bbc5014da4cf6f3715d6" dataarea="0" href="javascript:void(0);" src="activityPlace_list.html?operation=approvalList"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">审批单
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da3bbc5014da4cfe39415e2" dataarea="0" href="javascript:void(0);" src="activityPlace_list.html?operation=publicityReport"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">公示结果报告单
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da3bbc5014da4d296df15f0" dataarea="0" href="javascript:void(0);" src="activityPlace_list.html?operation=partySummary"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">工作总结
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814da4e2dd014da4fcc72f007d" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff8080814da4e2dd014da4fdbdaa0089, ff8080814da4e2dd014da4fef8f8008d, ff8080814da4e2dd014da4fff8d30090, ff8080814da4e2dd014da50086bb00ab, ff8080814da4e2dd014da50162bc00ae, ff8080814da4e2dd014da5026ee000bc]
+												 			>
+															<img src="common/images/menu/f.png">党员双评议
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff8080814da4e2dd014da4fdbdaa0089" dataarea="0" href="javascript:void(0);" src="doubleAppraisal_doubleAppraisalList.html?type=1"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">党员双评议登记
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da4e2dd014da4fef8f8008d" dataarea="0" href="javascript:void(0);" src="doubleAppraisal_doubleAppraisalList.html?type=2"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">领导小组
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da4e2dd014da4fff8d30090" dataarea="0" href="javascript:void(0);" src="doubleAppraisal_doubleAppraisalList.html?type=3"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">会议记录
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da4e2dd014da50086bb00ab" dataarea="0" href="javascript:void(0);" src="doubleAppraisal_doubleAppraisalList.html?type=4"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">审批单
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da4e2dd014da50162bc00ae" dataarea="0" href="javascript:void(0);" src="doubleAppraisal_doubleAppraisalList.html?type=5"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">工作总结
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814da4e2dd014da5026ee000bc" dataarea="0" href="javascript:void(0);" src="registrationForm_listRegistrationForm.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">党员测评
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814da58134014db34e4e564e7b" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff8080814da58134014db34f0dcd4fbe]
+												 			>
+															<img src="common/images/menu/f.png">党组织关系转接
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff8080814da58134014db34f0dcd4fbe" dataarea="0" href="javascript:void(0);" src="partyMemberIntroduction_list.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">组织关系介绍信
+																	</a>
+																
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff80808148f293a70148f3afe3f77537" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/bulb2.png">信息发布
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff8080814a05db3c014a05e447f70066" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/bulb2.png">信息留言
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="ff8080814a05db3c014a05e589d70068" dataarea="0" href="javascript:void(0);" src="messageBoard_messageBoardListTree.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/bulb2.png">分类留言
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814a05db3c014a05e6dfcc00a8" dataarea="0" href="javascript:void(0);" src="messageBoard_messageWallList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/bulb2.png">信息墙
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8ab0e3af492ba9cc01492bb2dff50004" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/bulb2.png">GPS管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="8ab0e3af492ba9cc01492bbe07d60005" dataarea="1" href="javascript:void(0);" src="gpsEquipment_gpsEquipmentList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">GPS设备
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814b0588af014b05951a780015" dataarea="0" href="javascript:void(0);" src="relationGpsLabel_relationGpsLabelList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">GPS电子围栏
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff8080814a6b19ad014a74f3741c7688" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/bulb2.png">社区心声
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="ff8080814a6b19ad014a74f40b0376c7" dataarea="1" href="javascript:void(0);" src="advice_adviceList.html?handleStatus=1" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">办理中
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814a6b19ad014a74f4ec5176cb" dataarea="1" href="javascript:void(0);" src="advice_adviceList.html?handleStatus=2" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">已答复
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff8080814ac802d1014acd8f57413fae" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/bulb2.png">环境保护
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="ff8080814ac802d1014acd91016f4002" dataarea="1" href="javascript:void(0);" src="protectionEnterprise_protectionEnterpriseList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">环保企业
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814ade13b3014ae2572dcd25c3" dataarea="1" href="javascript:void(0);" src="hbPersonnel_hbPersonnelList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">环保企业人员
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814ade13b3014ae24e732a2454" dataarea="1" href="javascript:void(0);" src="environmentalCert_environmentalCertList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">环保企业资质证照情况
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814ade13b3014ae254a0322564" dataarea="1" href="javascript:void(0);" src="pollutantsCharacteristic_pollutantsCharacteristicList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">污染物排放特征
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814ade13b3014ae2584ffd260c" dataarea="1" href="javascript:void(0);" src="pollutionHandle_pollutionHandleList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">污染治理设施
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814ae28c8a014ae37c9dc9026c" dataarea="1" href="javascript:void(0);" src="approval_approvalList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">环评审批
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff8080814a7a060d014a7b50936f5eda" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/bulb2.png">公共服务
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="ff8080814a7a060d014a7b512afe5f4a" dataarea="0" href="javascript:void(0);" src="dailyService_dailyServiceList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">日常服务
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814a7a060d014a80e1b4741d22" dataarea="0" href="javascript:void(0);" src="keepFit_keepFitList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">健身活动
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814a7a060d014a7bb141e50f0d" dataarea="0" href="javascript:void(0);" src="tripService_tripServiceList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">出行服务
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814a843598014a84ebe3e93620" dataarea="0" href="javascript:void(0);" src="houseService_houseServiceList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">房屋服务
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff8080814aeba645014aebcc06e10018" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/bulb2.png">数字城管
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="ff8080814aeba645014aebcd183f0019" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff8080814aeba645014aebce78ca001a, ff8080814aeba645014aebcf96f0001c, ff8080814aeba645014aebd05352001e, ff8080814aeba645014aebd0b13f001f, ff8080814aeba645014aebd1f1a20020, ff8080814aeba645014aebd2696b0021, ff8080814aeba645014aebcff123001d]
+												 			>
+															<img src="common/images/menu/f.png">城市部件管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff8080814aeba645014aebce78ca001a" dataarea="1" href="javascript:void(0);" src="cityComponent_cityComponentList.html?cityComponent.componentType=publicFacilities"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">公共设施
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814aeba645014aebcf96f0001c" dataarea="1" href="javascript:void(0);" src="cityComponent_cityComponentList.html?cityComponent.componentType=roadTraffic"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">道路交通
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814aeba645014aebd05352001e" dataarea="1" href="javascript:void(0);" src="cityComponent_cityComponentList.html?cityComponent.componentType=cityEnvironment"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">市容环境
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814aeba645014aebd0b13f001f" dataarea="1" href="javascript:void(0);" src="cityComponent_cityComponentList.html?cityComponent.componentType=landscaping"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">园林绿化
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814aeba645014aebd1f1a20020" dataarea="1" href="javascript:void(0);" src="cityComponent_cityComponentList.html?cityComponent.componentType=housingLand"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">房屋土地
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814aeba645014aebd2696b0021" dataarea="1" href="javascript:void(0);" src="cityComponent_cityComponentList.html?cityComponent.componentType=otherFacilities"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">其它设施
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814aeba645014aebcff123001d" dataarea="1" href="javascript:void(0);" src="cityComponent_cityComponentList.html?cityComponent.componentType=expansionComponent"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">扩展部件
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814aeba645014aebd2fa7e0022" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff8080814aeba645014aebd36def0023, ff8080814aeba645014aebd41c690024, ff8080814aeba645014aebd46c470025, ff8080814aeba645014aebd4be390026, ff8080814aeba645014aebd512660027]
+												 			>
+															<img src="common/images/menu/f.png">城市事件管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff8080814aeba645014aebd36def0023" dataarea="1" href="javascript:void(0);" src="cityEvenManagement_cityEvenManagementlist.html?cityEvenManagement.cityEvenClass=CityAppearanceEnvironment"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">市容环境管理
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814aeba645014aebd41c690024" dataarea="1" href="javascript:void(0);" src="cityEvenManagement_cityEvenManagementlist.html?cityEvenManagement.cityEvenClass=Advertising"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">宣传广告管理
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814aeba645014aebd46c470025" dataarea="1" href="javascript:void(0);" src="cityEvenManagement_cityEvenManagementlist.html?cityEvenManagement.cityEvenClass=ConstructionManagement"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">施工管理
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814aeba645014aebd4be390026" dataarea="1" href="javascript:void(0);" src="cityEvenManagement_cityEvenManagementlist.html?cityEvenManagement.cityEvenClass=UnexpectedEvents"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">突发事件管理
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814aeba645014aebd512660027" dataarea="1" href="javascript:void(0);" src="cityEvenManagement_cityEvenManagementlist.html?cityEvenManagement.cityEvenClass=StreetOrder"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">街面秩序管理
+																	</a>
+																
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff8080814b0b92e8014b0bf86b960108" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/bulb2.png">咸阳女性
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="ff8080814b0b92e8014b0bfa490f0109" dataarea="1" href="javascript:void(0);" src="#" 
+															[ff8080814b4d41d2014bca2fdac538fd, ff8080814b4d41d2014bcf26b1113995, ff8080814b0b92e8014b0bfbd8a2010b]
+												 			>
+															<img src="common/images/menu/f.png">巾帼风采
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff8080814b4d41d2014bca2fdac538fd" dataarea="1" href="javascript:void(0);" src="redBannerPacesetter_redBannerPacesetterList.html?rbpType=2"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">个人三八红旗手
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814b4d41d2014bcf26b1113995" dataarea="1" href="javascript:void(0);" src="redBannerPacesetter_redBannerPacesetterList.html?rbpType=4"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">个人妇女岗位建功
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814b0b92e8014b0bfbd8a2010b" dataarea="1" href="javascript:void(0);" src="mostBeautifulWomen_mostBeautifulWomenList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">最美女性
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814b222d7b014b258f0c190936" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff8080814b222d7b014b259027050938, ff8080814b222d7b014b2590bb9e0939]
+												 			>
+															<img src="common/images/menu/f.png">维权关爱
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff8080814b222d7b014b259027050938" dataarea="1" href="javascript:void(0);" src="womenCancerRelief_womenCancerReliefList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">妇女两癌救助
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814b222d7b014b2590bb9e0939" dataarea="1" href="javascript:void(0);" src="activistHelp_activistHelpList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">维权救助
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814b4d41d2014bd9a8a6d639c2" dataarea="0" href="javascript:void(0);" src="womenFederationOrg_womenFederationOrgList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">妇联组织机构
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814b4d41d2014bd9a9170839c3" dataarea="0" href="javascript:void(0);" src="womenFederationMember_womenFederationMemberList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">妇联成员
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff8080814be79487014bf9632577063d" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/bulb2.png">电子商务
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="ff8080814bfe30a8014bfe3458cf0002" dataarea="1" href="javascript:void(0);" src="shop_shopList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">电子商店
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814c35268e014c45e7fa8774dc" dataarea="0" href="javascript:void(0);" src="#" 
+															[ff8080814c464a2e014c4650f1310015, ff8080814c464a2e014c46515d070016, ff8080814c464a2e014c4651d23c0017]
+												 			>
+															<img src="common/images/menu/f.png">电商监管
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="ff8080814c464a2e014c4650f1310015" dataarea="1" href="javascript:void(0);" src="shop_shopManagementList.html?shop.shopCategory=1"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">电商企业
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814c464a2e014c46515d070016" dataarea="1" href="javascript:void(0);" src="shop_shopManagementList.html?shop.shopCategory=2"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">个体网店
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="ff8080814c464a2e014c4651d23c0017" dataarea="1" href="javascript:void(0);" src="shop_shopManagementList.html?shop.shopCategory=3"  class="cs-navi-tab">
+																		<img src="common/images/menu/f.png">智慧店
+																	</a>
+																
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff8080814d415e09014d4863cd523ee1" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/bulb2.png">仓库管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="ff8080814d415e09014d4864f13a3ee2" dataarea="1" href="javascript:void(0);" src="enterStore_enterStoreList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">仓库入库记录
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814d415e09014d4866140a3ee3" dataarea="1" href="javascript:void(0);" src="enterStore_storageList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/bulb2.png">仓库库存记录
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814d4bb6f1014d4c6cc15e26ad" dataarea="1" href="javascript:void(0);" src="deliverStore_list.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">仓库发放记录
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff8080814f812393014f8bfc5c8a11c7" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/bulb2.png">应急指挥
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="ff8080814f812393014f8bff505511d2" dataarea="1" href="javascript:void(0);" src="ecKnowledgeLib_list.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">知识库管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff8080814fab1595014fac3ec43a03b6" dataarea="1" href="javascript:void(0);" src="ecExpertLib_list.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">专家库管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a8e24fb684c3014fb698d1960005" dataarea="1" href="javascript:void(0);" src="ecPlans_list.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">预案库管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a8e24fbb9632014fbba589640001" dataarea="2" href="javascript:void(0);" src="ecRules_list.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">规则库管理
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff80808152a53ed00152a5a55a30002f" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/bulb2.png">精准扶贫
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="ff80808152a53ed00152a5a657870030" dataarea="1" href="javascript:void(0);" src="poorPeople_poorPeopleList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">城区困难群众
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808152a53ed00152a5a71b740036" dataarea="1" href="javascript:void(0);" src="poorPeople_poorPeopleList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">农村困难群众
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808153a3c98d0153e5d5cafc6297" dataarea="1" href="javascript:void(0);" src="povertyHouse_poorPeopleList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">贫困户建档立卡
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="ff80808153a3c98d0153e5d6f309629a" dataarea="1" href="javascript:void(0);" src="poorVillage_poorVillageList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">贫困村建档立卡
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+							</ul>
+						
+						</li>
+					
+				
+					
+						<li><a menuid="8ab0a9db4836410f0148364529360001" dataarea="0" href="javascript:void(0);" src="#"><img src="common/images/menu/house.png">地理空间库</a>
+						
+							<ul><!-- 二级菜单 -->
+							
+									
+									<li>
+											<a menuid="8ab0a9db4836410f0148364738e40003" dataarea="0" href="javascript:void(0);" src="/gis/omap_list.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/bulb2.png">地图参数
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff8080814f3b48da014f40127fcd196f" dataarea="1" href="javascript:void(0);" src="entityManagement_entityManagementList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/bulb2.png">实体管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8ab0a8eb4f691d2c014f69318b5c0039" dataarea="1" href="javascript:void(0);" src="gridPerson_gridPersonList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/bulb2.png">网格员管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8ab0a8eb4f691d2c014f6933117d003e" dataarea="1" href="javascript:void(0);" src="gridLabels_gridLabelsList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/bulb2.png">网格管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="2c9ee6814f8ccac0014f8cd71ea70002" dataarea="1" href="javascript:void(0);" src="mapLayerlabel_list.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/bulb2.png">标注管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8ab0a8034fcb2178014fcb45561e0002" dataarea="0" href="javascript:void(0);" src="mapStatic_list.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/bulb2.png">生成热区和索引
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="2c9ee6814fd3d514014fd3e082f50001" dataarea="0" href="javascript:void(0);" src="errorCorrection_list.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/bulb2.png">地图纠错管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8ab0a8eb4fd3e167014fd3ecc3920001" dataarea="1" href="javascript:void(0);" src="mapNote_mapNoteList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/bulb2.png">地图便签
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+							</ul>
+						
+						</li>
+					
+				
+					
+						<li><a menuid="8ab0a80351c77e170151c784f3490014" dataarea="0" href="javascript:void(0);" src="#"><img src="common/images/menu/house.png">信息发布</a>
+						
+							<ul><!-- 二级菜单 -->
+							
+									
+									<li>
+											<a menuid="8ab0a80351c77e170151c78762de002d" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/house.png">民政信息
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c788e5ed003e" dataarea="0" href="javascript:void(0);" src="#" 
+															[8ab0a80351c77e170151c78b11d90054, 8ab0a80351c77e170151c79791a300ea, 8ab0a80351c77e170151c7985bdc00f8]
+												 			>
+															<img src="common/images/menu/house.png">阳光政务
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c78b11d90054" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">政策法规
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c79791a300ea" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">服务指南
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c7985bdc00f8" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">信息公开
+																	</a>
+																
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8ab0a80351c77e170151c7a4bac50181" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/l.png">公众信息
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8ab0a80351c77e170151c7c05ff901ac" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/house.png">党建信息
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c7c40f1801b7" dataarea="0" href="javascript:void(0);" src="#" 
+															[8ab0a80351c77e170151c7c91cf601c7, 8ab0a80351c77e170151c7ca48da01d0, 8ab0a80351c77e170151c7caf13901d9, 8ab0a80351c77e170151c7cb88eb01e2, 8ab0a80351c77e170151c7cc205601eb]
+												 			>
+															<img src="common/images/menu/house.png">新闻动态
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c7c91cf601c7" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">三会一课
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c7ca48da01d0" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">党内关爱
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c7caf13901d9" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">支部活动
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c7cb88eb01e2" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">志愿服务
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c7cc205601eb" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">党代表动态
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c7c45a1a01b8" dataarea="0" href="javascript:void(0);" src="#" 
+															[8ab0a80351c77e170151c7d2135401f7]
+												 			>
+															<img src="common/images/menu/house.png">群众工作
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c7d2135401f7" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">活动动态
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c7c4d17501b9" dataarea="0" href="javascript:void(0);" src="#" 
+															[8ab0a80351c77e170151c7d614150200, 8ab0a80351c77e170151c7d6f0fd0209, 8ab0a80351c77e170151c7d7874f0212, 8ab0a80351c77e170151c7d81181021b]
+												 			>
+															<img src="common/images/menu/house.png">学习园地
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c7d614150200" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">政策法规
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c7d6f0fd0209" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">知识文库
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c7d7874f0212" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">视频课件
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c7d81181021b" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">依规治党
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c7c5858001ba" dataarea="0" href="javascript:void(0);" src="#" 
+															[8ab0a80351c77e170151c88d46d80229]
+												 			>
+															<img src="common/images/menu/house.png">网上支部
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c88d46d80229" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">通知公告
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c7c5f71d01bb" dataarea="0" href="javascript:void(0);" src="#" 
+															[8ab0a80351c77e170151c88f0ca20232]
+												 			>
+															<img src="common/images/menu/house.png">党员服务
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c88f0ca20232" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">志愿服务
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c7c6400e01bc" dataarea="0" href="javascript:void(0);" src="#" 
+															[8ab0a80351c77e170151c890ac7e023b, 8ab0a80351c77e170151c89164310244, 8ab0a80351c77e170151c891eed4024d, 8ab0a80351c77e170151c892768e0256]
+												 			>
+															<img src="common/images/menu/house.png">廉政园地
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c890ac7e023b" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">廉政视听
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c89164310244" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">廉政格言
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c891eed4024d" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">警钟长鸣
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c892768e0256" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">廉政论坛
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c7c6f5a001bd" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/l.png">荣誉风采
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c7c757f501c6" dataarea="0" href="javascript:void(0);" src="#" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/house.png">党务公开
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8ab0a80351c77e170151c7c1708101ad" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/l.png">政务信息
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8ab0a80351c77e170151c895a928025f" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/house.png">文明创建
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c899d8150265" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/l.png">道德模范
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c89a5384026e" dataarea="0" href="javascript:void(0);" src="#" 
+															[8ab0a80351c77e170151c8a58ee7029c, 8ab0a80351c77e170151c8a67dd902a5, 8ab0a80351c77e170151c8a7197102ae, 8ab0a80351c77e170151c8a7ad3002b7, 8ab0a80351c77e170151c8aa64a802c0]
+												 			>
+															<img src="common/images/menu/house.png">身边好人
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8a58ee7029c" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">见义勇为
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8a67dd902a5" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">助人为乐
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8a7197102ae" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">敬业奉献
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8a7ad3002b7" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">孝敬老幼
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8aa64a802c0" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">诚实守信
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c89bdaaa026f" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/l.png">志愿者
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c89cda020278" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/l.png">劳动模范
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c89d6a4d0281" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/l.png">文体娱乐
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c89e09ae028a" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/l.png">意见征集
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c89ea2b40293" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/l.png">创五型社区
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8ab0a80351c77e170151c896080e0260" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/house.png">社区动态
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c8ad277602c9" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/l.png">社区要闻
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c8ae009002d2" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/l.png">社区动态
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c8ae9d5902db" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/l.png">图片新闻
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c8af1ba902e4" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/l.png">视频要闻
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8ab0a80351c77e170151c8964a2c0261" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/house.png">环境保护
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c8b0c10b02ed" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/l.png">信息服务
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c8b1480002f6" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/l.png">政策法规
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8ab0a80351c77e170151c896a2560262" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/house.png">咸阳女性
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c8b4102502ff" dataarea="0" href="javascript:void(0);" src="#" 
+															[8ab0a80351c77e170151c8c000900315, 8ab0a80351c77e170151c8bf629a030c]
+												 			>
+															<img src="common/images/menu/house.png">女性新闻
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8c000900315" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">女性要闻
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8bf629a030c" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">图片新闻
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c8b748560300" dataarea="0" href="javascript:void(0);" src="#" 
+															[8ab0a80351c77e170151c8c5b1c60339, 8ab0a80351c77e170151c8c66c970342, 8ab0a80351c77e170151c8c82d99034b, 8ab0a80351c77e170151c8c0cf53031e]
+												 			>
+															<img src="common/images/menu/house.png">维权关爱
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8c5b1c60339" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">维权救助
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8c66c970342" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">心里疏导
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8c82d99034b" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">家事合议庭
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8c0cf53031e" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">留守儿童关爱
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c8b77f050301" dataarea="0" href="javascript:void(0);" src="#" 
+															[8ab0a80351c77e170151c8c1913e0327, 8ab0a80351c77e170151c8ca73e50354, 8ab0a80351c77e170151c8cb0ec3035d, 8ab0a80351c77e170151c8cba3af0366]
+												 			>
+															<img src="common/images/menu/house.png">巾帼风采
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8c1913e0327" dataarea="0" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">三八红旗手
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8ca73e50354" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">巾帼建功标兵
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8cb0ec3035d" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">最美女性
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8cba3af0366" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">巾帼志愿者
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c8b7bb440302" dataarea="0" href="javascript:void(0);" src="#" 
+															[8ab0a80351c77e170151c8c24a140330, 8ab0a80351c77e170151c8cd976d036f, 8ab0a80351c77e170151c8ce314a0378]
+												 			>
+															<img src="common/images/menu/house.png">创业天地
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8c24a140330" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">就业平台
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8cd976d036f" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">技能培训
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8ce314a0378" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">创业资助
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c8bc2c200303" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/l.png">最美家庭
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8ab0a80351c77e170151c896f15a0263" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/house.png">环境卫生
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c8d04f4b0381" dataarea="0" href="javascript:void(0);" src="#" 
+															[8ab0a80351c77e170151c8d44e030394, 8ab0a80351c77e170151c8d50223039d, 8ab0a80351c77e170151c8d59b4f03a6, 8ab0a80351c77e170151c8d61c5d03af, 8ab0a80351c77e170151c8d6b47103b8, 8ab0a80351c77e170151c8d7caca03c1]
+												 			>
+															<img src="common/images/menu/house.png">环卫风采
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8d44e030394" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">环卫剪影
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8d50223039d" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">环卫动态
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8d59b4f03a6" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">环卫关爱
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8d61c5d03af" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">五步工作法
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8d6b47103b8" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">机械化清扫
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8d7caca03c1" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">环卫考核
+																	</a>
+																
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c8d262610382" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/l.png">制度建设
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c8d2e763038b" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/l.png">环卫工作概况
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8ab0a80351c77e170151c89736df0264" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/house.png">电商监管
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c8db479903ca" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/l.png">武功特色
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a80351c77e170151c8db8e9203d3" dataarea="0" href="javascript:void(0);" src="#" 
+															[8ab0a80351c77e170151c8e05cde03d4, 8ab0a80351c77e170151c8e145fd03dd, 8ab0a80351c77e170151c8e1bf3203e6, 8ab0a80351c77e170151c8e2557a03ef]
+												 			>
+															<img src="common/images/menu/house.png">咨询信息
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8e05cde03d4" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">商家信息服务
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8e145fd03dd" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">账号服务
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8e1bf3203e6" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">意见与建议
+																	</a>
+																
+													
+															
+															<li>
+																	<a menuid="8ab0a80351c77e170151c8e2557a03ef" dataarea="2" href="javascript:void(0);" src="infoPublish_infoPublishList.html"  class="cs-navi-tab">
+																		<img src="common/images/menu/l.png">特色业务
+																	</a>
+																
+													
+													</ul>			
+										
+										</ul>
+							
+							</ul>
+						
+						</li>
+					
+				
+					
+				
+					
+						<li><a menuid="ff8080814cd44675014cd480a21e166c" dataarea="0" href="javascript:void(0);" src="#"><img src="common/images/menu/house.png">流程管理</a>
+						
+							<ul><!-- 二级菜单 -->
+							
+									
+									<li>
+											<a menuid="ff8080814cdadb60014cded7df2272d6" dataarea="0" href="javascript:void(0);" src="/businessModel/businessModel_list.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/j.png">业务建模
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff8080814cd44675014cd48355bd1852" dataarea="0" href="javascript:void(0);" src="/businessFlow/businessFlow_list.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/j.png">业务流程
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff8080814cd44675014cd48534ba1951" dataarea="0" href="javascript:void(0);" src="/businessForm/businessForm_list.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/j.png">业务表单
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff8080814cd44675014cd48718901a4e" dataarea="0" href="javascript:void(0);" src="/businessAssemble/businessAssemble_list.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/j.png">业务组装
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="ff8080814cd44675014cd4864d2719ab" dataarea="1" href="javascript:void(0);" src="/businessSearch/businessSearch_list.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/j.png">业务查询
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+							</ul>
+						
+						</li>
+					
+				
+					
+						<li><a menuid="ff8080814d415e09014d4657cce12560" dataarea="0" href="javascript:void(0);" src="#"><img src="common/images/menu/house.png">问题反馈</a>
+						
+							<ul><!-- 二级菜单 -->
+							
+									
+									<li>
+											<a menuid="ff8080814d415e09014d465887602561" dataarea="0" href="javascript:void(0);" src="feedbackProblem_feedbackProblemlist.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/l.png">问题反馈
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+							</ul>
+						
+						</li>
+					
+				
+					
+						<li><a menuid="8ab0a8034f05b08e014f05defcb0000d" dataarea="0" href="javascript:void(0);" src="#"><img src="common/images/menu/house.png">统计分析</a>
+						
+							<ul><!-- 二级菜单 -->
+							
+									
+									<li>
+											<a menuid="8ab0a8034f05b08e014f05e083d0000e" dataarea="2" href="javascript:void(0);" src="statistics_commonCondition.html?onlyFlag=treeClick" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/f.png">基础信息统计
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8ab0a8034f05b08e014f0654087b0045" dataarea="0" href="javascript:void(0);" src="#" 
+												>
+												<img src="common/images/menu/house.png">事件统计
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+												
+												<li>
+														<a menuid="8ab0a8034f05b08e014f0654e1730046" dataarea="2" href="javascript:void(0);" src="eventCom_workStatisticsTime.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">工作量统计
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+												
+												<li>
+														<a menuid="8ab0a8034f15267e014f1541db5f0010" dataarea="2" href="javascript:void(0);" src="eventCom_classStatisticsTime.html" 
+															
+												 			 class="cs-navi-tab" >
+															<img src="common/images/menu/f.png">事件分类统计
+														</a>
+													
+												<ul><!--四级菜单 -->
+													
+													</ul>			
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8ab0a8034f074996014f07682c1f0017" dataarea="2" href="javascript:void(0);" src="statistics_dataAnalyze.html?htFlag=1" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/f.png">数据分析
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+									
+									<li>
+											<a menuid="8ab0a8034f157043014f168fbce400ef" dataarea="0" href="javascript:void(0);" src="eventCom_labelEvent.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/f.png">业务监控
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+							</ul>
+						
+						</li>
+					
+				
+					
+						<li><a menuid="ff8080814f4b2f8f014f4b3642690004" dataarea="0" href="javascript:void(0);" src="#"><img src="common/images/menu/house.png">民情日志</a>
+						
+							<ul><!-- 二级菜单 -->
+							
+									
+									<li>
+											<a menuid="ff8080814f1cc090014f1fc07a5520bf" dataarea="1" href="javascript:void(0);" src="peopleLog_peopleLogList.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/bulb2.png">民情日志
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+							</ul>
+						
+						</li>
+					
+				
+					
+						<li><a menuid="ff808081508551fb0150935bb71e1f9d" dataarea="0" href="javascript:void(0);" src="#"><img src="common/images/menu/house.png">回收站</a>
+						
+							<ul><!-- 二级菜单 -->
+							
+									
+									<li>
+											<a menuid="ff808081508551fb0150935eb8521fa6" dataarea="0" href="javascript:void(0);" src="recycle_list.html" 
+												 class="cs-navi-tab" >
+												<img src="common/images/menu/l.png">回收站信息管理
+											</a>
+																			
+										<ul><!--三级菜单 -->
+										
+										</ul>
+							
+							</ul>
+						
+						</li>
+					
+								
+			</ul>			
+		</div> 
+	</div>
+	<div id="mainPanle" region="center" border="true" border="false">
+		 <div id="tabs" class="easyui-tabs"  fit="true" border="false" >
+			<div title="Home">
+			<!-- <div class="cs-home-remark">
+				<h1>欢迎欢迎</h1> <br>
+			</div> -->
+			<iframe scrolling="auto" frameborder="0"  src="login_mainMap.html" style="width:100%;height:100%;"></iframe>
+			</div>
+        </div>
+	</div>
+	<div region="south" border="false" class="cs-south">网格化管理综合服务平台</div>
+	<div id="mm" class="easyui-menu cs-tab-menu">
+		<div id="mm-tabupdate">刷新</div>
+		<div class="menu-sep"></div>
+		<div id="mm-tabclose">关闭</div>
+		<div id="mm-tabcloseother">关闭其他</div>
+		<div id="mm-tabcloseall">关闭全部</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+
+function openInitMenu()
+{
+	$('*[menuid="7a8a8f3947ed85e50147ed8bae0e0000"]').click();
+	$('*[menuid="402881f049a313880149a316c79c0001"]').click();
+}
+</script>
+		

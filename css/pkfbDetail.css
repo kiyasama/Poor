@@ -1,0 +1,620 @@
+/* .xqDiv {
+    height: 679px;
+    width: 843px;
+} */
+
+.xqDiv {
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    /*position: fixed;*/
+    top: 0px;
+    right: 0px;
+    z-index: 2;
+    font-family: 微软雅黑;
+    height: 679px;
+    width: 843px;
+    background-color: rgb(255, 255, 255);
+    font-size: 13px;
+    border: 1px solid rgb(228, 228, 228);
+    color: #555353
+}
+
+.xqDiv3 {
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    /*position: absolute;*/
+    top: 12%;
+    right: 39px;
+    z-index: 2;
+    font-family: 微软雅黑;
+    height: 539px;
+    width: 770px;
+    background-color: rgb(255, 255, 255);
+    font-size: 13px;
+    display: none;
+    border: 1px solid rgb(228, 228, 228);
+}
+
+.pkc #zb {
+    color: #0b84ec;
+    border: 1px solid #0b84ec;
+    width: 90px;
+    height: 26px;
+    float: right;
+    margin-right: 32px;
+    padding-top: 8px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-family: 微软雅黑;
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+.pkc {
+    height: 611px;
+    width: 843px;
+}
+
+.pkc .pkzbDiv {
+    width: 232px;
+    border-left: 1px solid #d5d3d4;
+    text-align: center;
+    float: right;
+    height: 35px;
+    background-color: #e7f1fb;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.pkc .pkzbDiv p {
+    display: inline-block;
+    zoom: 1;
+    width: 85px;
+    height: 6px;
+    font-size: 14px;
+    text-align: center;
+    border-bottom: 3px solid #0e85ed;
+    color: #0d84ec;
+}
+
+.pkc p {
+    padding: 6px 0;
+    line-height: 0;
+}
+
+.pkc p span {
+    margin-right: 30px;
+}
+
+.pkc .detailTabTitle {
+    height: 35px;
+    border-bottom: 1px solid #d5d3d4;
+}
+
+.pkc .detailTabTitle,
+.pkc .rightTitle {
+    /*background-color: #d3e7ef;*/
+    background-color: #f3f8fe;
+    height: 35px;
+    line-height: 35px;
+    padding-left: 15px;
+}
+
+.pkc .detailTabTitle span.current {
+    /*background: url("../images/xqTabBg_cur.png") no-repeat 0 8px;*/
+    border-bottom: 3px solid #0e85ed;
+    color: #0d84ec;
+    font-size: 15px;
+}
+
+.pkc .detailTitle span {
+    font-size: 13px;
+}
+
+.pkc .detailTabTitle span {
+    font-size: 14px;
+}
+
+.pkc .detailTabTitle span,
+.pkc .rightTitle span {
+    /*background: url("../images/xqTabBg.png") no-repeat 0 8px;*/
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    width: 135px;
+    height: 32px;
+    cursor: pointer;
+    font-size: 15px;
+    text-align: center;
+}
+
+
+/* .pkc .pkcDetail {
+    padding: 0 10px;
+    margin-top: 10px;
+    padding-top: 10px;
+    overflow: auto;
+    width: 593px;
+    float: left;
+    padding-right: 0;
+    border-right: 1px solid #d5d3d4;
+    height: 520px;
+} */
+
+.pkc #busiform {
+    /*width: 100%;
+    padding-bottom: 10px*/
+}
+
+.pkc #busiform table.xzq {
+    border: 0;
+    margin-bottom: 10px;
+    width: 537px;
+    background-color: #f6f6f6;
+}
+
+.pkc #busiform table.xzq td {
+    border: 0;
+    height: 24px;
+}
+
+.pkc #busiform table.xzq td.firstCol {
+    width: 110px;
+    text-align: left;
+    color: #0b84ec;
+    padding-left: 10px;
+}
+
+.pkc #busiform table td span.cbgdh {
+    margin-left: 125px;
+}
+
+.pkc #busiform table.gsTable td input[type="text"] {
+    width: 66px;
+}
+
+.pkc #busiform table.xzq.jtInfo {
+    width: 593px;
+    border: 0;
+}
+
+.pkc #busiform table.xzq.jtInfo td.firstCol {
+    text-align: left;
+    width: 91px;
+    padding-left: 10px;
+    color: #0b84ec;
+}
+
+.pkc #busiform table.xzq.jtInfo td {
+    text-align: left;
+    padding-left: 10px;
+    height: 30px;
+}
+
+.pkc #busiform table.cyTable th,
+.zcgzd table.bTable th,
+.bfjh table.bfjhTable th {
+    height: 46px;
+    font-weight: normal;
+    background-color: #f3f9ff;
+    color: #518acd;
+    border: 0;
+    /*font-size: 13px;*/
+}
+
+.pkc #busiform table.cyTable td,
+.zcgzd table.bTable td,
+.bfjh table.bfjhTable td {
+    padding: 0;
+    border: 0;
+    height: 30px;
+    text-align: center;
+}
+
+.pkc #busiform table.cyTable,
+.zcgzd table.bTable,
+.bfjh table.bfjhTable {
+    border: 0;
+    border-top: 2px solid #86c3f8;
+    margin-top: 10px;
+}
+
+.pkc #busiform table.cyTable {
+    width: 100%;
+}
+
+.pkc .jbqk table,
+.pkc .xmcx table,
+.pkc #busiform table.xzq.jtInfo,
+.pkc .bfjh table {
+    width: 593px;
+}
+
+.pkc #busiform table.xzq.jtInfo {
+    width: 100%;
+}
+
+.pkc .pkcTop table,
+.pkc .zcgzd table,
+.pkc .pkzb table,
+.pkc .xmcx table,
+.pkc .bfjh table {
+    border: 1px solid #d5d3d4;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    font-family: "microsoft yahei";
+}
+
+.pkc .pkcTop table td,
+.pkc .zcgzd table td,
+.pkc .pkzb table td,
+.pkc .xmcx table td,
+.pkc #busiform table.cyTable th,
+.pkc .bfjh table td {
+    border-right: 1px solid #d5d3d4;
+    border-bottom: 1px solid #d5d3d4;
+    /*height: 25px;*/
+}
+
+.pkc .pkcTop table td {
+    text-align: left;
+    /*padding-left: 10px;*/
+}
+
+.pkc #busiform table.cyTable th {
+    border-width: 0;
+}
+
+.pkc .xmcx table td.xmxhTD,
+.pkc .pkcTop table td.xmxhTD {
+    width: 140px;
+    background-color: #f9f9fa;
+    text-align: right;
+    padding-right: 10px;
+}
+
+
+/* .pkc .xmcx table td.imgTD {
+    padding: 5px 0;
+} */
+
+.pkc .pkzb {
+    float: left;
+    width: 222px;
+    /*padding-top: 20px;*/
+    margin-left: 5px;
+}
+
+
+/* .pkcTop{
+     width: 595px;
+} */
+
+.pkc .jbqkyjt,
+.pkc .commonDiv {
+    background-color: #f6f6f6;
+    text-align: left;
+    /* width: 573px;
+    padding: 1px 10px; */
+    width: 98%;
+    padding: 1px 1%;
+}
+
+.pkc .even {
+    background-color: #ffffff;
+}
+
+.pkc .odd {
+    background-color: #f6f6f6;
+}
+
+.pkc table.gsTable1 td {
+    height: 30px;
+    /* padding-left: 5px; */
+    border: 0;
+    text-align: left;
+}
+
+.pkc table.gsTable1 td.tdleft1 {
+    width: 120px;
+    padding-left: 20px;
+}
+
+.pkc .jbqk,
+.pkc .bfjh,
+.pkc .xmcx {
+    float: left;
+    margin: 0;
+    /*width: 600px;*/
+    height: 595px;
+    padding-top: 10px;
+    text-align: center;
+    /*padding-left: 10px;*/
+    width: 99%;
+    padding-left: 1%;
+}
+
+.pkc table.gsTable1 {
+    /*width: 537px;*/
+    /*height:510px;*/
+    /*width: 293px;*/
+    width: 49%;
+    float: left;
+    border: 0;
+    border-top: 2px solid #86c3f9;
+    margin-right: 5px;
+}
+
+.pkc table.gsTable1 td.tdleft {
+    background: url("../images/tip_icon.png") no-repeat 5px 7px;
+    padding-right: 189px;
+    /*padding-top: 5px;*/
+    padding-left: 20px;
+}
+
+.pkc table.gsTable1 td.tdleft,
+.pkc table.gsTable td.tdright {
+    color: #0b84ec;
+}
+
+.pkc .ckzb1 {
+    background-color: #fd8b26;
+    /* border: 3px solid #fc8d51; */
+    background-size: 220px 69px;
+    border-radius: 5px;
+    margin-top: 11px;
+    height: 69px;
+    background-size: 220px 69px;
+}
+
+.pkc #t1 {
+    font-size: 15px;
+    font-family: 微软雅黑;
+    /* font-weight: bold; */
+    color: #ffffff;
+    float: right;
+    margin-right: 11px;
+    margin-top: 18px;
+}
+
+.pkc #t2 {
+    font-size: 15px;
+    font-family: 微软雅黑;
+    /* font-weight: bold; */
+    color: #ffffff;
+    float: right;
+    margin-right: 47px;
+    margin-top: -21px;
+}
+
+.pkc .zrzp {
+    background-color: #6AB5F3;
+}
+
+.pkc .chartDiv {
+    /*background-color: #8b64d2;*/
+    border-radius: 5px;
+    margin: 8px 0;
+}
+
+.pkc .chartTitle {
+    text-align: center;
+    color: #ffffff;
+    border-bottom: 1px solid #cccccc;
+    height: 25px;
+    line-height: 25px;
+}
+
+.pkc .zrzpleft {
+    background-color: #578EBE;
+}
+
+.pkc .leftChart {
+    float: left;
+    width: 85px;
+    height: 85px;
+    border-right: 1px solid #cccccc;
+    border-bottom-left-radius: 5px;
+}
+
+.pkc .rightP {
+    float: left;
+    margin-left: 5px;
+    padding-top: 10px;
+    width: 118px;
+}
+
+.pkc .rightP p {
+    font-size: 12px;
+    color: #ffffff;
+}
+
+.pkc .rightP p span {
+    color: #ffff00;
+    font-size: 12px;
+    margin-right: 0;
+}
+
+.pkc .shzp {
+    background-color: #6AB5F3;
+}
+
+.pkc .shzpleft {
+    background-color: #E35B5A;
+}
+
+.pkc .jjhp {
+    background-color: #6AB5F3;
+}
+
+.pkc .jjhpleft {
+    background-color: #44B6AE;
+}
+
+.pkc .jjhpRight p {
+    padding-top: 15px;
+}
+
+.pkc .jtsr {
+    background-color: #6AB5F3;
+}
+
+.pkc .ckzb {
+    /*padding: 20px 0;*/
+    background-color: #6AB5F3;
+    ;
+    background-size: 220px 69px;
+    border-radius: 5px;
+    height: 69px;
+}
+
+.pkc #t3 {
+    font-size: 13px;
+    font-family: 微软雅黑;
+    /* font-weight: bold; */
+    color: #ffffff;
+    float: right;
+    margin-right: 73px;
+    margin-top: 25px;
+}
+
+.zcgzd,
+.xmcx,
+.bfjh {
+    display: none;
+}
+
+.txt {
+    float: left;
+    padding-right: 20px;
+}
+
+.txt1 {
+    float: left;
+    padding-right: 20px;
+    border-top: 2px solid #86c3f8;
+}
+
+#text span {
+    font-family: "微软雅黑";
+    font-size: 13px;
+    float: left;
+    font-weight: bold;
+}
+
+#text1 {
+    padding-right: 10px;
+}
+
+#font1 {
+    color: #ff7f50;
+}
+
+#font2 {
+    color: #0b84ec;
+}
+
+#dsjzb .pkcDetail1 {
+    padding: 0 10px;
+    margin-top: 10px;
+    /* overflow: auto; */
+    /* width: 775px; */
+    float: left;
+    /* border-right: 1px solid #d5d3d4; */
+}
+
+#busiform1 {
+    /* border-right: 1px solid #d5d3d4; */
+    width: 750px;
+    height: 475px;
+}
+
+#busiform1 table {
+    /* border: 1px solid #d5d3d4; */
+    border-right-width: 0;
+    border-bottom-width: 0;
+    width: 750px;
+    height: 455px;
+}
+
+#busiform1 table tr td {
+    /*     border-right: 1px solid #d5d3d4;
+    border-bottom: 1px solid #d5d3d4; */
+    text-align: left;
+    height: 23px;
+}
+
+#dsjzb .xqDiv {
+    border: 1px solid #e4e4e4;
+    /*position: absolute;*/
+    top: 0px;
+    right: 0px;
+    z-index: 2;
+    font-family: "微软雅黑";
+    height: 660px;
+    width: 770px;
+    background-color: #ffffff;
+    font-size: 13px;
+}
+
+#dsjzb .td1 {
+    width: 135px;
+}
+
+#dsjzb .td2 {
+    color: #ff7f50;
+    width: 50px;
+}
+
+#dsjzb .td3 {
+    color: #0b84ec;
+    width: 50px;
+}
+
+#text {
+    margin-bottom: 10px;
+}
+
+.zcgzd-img {
+    text-align: center;
+}
+
+.zcgzd-img img {
+    margin-top: 45px;
+}
+
+.zcgzd-img img#imgXm {
+    margin: 0;
+}
+
+#sypkhdiv {
+    padding: 10px 5px;
+}
+
+#sypkhtj {
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+#sypkhss input.empty {
+    width: 237px;
+    height: 25px;
+    font-family: "microsoft yahei";
+}
+
+#sypkhcx {
+    margin-left: -23px;
+    vertical-align: middle;
+    margin-top: -2px;
+}
+
+.xmxxTableDiv {
+    padding: 10px 5px;
+    height: 400px;
+}

@@ -1,0 +1,307 @@
+<!-- 大数据甄别模块 -->
+<div class="xqDiv pkc" id="pkcXqDiv">
+    <div class="detailTitle">
+        <span class="titleSpan">大数据甄别</span>
+        <!-- <span class="imgSpan"><img
+			src="images/detailClose.png" id="dsjzbClose" /></span> -->
+        <div class="box_tool">
+            <a class="max" href="javascript:;" title="最大化" style="display:none"></a>
+            <a class="revert" href="javascript:;" title="还原" style="display:none"></a>
+            <a class="close" href="javascript:;" id="dsjzbClose" title="关闭"></a>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="pkcDetail1" id="cunBaseInfo">
+        <div class="pkcTop1">
+            <div id="text">
+                <span id="font1">红色字体：</span><span id="text1">参考值</span><span id="font2">蓝色字体：</span><span id="text2">实际值</span>
+                <div class="clear"></div>
+            </div>
+            <div id="busiform1" splitSize="0">
+                <table border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td rowspan="8" width="130"><img src="images/img_12.png" width="130" height="130" /></td>
+                        <td class="td1">
+                            <li>
+                                家庭人均纯收入(元)
+                            </li>
+                        </td>
+                        <td class="td2">2950</td>
+                        <td class="td3" id="FAMILYINCOME">{$T.shiji.FAMILYINCOME} </td>
+                        <td rowspan="8" width="130"><img src="images/img_11.png" width="130" height="130" /></td>
+                        <td class="td1">
+                            <li>
+                                住房面积(平方米)
+                            </li>
+                        </td>
+                        <td class="td2">60</td>
+                        <td class="td3" id="HOUSEAREA">{$T.shiji.HOUSEAREA}</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">
+                            <li>
+                                家庭经营性收入（元）
+                            </li>
+                        </td>
+                        <td class="td2">{$T.cankao.obj[0].familyIncome}</td>
+                        <td class="td3"></td>
+                        <td class="td1">
+                            <li>
+                                建筑时间（年）
+                            </li>
+                        </td>
+                        <td class="td2">15</td>
+                        <td class="td3" id="BUILDINGTIME">{$T.shiji.BUILDINGTIME}</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">
+                            <li>
+                                工资性支配收入（元）
+                            </li>
+                        </td>
+                        <td class="td2">{$T.cankao.obj[0].wagesIncome}</td>
+                        <td class="td3"></td>
+                        <td class="td1">
+                            <li>
+                                有无车辆
+                            </li>
+                        </td>
+                        <td class="td2">无</td>
+                        <td class="td3">无</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">
+                            <li>
+                                转移性收入（元）
+                            </li>
+                        </td>
+                        <td class="td2">{$T.cankao.obj[0].moveIncome}</td>
+                        <td class="td3"></td>
+                        <td class="td1">
+                            <li>
+                                饮水是否困难
+                            </li>
+                        </td>
+                        <td class="td2">否</td>
+                        <td class="td3" id="ISDRINKING">{$T.shiji.ISDRINKING}</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">
+                            <li>
+                                财产性收入（元）
+                            </li>
+                        </td>
+                        <td class="td2">{$T.cankao.obj[0].patrimonyIncome}</td>
+                        <td class="td3"></td>
+                        <td class="td1">
+                            <li>
+                                饮用水主要困难
+                            </li>
+                        </td>
+                        <td class="td2">水源少</td>
+                        <td class="td3">水源少</td>
+                    </tr>
+                    <tr>
+                        <td class="td1"></td>
+                        <td class="td2"></td>
+                        <td class="td3"></td>
+                        <td class="td1">
+                            <li>
+                                住房主要结构
+                            </li>
+                        </td>
+                        <td class="td2">民房</td>
+                        <td class="td3" id="BUILDSTRUCTURE">{$T.shiji.BUILDSTRUCTURE}</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" class="td1"></td>
+                        <td rowspan="2" class="td2"></td>
+                        <td rowspan="2" class="td3"></td>
+                        <!--<td class="td1">
+							<li>
+								有无卫生厕所
+							</li>
+						</td>
+						<td class="td2">有</td>
+						<td class="td3" id="HASTOILET">{$T.HASTOILET}</td>-->
+                    </tr>
+                    <tr>
+                        <!--<td class="td1">
+							<li>
+								日用消费品(元)
+							</li>
+						</td>
+						<td class="td2">1000</td>
+						<td class="td3">800</td>-->
+                    </tr>
+                    <tr>
+                        <td rowspan="11" width="130" style="padding-top: 30px;"><img src="images/img_13.png" width="130" height="130" /></td>
+                        <td class="td1" style="padding-top: 30px;">
+                            <li>
+                                互动资金金额(万元)
+                            </li>
+                        </td>
+                        <td class="td2" style="padding-top: 30px;"></td>
+                        <td class="td3" style="padding-top: 30px;" id="INPUTFOUNDS">{$T.shiji.INPUTFOUNDS}</td>
+                        <td rowspan="11" width="130" style="padding-top: 30px;"><img src="images/img_14.png" width="130" height="130" /></td>
+                        <td class="td1" style="padding-top: 30px;">
+                            <li>
+                                因灾
+                            </li>
+                        </td>
+                        <td class="td2" style="padding-top: 30px;">&nbsp;</td>
+                        <td class="td3" style="padding-top: 30px;"><img src="images/gouxuan.png" style="display: none;"></td>
+                    </tr>
+                    <tr>
+                        <td class="td1">
+                            <li>
+                                参与产业组织（万元）
+                            </li>
+                        </td>
+                        <td class="td2"></td>
+                        <td class="td3">3</td>
+                        <td class="td1">
+                            <li>
+                                因病
+                            </li>
+                        </td>
+                        <td class="td2">&nbsp;</td>
+                        <td class="td3"><img src="images/gouxuan.png" style="display: none;"></td>
+                    </tr>
+                    <tr>
+                        <td class="td1">
+                            <li>
+                                龙头企业收益（万元）
+                            </li>
+                        </td>
+                        <td class="td2"></td>
+                        <td class="td3" id="COMPANYBENEFIT">{$T.shiji.COMPANYBENEFIT}</td>
+                        <td class="td1">
+                            <li>
+                                因残
+                            </li>
+                        </td>
+                        <td class="td2">&nbsp;</td>
+                        <td class="td3"><img src="images/gouxuan.png" style="display: none;"></td>
+                    </tr>
+                    <tr>
+                        <td class="td1">
+                            <li>
+                                耕地面积（亩）
+                            </li>
+                        </td>
+                        <td class="td2"></td>
+                        <td class="td3" id="FARMLAND">{$T.shiji.FARMLAND}</td>
+                        <td class="td1">
+                            <li>
+                                因学
+                            </li>
+                        </td>
+                        <td class="td2">&nbsp;</td>
+                        <td class="td3"><img src="images/gouxuan.png" style="display: none;"></td>
+                    </tr>
+                    <tr>
+                        <td class="td1">
+                            <li>
+                                林地面积（亩）
+                            </li>
+                        </td>
+                        <td class="td2"></td>
+                        <td class="td3" id="WOODLAND">{$T.shiji.WOODLAND}</td>
+                        <td class="td1">
+                            <li>
+                                缺技术
+                            </li>
+                        </td>
+                        <td class="td2">&nbsp;</td>
+                        <td class="td3"><img src="images/gouxuan.png" style="display: none;"></td>
+                    </tr>
+                    <tr>
+                        <td class="td1">
+                            <li>
+                                商品经济作物（亩）
+                            </li>
+                        </td>
+                        <td class="td2"></td>
+                        <td class="td3" id="ECONOMICAREA">{$T.shiji.ECONOMICAREA}</td>
+                        <td class="td1">
+                            <li>
+                                缺劳力
+                            </li>
+                        </td>
+                        <td class="td2">&nbsp;</td>
+                        <td class="td3"><img src="images/gouxuan.png" style="display: none;"></td>
+                    </tr>
+                    <tr>
+                        <td class="td1">
+                            <li>
+                                生产用房（平方米）
+                            </li>
+                        </td>
+                        <td class="td2"></td>
+                        <td class="td3" id="PRODUCTION">{$T.shiji.PRODUCTION}</td>
+                        <td class="td1">
+                            <li>
+                                缺发展资金
+                            </li>
+                        </td>
+                        <td class="td2">&nbsp;</td>
+                        <td class="td3"><img src="images/gouxuan.png" style="display: none;"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <li>
+                                牲畜数量（头）
+                            </li>
+                        </td>
+                        <td class="td2"></td>
+                        <td class="td3" id="LIVESTOCK">{$T.shiji.LIVESTOCK}</td>
+                        <td class="td1">
+                            <li>
+                                缺土地
+                            </li>
+                        </td>
+                        <td class="td2">&nbsp;</td>
+                        <td class="td3"><img src="images/gouxuan.png" style="display: none;"></td>
+                    </tr>
+                    <tr>
+                        <td class="td1"></td>
+                        <td class="td2"></td>
+                        <td class="td3"></td>
+                        <td class="td1">
+                            <li>
+                                交通条件落后
+                            </li>
+                        </td>
+                        <td class="td2">&nbsp;</td>
+                        <td class="td3"><img src="images/gouxuan.png" style="display: none;"></td>
+                    </tr>
+                    <tr>
+                        <td class="td1"></td>
+                        <td class="td2"></td>
+                        <td class="td3"></td>
+                        <td>
+                            <li>
+                                自身发展动力不足
+                            </li>
+                        </td>
+                        <td class="td2">&nbsp;</td>
+                        <td class="td3"><img src="images/gouxuan.png" style="display: none;"></td>
+                    </tr>
+                    <tr>
+                        <td class="td1"></td>
+                        <td class="td2"></td>
+                        <td class="td3"></td>
+                        <td class="td1">
+                            <li>
+                                其他
+                            </li>
+                        </td>
+                        <td class="td2">&nbsp;</td>
+                        <td class="td3"><img src="images/gouxuan.png" style="display: none;"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

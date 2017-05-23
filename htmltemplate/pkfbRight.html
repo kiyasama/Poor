@@ -1,0 +1,76 @@
+<!--脱贫成效右侧菜单 -->
+<div class="rightdiv" id="rightdiv">
+    <div class="tabLeft">
+        <span id="jdbfTab" class="leftTitle current">结对帮扶管理</span>
+        <span id="tpzjTab" class="leftTitle">脱贫资金管理</span>
+        <span id="bfdwTab" class="leftTitle">帮扶单位管理</span>
+    </div>
+    <div id="jdbf" class="helpRList">
+        <div class="tabRight">
+            <div class="conditions">
+                <div class="search">
+                    <input type="text" placeholder="请输入帮扶人员姓名" id="search">
+                    <input type="button" class="search_btn" id="searchBar">
+                    <div class="clear"></div>
+                </div>
+                <!--  <select name="" id="" class="select1">
+                   <option value="all">全部</option>
+                   <option value="zpyy">马栏镇</option>
+                   <option value="cgz">城关镇</option>
+                   <option value="dmz">低庙镇</option>
+                   <option value="qptz">湫坡头镇</option>
+                   <option value="qyz">清塬镇</option>
+                   <option value="tcz">太村镇</option>
+                   <option value="cdsq">赤道社区</option>
+                   <option value="tqz">土桥镇</option>
+                   <option value="zhz">张洪镇</option>
+                   <option value="ydsq">原底社区</option>
+                   <option value="zbsz">丈八寺镇</option>
+                   <option value="ztz">职田镇</option>
+               </select> -->
+                <span style="padding-left:10px; "><span id="areaName"></span>共有<span id="pcount">15</span>位帮扶人员</span>
+                <div class="number">
+                    <span>帮扶户数：<strong>{$T.famliy}</strong></span>
+                    <span>帮扶人数：<strong>{$T.people}</strong></span>
+                </div>
+                <div class="number zfcs">
+                    <span>走访次数：<strong>{$T.help}</strong></span>
+                </div>
+            </div>
+            <div class="detail">
+                <div id="div_id_jdbf"></div>
+                <div style="margin-top:10px; margin-left: 1%; " id="pkcPagenav"></div>
+            </div>
+        </div>
+    </div>
+    <div id="tpzj" class="helpRList" style="display:none;">
+        <div class="tabRight">
+            <div class="conditions ">
+                <div class="search ">
+                    <input type="text" placeholder="请输入文件名称 " id="searchZj">
+                    <input type="button" class="search_btn" id="searchZjBar">
+                </div>
+                <span style="padding-left:15px; "><span id="areaName2"></span>共有<span id="allfile">15</span>类文件</span>
+            </div>
+            <div class="detail ">
+                <div id="div_id_tpzj"></div>
+                <div style="margin-top:10px; margin-left: 1%;" id="pkcPagenavZj"></div>
+            </div>
+        </div>
+    </div>
+    <div id="bfdw" class="helpRList" style="display:none;">
+        <div class="tabRight">
+            <div class="conditions ">
+                <div class="search ">
+                    <input type="text" placeholder="请输入单位名称 " id="searchDw">
+                    <input type="button" class="search_btn" id="searchDwBar">
+                </div>
+                <span style="padding-left:15px; "><span id="areaName3"></span>共有<span id="allDw">0</span>个单位</span>
+            </div>
+            <div class="detail ">
+                <div id="div_id_bfdw"></div>
+                <div style="margin-top:10px; margin-left: 1%;" id="pkcPagenavDw"></div>
+            </div>
+        </div>
+    </div>
+</div>

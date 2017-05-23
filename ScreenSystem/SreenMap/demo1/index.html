@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<script type="text/javascript" src="http://61.185.20.73:58888/api/OMAP-source.js"></script>
+		<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+		<title>咸阳地图</title>
+	</head>
+	<body>
+		<div id="mapDiv" style="width: 1600px; height: 900px; "></div>
+	</body>
+	<script>
+		$(function() {
+			init();
+		});
+		function init1() {
+			var zoomNum = 4;
+			var config = new OMAP.Config({
+				imagePath : "http://61.185.20.73:58888/image",
+				jsPath : "http://61.185.20.73:58888/resource/js",
+				mapId : 2,
+				scale : 0.353,
+				hotFileLevel : 5,
+				overlook : Math.PI / 4,
+				rotate : Math.PI / 4
+			});
+			var ext = new OMAP.Bounds(-56255400.354765005, -56255400.354765005, 56255400.354765005, 56255400.354765005);
+			var layerYX = new OMAP.Layer.NOGISLayer("YX", "http://61.185.20.73:58888/resource/yx", {
+				isBaseLayer : true,
+				defaultImage : 'http://61.185.20.73:58888/api/img/nopic.jpg',
+				loadHotspot : false
+			});
+			var layer25D = new OMAP.Layer.NOGISLayer("25D", "http://61.185.20.73:58888/resource", {
+				isBaseLayer : false,
+				transparent : true,
+				defaultImage : 'http://61.185.20.73:58888/api/img/transparent.png',
+				loadHotspot : true
+			});
+			var mapOptions = {
+				extent : ext,
+				center : [7656389.8598, 4714460.4098],
+				zoom : zoomNum,
+				config : config,
+				resolutions : [107.29866095498084608, 53.64933047749042304, 26.82466523874521152, 13.41233261937260576, 6.70616630968630288, 3.35308315484315144, 1.67654157742157572, 0.83827078871078786, 0.41913539435539393],
+				numZoomLevels : 9,
+				layers : [layer25D, layerYX],
+				controls : [new OMAP.Control.MousePosition(), // 鼠标位置
+				new OMAP.Control.Navigation()]
+			};
+			var map = new OMAP.Map("mapDiv", mapOptions);
+		}
+
+		function init() {
+			var zoomNum = 4;
+			var config = new OMAP.Config({
+				imagePath : "http://61.185.20.73:58888/image",
+				jsPath : "http://61.185.20.73:58888/resource/js",
+				mapId : 2,// 2鼠标移动到上面有气泡 ， 5 没有气泡
+				scale : 0.353,
+				hotFileLevel : 5,
+				overlook : Math.PI / 4,
+				rotate : Math.PI / 4
+			});
+			var ext = new OMAP.Bounds(-56255400.354765005, -56255400.354765005, 56255400.354765005, 56255400.354765005);
+
+			var layerYX = new OMAP.Layer.NOGISLayer("YX", "http://61.185.20.73:58888/resource/yx", {
+				isBaseLayer : true,
+				defaultImage : 'http://61.185.20.73:58888/api/img/nopic.jpg',
+				loadHotspot : false
+			});
+			var layer25D = new OMAP.Layer.NOGISLayer("25D", "http://61.185.20.73:58888/resource", {
+				isBaseLayer : false,
+				transparent : true,
+				defaultImage : 'http://61.185.20.73:58888/api/img/transparent.png',
+				loadHotspot : true
+			});
+			// 地图配置
+			var mapOptions = {
+				extent : ext,
+				center : [7656389.8598, 4714460.4098],
+				zoom : zoomNum,
+				//restrictedExtent : new OMAP.Bounds(7662081.779113,4658244.0444917,7666715.740033,4662267.7442775),
+				config : config,
+				resolutions : [107.29866095498084608, 53.64933047749042304, 26.82466523874521152, 13.41233261937260576, 6.70616630968630288, 3.35308315484315144, 1.67654157742157572, 0.83827078871078786, 0.41913539435539393],
+				numZoomLevels : 9, // mapConfig.maxLevel = 9
+				layers : [layer25D, layerYX],
+				controls : [new OMAP.Control.MousePosition(), new OMAP.Control.Navigation()]
+			};
+			// 初始化地图
+			var map0 = new OMAP.Map("mapDiv", mapOptions);
+		}
+	</script>
+</html>

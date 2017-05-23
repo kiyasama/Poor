@@ -1,0 +1,285 @@
+/*  body {
+    margin: 0;
+    padding: 0;
+    font-family: "微软雅黑";
+    color: #7c7c7c;
+} */
+
+
+#tpcxDiv a {
+    text-decoration: none;
+}
+
+#tpcxDiv table {
+    border-collapse: collapse;
+}
+
+#tpcxDiv td,
+#tpcxDiv span,
+#tpcxDiv select,
+#tpcxDiv input,
+#tpcxDiv th {
+    color: #6c6c6c;
+}
+
+#tpcxDiv .detailTitle span {
+    color: #ffffff;
+    font-size: 15px;
+    vertical-align: middle;
+}
+
+
+/*.optEntry a img{
+            margin: 0 5px;
+        }*/
+
+#tpcxDiv .menu ul {
+    font-size: 0;
+    margin: 0;
+    padding: 0;
+}
+
+#tpcxDiv .menu ul li {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    width: 100px;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+}
+
+#tpcxDiv .menu ul li a {
+    color: #333333;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+#tpcxDiv .menu ul li:visited a,
+#tpcxDiv .menu ul li:hover a,
+#tpcxDiv .menu ul li:active a {
+    color: #2e83d7;
+    text-decoration: none;
+}
+
+#rzck {
+    width: 719px;
+    height: 547px;
+}
+
+
+/*遮罩层*/
+
+#tpcxDiv #hidebg {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background-color: #000;
+    width: 100%;
+    /*宽度设置为100%，这样才能使隐藏背景层覆盖原页面*/
+    filter: alpha(opacity=60);
+    /*设置透明度为60%*/
+    opacity: 0.6;
+    /*非IE浏览器下设置透明度为60%*/
+    display: none;
+    z-Index: 2;
+    height: 100%;
+    bottom: 0;
+    min-height: 768px;
+}
+
+
+/*弹出窗口*/
+
+#tpcxDiv .bfdx,
+#tpcxDiv .bfrz {
+    display: none;
+}
+
+#tpcxDiv .xqDiv {
+    /*border:1px solid #e4e4e4;*/
+    /*position: fixed;*/
+    /*top: 20%;*/
+    /*  right: 421px; */
+    z-index: 3;
+    font-family: "微软雅黑";
+    height: 547px;
+    width: 720px;
+    background-color: #ffffff;
+    font-size: 13px;
+    border: 1px solid rgb(228, 228, 228);
+    /*display: none;*/
+}
+
+#tpcxDiv .commonTitle {
+    height: 35px;
+    line-height: 35px;
+    background-color: #f3f9ff;
+    font-size: 16px;
+    padding-left: 20px;
+}
+
+#tpcxDiv .tabTitle {
+    border-bottom: 1px solid #c9c9c9;
+}
+
+#tpcxDiv .commonTitle span {
+    font-size: 16px;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    width: 115px;
+    text-align: center;
+    cursor: pointer;
+    height: 32px;
+}
+
+#tpcxDiv .commonTitle.jbxx span {
+    display: inline;
+}
+
+#tpcxDiv .commonTitle span.current {
+    color: #0c85eb;
+    border-bottom: 3px solid #0c85eb;
+}
+
+#tpcxDiv .detailWrap {
+    /*padding: 0 5px;*/
+}
+
+#tpcxDiv .tableDiv {
+    height: 205px;
+    margin-top: 5px;
+    padding: 5px;
+}
+
+#tpcxDiv #bfcxDiv{
+    height: auto;
+}
+
+#tpcxDiv .contentWrap table,
+#tpcxDiv .contentWrap table td,
+#tpcxDiv .contentWrap table th {
+    border: 1px solid #c9c9c9;
+}
+
+#tpcxDiv .contentWrap table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+#tpcxDiv .contentWrap table td,
+#tpcxDiv .contentWrap table th {
+    height: 25px;
+    text-align: center;
+}
+
+#tpcxDiv .contentWrap table th {
+    background-color: #dfdfe0;
+    font-weight: 400;
+}
+
+#tpcxDiv .contentWrap table th.indexTH {
+    width: 50px;
+}
+
+#tpcxDiv .contentWrap table th.hzxmTH {
+    width: 90px;
+}
+
+#tpcxDiv .contentWrap table th.timeTH {
+    width: 100px;
+}
+
+#tpcxDiv .contentWrap table th.optTH {
+    width: 60px;
+}
+
+#tpcxDiv .contentWrap table td.nameTD {
+    background-color: #f9f9fa;
+}
+
+#tpcxDiv .contentWrap table td.remarkTD {
+    height: 60px;
+}
+
+#tpcxDiv .jbqk table td {
+    width: 25%;
+}
+
+#tpcxDiv .even {
+    background-color: #f5f5f5;
+}
+
+#tpcxDiv .odd {
+    background-color: #ffffff;
+}
+
+#tpcxDiv .bfjg {
+    border-bottom: 1px solid #c9c9c9;
+}
+
+#tpcxDiv .bfjg span {
+    /*padding-left: 30px;*/
+    color: #0c85eb;
+}
+
+#tpcxDiv .ldstatistics {
+    height: 190px;
+}
+
+
+/* #tpcxDiv .pkcDetail {
+    padding: 0 10px;
+    margin-top: 10px;
+    padding-top: 10px;
+    overflow: auto;
+    width: 593px;
+    float: left;
+    padding-right: 0;
+    border-right: 1px solid #d5d3d4;
+    height: 520px;
+} */
+
+#tpcxDiv .light-theme ul li span {
+    color: #ffffff;
+}
+
+
+/*帮扶成效样式*/
+
+.bfzt {
+    display: none;
+}
+
+.contentWrap table.bfzt_Table {
+    margin-bottom: 10px;
+}
+
+.contentWrap table.bfzt_Table td.titleTD {
+    background-color: #f9f9fa;
+}
+
+.contentWrap table.bfzt_Table td img {
+    vertical-align: middle;
+    margin: 3px 0;
+}
+
+.contentWrap table.bfzt_Table td img.bfzp_img {
+    width: 117px;
+
+}
+
+#tpcxDiv .contentWrap table.commonTableStyle td{
+	text-align: left;
+	padding-left: 10px;
+}
+#tpcxDiv .contentWrap table.commonTableStyle td.imgTD,#tpcxDiv .contentWrap table.commonTableStyle td.titleTD.photoTitleTD{
+	text-align: center;
+	padding: 0;
+}
+#tpcxDiv .contentWrap table.commonTableStyle td.nameTD,#tpcxDiv .contentWrap table.commonTableStyle td.titleTD{
+	text-align: right;
+	padding-right: 10px;
+}

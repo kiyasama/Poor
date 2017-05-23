@@ -1,0 +1,34 @@
+<!--帮扶日志详情 -->
+<div class="bfry" id="rzck">
+    <div class="detailTitle" id="detailTitle">
+        <span class="titleSpan">帮扶日志详细信息</span>
+        <!-- <span class="imgSpan return"><img src="images/box_return1.png" id="goback" /></span> -->
+        <div class="box_tool">
+            <a class="max" href="javascript:;" title="最大化" style="display:none;"></a>
+            <a class="revert" href="javascript:;" title="还原" style="display:none;"></a>
+            <a class="close" href="javascript:;" id="goback" title="关闭"></a>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="rzDetail" style="overflow: auto; height:490px;">
+        <div class="hzxx">
+            <span class="hzSpan">户主姓名：</span>
+            <span class="contSpan" id="holdname">{$T.holdname}</span>
+            <span class="hzSpan">身份证号码：</span>
+            <span class="contSpan" id="cardId">{$T.cardId}</span>
+        </div>
+        <div class="xctpDiv">
+            <span>现场图片：</span>
+            <div class="photo" id="rzimg">
+            </div>
+        </div>
+        <div class="nrmsDiv">
+            <span>内容描述：</span>
+            <p id="content">{$T.content}</p>
+        </div>
+        <div class="remarkDiv">
+            <span>备注：</span>
+            <p id="remark">{$T.remark}</p>
+        </div>
+    </div>
+</div>

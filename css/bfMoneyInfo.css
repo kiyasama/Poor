@@ -1,0 +1,410 @@
+/*    body {
+    margin: 0;
+    padding: 0;
+    font - family: "微软雅黑";
+    color: #7c7c7c;
+} */
+
+#tpcxDiv a {
+    text-decoration: none;
+}
+
+
+/* table {
+    border-collapse: collapse;
+} */
+
+
+/* td,
+span,
+select,
+input,
+th {
+    color: #6c6c6c;
+    font - family: 微软雅黑;
+} */
+
+#tpcxDiv img {
+    vertical-align: middle;
+}
+
+
+/*.optEntry a img{
+       margin: 0 5px;
+   }*/
+
+#tpcxDiv .menu ul {
+    font-size: 0;
+    margin: 0;
+    padding: 0;
+}
+
+#tpcxDiv .menu ul li {
+    display: inline-block;
+    * display: inline;
+    * zoom: 1;
+    width: 100px;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+}
+
+#tpcxDiv .menu ul li a {
+    color: #333333;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+#tpcxDiv .menu ul li:visited a,
+#tpcxDiv .menu ul li:hover a,
+#tpcxDiv .menu ul li:active a {
+    color: #2e83d7;
+    text-decoration: none;
+}
+
+
+/*遮罩层*/
+
+#tpcxDiv .hidebg {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background-color: #000;
+    width: 100%;
+    /*宽度设置为100%，这样才能使隐藏背景层覆盖原页面*/
+    filter: alpha(opacity=60);
+    /*设置透明度为60%*/
+    opacity: 0.6;
+    /*非IE浏览器下设置透明度为60%*/
+    display: none;
+    z-Index: 2;
+    height: 100%;
+    bottom: 0;
+    min-height: 768px;
+}
+
+
+/*弹出窗口*/
+
+
+/* .bfdx,
+.bfrz {
+    display: none;
+} */
+
+
+/* .xqDiv {
+    border:1px solid #e4e4e4;
+    position: absolute;
+    top: 20%;
+    right: 421px;
+    z-index: 3;
+    font - family: "微软雅黑";
+    height: 510 px;
+    width: 720 px;
+    background - color: #ffffff;
+    font - size: 13 px;
+    display: none;
+} */
+
+
+/* .detailTitle {
+    background - color: #3a95c9;
+    padding-left: 20px;
+    height: 40px;
+    line-height: 40px;
+} */
+
+
+/* .detailTitle span {
+    color: # ffffff;
+    font - size: 15 px;
+    vertical - align: middle;
+} */
+
+
+/* .detailTitle span.titleSpan {
+    float: left;
+} */
+
+
+/* .detailTitle span.imgSpan {
+    float: right;
+    margin - top: 4 px;
+    margin - right: 16 px;
+    cursor: pointer;
+} */
+
+
+/* .commonTitle {
+    height: 35 px;
+    line-height: 35 px;
+    background - color: #f3f9ff;
+    font - size: 16 px;
+    padding - left: 20 px;
+} */
+
+#tpcxDiv .tpzj {
+    height: 550px;
+}
+
+#tpcxDiv .syqkDiv {
+    height: 295px;
+    overflow-y: auto;
+}
+
+#tpcxDiv .syqkDiv table {
+    width: 100%;
+    table-layout: fixed;
+    border: none;
+    ;
+}
+
+#tpcxDiv .syqkDiv table th,
+#tpcxDiv .syqkDiv table td {
+    text-align: center;
+    border: none;
+}
+
+#tpcxDiv .syqkDiv table th,
+#tpcxDiv .syqkDiv table td.jhjeTD {
+    color: #0c85eb;
+}
+
+#tpcxDiv .syqkDiv table th {
+    font-size: 15px;
+    background-color: transparent;
+    height: 35px;
+}
+
+#tpcxDiv .syqkDiv table th.jdTH {
+    width: 90px;
+}
+
+#tpcxDiv .syqkDiv table th.jhjeTH {
+    width: 170px;
+}
+
+#tpcxDiv .syqkDiv table th.moreTH {
+    width: 50px;
+}
+
+#tpcxDiv .syqkDiv table td.jdTD {
+    background: url("../images/jd_bg.png") no-repeat 64px -2px;
+}
+
+#tpcxDiv .syqkDiv table td.jdTD span {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    width: 35px;
+    font-size: 13px;
+}
+
+#tpcxDiv .syqkDiv table td.jdTD img {}
+
+#tpcxDiv .syqkDiv table td.syqkTD {
+    text-align: left;
+}
+
+#tpcxDiv .syqkDiv table td.syqkTD p {
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+    line-height: 20px;
+}
+
+
+/* .commonTitle span {
+    font - size: 16 px;
+    display: inline - block;
+    * display: inline;
+    * zoom: 1;
+    width: 115 px;
+    text - align: center;
+    cursor: pointer;
+    height: 32 px;
+} */
+
+
+/* .commonTitle span.current {
+    color: #0c85eb;
+    border-bottom: 3px solid # 0 c85eb;
+} */
+
+
+/* .tableDiv {
+    height: 205 px;
+} */
+
+
+/* .contentWrap table,
+.contentWrap table td,
+.contentWrap table th {
+    border: 1 px solid# c9c9c9;
+} */
+
+
+/*
+.contentWrap table {
+    width: 100 %;
+    table - layout: fixed;
+} */
+
+
+/* .contentWrap table td,
+.contentWrap table th {
+    height: 25 px;
+    text-align: center;
+} */
+
+
+/* .contentWrap table th {
+    background-color: #dfdfe0;
+    font-weight: 400;
+} */
+
+#tpcxDiv .contentWrap table td a {
+    color: #5395e3;
+}
+
+#tpcxDiv .contentWrap table td a:hover {
+    text-decoration: underline;
+}
+
+
+/* .contentWrap table th.indexTH {
+    width: 50px;
+} */
+
+#tpcxDiv .contentWrap table th.hzxmTH {
+    width: 90px;
+}
+
+#tpcxDiv .contentWrap table th.timeTH {
+    width: 100px;
+}
+
+#tpcxDiv .contentWrap table th.optTH {
+    width: 60px;
+}
+
+#tpcxDiv .contentWrap table td.nameTD {
+    background-color: #f9f9fa;
+}
+
+#tpcxDiv .contentWrap table td.remarkTD {
+    height: 60px;
+}
+
+#tpcxDiv .jbqk table td {
+    width: 25%;
+}
+
+#tpcxDiv .bfjg span,
+#tpcxDiv .jbxx span {
+    /*padding-left: 30px;*/
+    color: #0c85eb;
+}
+
+#tpcxDiv .jbxx span {
+    display: inline;
+}
+
+#tpcxDiv .contentWrap .syqkDiv {
+    height: 295px;
+    overflow-y: auto;
+}
+
+#tpcxDiv .contentWrap .syqkDiv table {
+    width: 100%;
+    table-layout: fixed;
+    border: none;
+    ;
+}
+
+#tpcxDiv .contentWrap .syqkDiv table th,
+#tpcxDiv .contentWrap .syqkDiv table td {
+    text-align: center;
+    border: none;
+}
+
+#tpcxDiv .contentWrap .syqkDiv table th,
+#tpcxDiv .contentWrap .syqkDiv table td.jhjeTD {
+    color: #0c85eb;
+}
+
+#tpcxDiv .contentWrap .syqkDiv table th {
+    font-size: 15px;
+    background-color: transparent;
+    height: 35px;
+}
+
+#tpcxDiv .contentWrap .syqkDiv table th.jdTH {
+    width: 90px;
+}
+
+#tpcxDiv .contentWrap .syqkDiv table th.jhjeTH {
+    width: 170px;
+}
+
+#tpcxDiv .contentWrap .syqkDiv table th.moreTH {
+    width: 50px;
+}
+
+#tpcxDiv .contentWrap .syqkDiv table td.jdTD {
+    background: url("../images/jd_bg.png") no-repeat 64px -2px;
+}
+
+#tpcxDiv .contentWrap .syqkDiv table td.jdTD span {
+    display: inline-block;
+    * display: inline;
+    * zoom: 1;
+    width: 35px;
+    font-size: 13px;
+}
+
+#tpcxDiv .contentWrap .syqkDiv table td.jdTD img {}
+
+#tpcxDiv .contentWrap .syqkDiv table td.syqkTD {
+    text-align: left;
+}
+
+#tpcxDiv .contentWrap .syqkDiv table td.syqkTD p {
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+    line-height: 20px;
+}
+
+#tpcxDiv .qkDiv,
+#tpcxDiv .moreDiv {
+    float: left;
+}
+
+#tpcxDiv .qkDiv {
+    width: 375px;
+    margin-top: 7px;
+}
+
+#tpcxDiv .moreDiv {
+    margin-top: 10px;
+}
+
+#tpcxDiv .moreDiv a {
+    /*padding: 4px 15px;*/
+    border: 1px solid #5395e3;
+    border-radius: 3px;
+    display: inline-block;
+    width: 50px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+}
+
+#tpcxDiv .contentWrap table td .moreDiv a:hover {
+    background-color: #5395e3;
+    color: #ffffff;
+    text-decoration: none;
+}

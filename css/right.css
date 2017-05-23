@@ -1,0 +1,261 @@
+.tabLeft {
+    float: left;
+    width: 25px;
+    position: absolute;
+    left: -25px;
+    top: 25%;
+    z-index: 800
+}
+
+#content {
+    height: auto;
+}
+
+.tabLeft span.current {
+    /* color: #2a69b4; */
+    font-weight: bold;
+    font-size: 14px;
+    background: url("../images/rightTabbg2_on.png") no-repeat -8px 0;
+}
+
+.tabLeft span.leftTitle {
+    padding-top: 12px;
+    height: 105px;
+    line-height: 16px;
+}
+
+.tabLeft span.lessText {
+    padding-top: 27px;
+}
+
+.tabLeft span {
+    background: url("../images/rightTabbg2.png") no-repeat -8px 0;
+    display: inline-block;
+    font-size: 13px;
+    text-align: center;
+    width: 25px;
+    height: 120px;
+    cursor: pointer;
+    line-height: 14px;
+    color: #ffffff;
+}
+
+.tabLeft span.leftTitle2 {
+    padding-top: 25px;
+}
+
+.tabRight {
+    float: left;
+    border-left: 1px solid #e4e4e4;
+    width: 350px;
+    height: 615px;
+    background-color: #f9f9f9;
+}
+
+.conditions {
+    margin-top: 15px;
+}
+
+.conditions span {
+    font-size: 15px;
+}
+
+.conditions span span {
+    color: red;
+}
+
+
+/* .conditions .select1 {
+    width: 135px;
+    margin-left: 10px;
+} */
+
+.conditions .select1,
+.conditions .select2 {
+    border: 1px solid #cccccc;
+    height: 30px;
+    font-size: 13px;
+}
+
+.detail {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.detailContent {
+    border-bottom: 1px solid #cccccc;
+    padding: 5px 0px 5px 0px;
+}
+
+.detailLeft {
+    float: left;
+    width: 270px;
+}
+
+.detailLeft table,
+.detailLeft table td {
+    border: none;
+    font-size: 13px;
+    /*padding-right: 25px;*/
+}
+
+.detailLeft table {
+    width: 100%;
+}
+
+.detailLeft table tr {
+    height: 22px;
+}
+
+.detailLeft table td.firstCol {
+    width: 81px;
+}
+
+.detailLeft table td.zjfirstCol {
+    width: 105px;
+}
+
+.detailRight {
+    float: left;
+}
+
+.detailRight a {
+    width: 40px;
+    display: block;
+    color: #7c7c7c;
+    width: 45px;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    /*margin-top: 10px;*/
+}
+
+.detailRight a.iconLink {
+    margin-top: 4px;
+}
+
+.detailRight a.iconLink:hover {
+    background-color: transparent;
+}
+
+.detailRight a.xqLink {
+    border: 1px solid #919191;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 14px;
+    height: 25px;
+    line-height: 25px;
+    margin-top: 8px;
+}
+
+.detailRight a.gjLink {
+    margin-top: 7px;
+    margin-left: -14px;
+}
+
+.detailRight a.xqLink:hover {
+    background-color: #159ff3;
+    border: 1px solid #159ff3;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.allDetail {
+    display: none;
+    /*padding: 0 10px;*/
+}
+
+.rightdiv {
+    width: 351px;
+    height: 100%;
+    right: 0;
+    position: absolute;
+    z-index: 800;
+    top: 121px;
+}
+
+.maptabRight {
+    display: none;
+    top: 18%;
+    position: absolute;
+    right: 0;
+    width: 365px;
+    overflow: hidden;
+    z-index: 800;
+}
+
+.clear {
+    clear: both;
+}
+
+a {
+    text-decoration: none;
+}
+
+.search {
+    margin-left: 10px;
+    margin-bottom: 15px;
+    margin-right: 10px;
+}
+
+.search input[type="text"] {
+    height: 31px;
+    border: 1px solid #cccccc;
+    padding-left: 5px;
+    font-size: 13px;
+    width: 280px;
+    border-right-width: 0;
+    padding-right: 5px;
+    display: block;
+    float: left;
+}
+
+.search input[type="text"]:focus {
+    /*border:*/
+}
+
+.search_btn {
+    border: 0;
+    background: #ffffff url("../images/search_right.png") no-repeat 2px 6px;
+    /*margin-left: -30px;*/
+    border: 1px solid #cccccc;
+    border-left-width: 0;
+    height: 35px;
+    width: 30px;
+    margin-left: -5px;
+    vertical-align: middle;
+    /* margin-top: -2px; */
+    display: block;
+    float: left;
+}
+
+.search_btn:hover {
+    background: #ffffff url("../images/search_right_cur.png") no-repeat 2px 6px;
+}
+
+.search_img {
+    margin-left: -30px;
+    vertical-align: middle;
+}
+
+.number {
+    height: 20px;
+    line-height: 20px;
+    /*border-bottom: 1px solid #cccccc;*/
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+.zfcs{
+    border-bottom: 1px solid #cccccc;
+    height:  25px;
+}
+
+.number span {
+    font-size: 13px;
+    margin-right: 5px;
+}
+
+.number span strong {
+    color: #5395e3;
+}

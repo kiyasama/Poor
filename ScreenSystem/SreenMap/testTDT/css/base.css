@@ -1,0 +1,210 @@
+*{
+	padding:0;
+	margin:0;
+	font-family:微软雅黑;
+}
+html,body{
+	height:100%;
+	width:100%;
+	overflow:hidden;
+}
+#header{
+    width: 100%;
+    top: 0;
+    height: 100px;
+    background: yellow;
+    position: relative;
+}
+#main{
+	position:relative;
+	width:100%;
+	height:100%;
+	overflow:hidden;
+	top:0;
+}
+#leftpanel{
+	position:absolute;
+	width:325px;
+	height:100%;
+	background:yellowgreen;
+	left:0;
+	top:0;
+}
+#map{
+	width:100%;
+	height:100%;
+	position:absolute;
+	overflow:hidden;
+	left:325px;
+	top:0;
+}
+
+/*leftpanel*/
+#search_panel{
+	position:relative;
+	height:165px;
+	background-color:darkseagreen;
+	padding:8px;
+	background:#FFF;
+}
+#function-container{
+	left:0;
+	top:0;
+}
+#function-container > ul{
+	text-align:center;
+	border:1px solid #e0e0e0;
+	border-radius:4px;
+	background:#FFFFFF;
+	margin:0 auto;
+	width:100%;
+	height:28px;
+}
+
+#function-container > ul > li{
+	cursor:pointer;
+	float:left;
+	font-size:1em;
+	background:#fafafa;
+	width:33.333%;
+	height:28px;
+	line-height:28px;
+	position:relative;
+}
+#function-container > ul > li:after{
+	content: " ";
+    position: absolute;
+    top: 7px;
+    right: 0;
+    width: 2px;
+    height: 14px;
+    background: #e0e0e0;
+}
+.clearfix:after {
+    display: block;
+    width: 0;
+}
+.clearfix:after {
+    content: '\0020';
+    height: 0;
+    clear: both;
+}
+#function-container > ul > li > a{
+	width:100%;
+	height:100%;
+	display:block;
+    background-color: #FFF;
+    background-repeat: no-repeat;
+    background-position: 30% 6px;
+    text-decoration: none;
+    color: #333;
+    text-align: center;
+    text-indent: 25px;
+}
+#function-container > ul > li > a:target{
+	color: #0091ff;
+    background-color: #fafafa;
+}
+#function-container > ul > li > a.icon-car{
+	background-image: url(../image/car.png);
+	background-repeat:no-repeat;
+}
+#function-container > ul > li > a.icon-car:hover{
+	background-image:url(../image/car-active.png);
+}
+#function-container > ul > li > a.icon-bus{
+	background-image: url(../image/bus.png);
+	background-repeat:no-repeat;
+}
+#function-container > ul > li > a.icon-bus:hover{
+	background-image:url(../image/bus-active.png);
+}
+#function-container > ul > li > a.icon-walk{
+	background-image: url(../image/walk.png);
+	background-repeat:no-repeat;
+}
+#function-container > ul > li > a.icon-walk:hover{
+	background-image:url(../image/walk-active.png);
+}
+#function-container > div.line-search{
+	position:relative;
+	margin-top:15px;
+	margin-bottom:5px;
+}
+#function-container > div.line-search > div.line-search-left{
+	position:absolute;
+	top:0;
+	width:20px;
+	height:100%;
+	left:0;
+}
+#function-container > div.line-search > div.line-search-left > a.icon-updown{
+	top: 50%;
+    margin-top: -28px;
+    background-image: url(../image/updown.png);
+    cursor: pointer;
+	display: block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#function-container > div.line-search > div.line-search-form{
+	margin:0 30px;
+}
+#function-container > div.line-search > div.line-search-form> p{
+	position: relative;
+    height: 36px;
+    line-height: 36px;
+    font-size: 13px;
+}
+.line-search-end, .line-search-point, .line-search-start {
+    border-bottom: 1px solid #e6e6e6;
+}
+.line-search-form p label {
+    margin-left: 10px;
+    color: #999;
+}
+.line-search-form p input {
+    float: right;
+    width: 85%;
+    height: 34px;
+    line-height: 32px;
+    border: none;
+    background: 0 0;
+    text-indent: 5px;
+	outline:none;
+}
+.localSug {
+    display: block;
+    position: absolute;
+    bottom: -32px;
+    width: 100%;
+    z-index: 100;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #ccc;
+    border-top: none;
+    background: url(/assets/img/loc_ok.png) 9px center no-repeat #fff;
+    text-indent: 42px;
+    cursor: pointer;
+    color: #0091ff;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.line-search-submit {
+    position: relative;
+    margin-top: 10px;
+    border-bottom: none;
+}
+.line-search-submit a {
+    font-size: 13px;
+    text-decoration: underline;
+    opacity: 1;
+    transition: opacity 500ms ease-in 0s;
+    -webkit-transition: opacity 500ms ease-in 0s;
+    -moz-transition: opacity 500ms ease-in 0s;
+	background-color: transparent;
+    color: #6495ed;
+}

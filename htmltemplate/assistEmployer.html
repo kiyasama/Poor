@@ -1,0 +1,121 @@
+<!-- 帮扶单位详情 -->
+<div class="xqDiv bfry" id="bfry">
+    <div class="detailTitle" id="detailTitle" style="cursor: move;">
+        <span class="titleSpan">帮扶单位详细信息</span>
+        <div class="box_tool">
+            <a class="max" href="javascript:;" title="最大化" style="display:none;"></a>
+            <a class="revert" href="javascript:;" title="还原" style="display:none;"></a>
+            <a class="close" href="javascript:;" id="closeBfdw" title="关闭"></a>
+        </div>
+        <!-- <span class="imgSpan"><img src="images/detailClose.png" id="closeDiv" /></span>
+ -->
+        <div class="clear"></div>
+    </div>
+    <div class="bfryDetail" id="bfryDetail">
+        <div class="commonTitle tabTitle">
+            <span id="base2" class="titles current">基本情况</span>
+            <span id="bfjhTab" class="titles">帮扶计划与措施</span>
+            <span id="bfjdTab" class="titles">帮扶进度</span>
+            <span id="pkcTab" class="titles">结对帮扶信息</span>
+        </div>
+        <div class="detailWrap">
+            <div class="contentWrap jbqk2">
+                <div class="tableDiv">
+                    <table class="commonTableStyle">
+                        <tr>
+                            <td class="nameTD">单位名称：</td>
+                            <td colspan="3" id="name">{$T.name}</td>
+                        </tr>
+                        <tr>
+                            <td class="nameTD">联系电话：</td>
+                            <td id="contactPhone">{$T.contactPhone}</td>
+                            <td class="nameTD">联系人：</td>
+                            <td id="contactpeople">{$T.contactpeople}</td>
+                        </tr>
+                        <tr>
+                            <td class="nameTD">单位隶属关系：</td>
+                            <td id="orgRelation">{$T.orgRelation}</td>
+                            <td class="nameTD">单位性质：</td>
+                            <td id="orgType">{$T.orgType}</td>
+                        </tr>
+                        <tr>
+                            <td class="nameTD remarkTD">单位地址：</td>
+                            <td colspan="3" id="addres">{$T.addres}</td>
+                        </tr>
+                        <tr>
+                            <td class="nameTD">开始帮扶时间：</td>
+                            <td colspan="3" id="startTime">{$T.startTime}</td>
+                        </tr>
+                        <tr>
+                            <td class="nameTD">结束帮扶时间：</td>
+                            <td colspan="3" id="endTime">{$T.endTime}</td>
+                        </tr>
+                        <tr>
+                            <td class="nameTD remarkTD">备注：</td>
+                            <td colspan="3" id="remarks">{$T.remarks}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="contentWrap bfdx">
+                <div class="tableDiv" style="overflow:auto;">
+                    <table id="jhTable">
+                        <thead>
+                            <th class="indexTH">序号</th>
+                            <th>年份</th>
+                            <th>帮扶计划</th>
+                            <th>帮扶措施</th>
+                        </thead>
+                        <tbody id="bfjhInfo"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="contentWrap bfjd" id="bfjdDiv" style="display: none;">
+                <div class="syqkDiv">
+                    <table id="bfjdTable">
+                        <thead>
+                            <tr>
+                                <th class="jdTH">节点</th>
+                                <th>项目进度</th>
+                            </tr>
+                        </thead>
+                        <tbody id="jdList"></tbody>
+                    </table>
+                </div>
+                <div style="margin-top:10px; margin-left: 1%;" id="pkfbPagenavJd"></div>
+            </div>
+            <div id="bfjdPic" class="popDiv2" style="">
+                <div class="xqDiv">
+                    <div class="detailTitle" id="detailTitle">
+                        <span class="titleSpan">进度监管图片</span>
+                        <div class="box_tool">
+                            <a class="max" href="javascript:;" title="最大化" style="display:none;"></a>
+                            <a class="revert" href="javascript:;" title="还原" style="display:none;"></a>
+                            <a class="close" href="javascript:;" id="closepic" title="关闭"></a>
+                        </div>
+                        <div class="clear"></div>
+                        <img src="" id="jgPicture" />
+                    </div>
+                    <div id="zjDetail" style="width: 720px;height: 506px;"></div>
+                </div>
+            </div>
+            <div class="contentWrap bfrz">
+                <div class="tableDiv" id="pkclist">
+                    <table id="pkcTable">
+                        <thead>
+                            <th class="indexTH">序号</th>
+                            <th>村名</th>
+                            <th class="timeTH">村负责人</th>
+                            <th class="timeTH">村属性</th>
+                            <th class="timeTH">电话</th>
+                            <th class="optTH">操作</th>
+                        </thead>
+                        <tbody id="pkcList"></tbody>
+                    </table>
+                </div>
+                <div style="margin:5px auto;text-align:center;width: 370px;" id="poorVPagenav"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="pVillageDetail" class="popDiv" style=""></div>

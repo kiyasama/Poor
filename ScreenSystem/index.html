@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>大电视</title>
+<!--<script type="text/javascript" src="lib/jquery.min.js"></script>-->
+<script type="text/javascript" src="lib/jquery-1.8.3.js"></script>
+<script src="js/UICore.js"></script>
+<script src="js/chartsData.js"></script>
+<script src="js/chart_setting.js"></script>
+<script src="SreenMap/js/xyGeoJson.js"></script>
+<link rel="stylesheet" href="style/main_another.css">
+</head>
+<body>
+	<!--<div class="logo">-->
+		<!--<img src="images/logo_new.png">-->
+	<!--</div>-->
+	<div class="content" id="dci_left">
+		<div class="left">
+			<div class="query">
+				<img class="xzqh-img" src="images/map_icon.png" alt="行政区划" title="行政区划"/>
+				<input type="text" class="search-input" placeholder="请选择行政区划"/>
+				<!--<input type="button" class="search-btn"/>-->
+				
+				<select name="" id="year" class="select selectY">
+					<option value="nianfeng" selected>年份</option>
+					<option value="2017">2017年</option>
+					<option value="2016">2016年</option>
+					<option value="2015">2015年</option>
+					<option value="2014">2014年</option>
+				</select>
+				
+				<button class="btn sta_btn">统计</button>
+				<button class="btn reset_btn">重置</button>
+			</div>
+			<div class="leftDiv" id="dci_time">
+				<div class="divInfo ywjk">
+					<div class="title" style="padding-bottom: 5px;">
+						<span>扶贫项目类别统计</span>
+						<span style="font-size: 15px">（项目安排精准）</span>
+					</div>
+					<div id="tj_jr_ch" style="display:block; width:100%;  height: 264px; margin-bottom: 5px; padding-left: 0px; margin-top: 0px;"></div>
+				</div>
+				<div class="divInfo zjjc">
+					<div class="title">
+						<span>扶贫资金使用统计</span>
+						<span style="font-size: 15px">（资金使用精准）</span>
+					</div>
+					<div id="ct_ri_zjjc" style="display:block; width:100%;  height: 350px; margin-top: -20px"></div>
+				</div>
+				<div class="divInfo lytj">
+					<div class="title lytjTitle">
+						<span>致贫因素情况统计</span>
+						<span style="font-size: 15px">（措施到户精准）</span>
+					</div>
+					<div id="tj_fwd2" style="display:block; width:100%;  height: 264px; margin-top: -7px; margin-left: 0px;" >
+					</div>
+				</div>
+
+			</div>
+			<div class="centerDiv">
+				<div class="divInfo fwdsltj">
+					<div class="title">
+						<span>驻村工作队服务统计</span>
+						<span style="font-size: 15px">（因村派人精准）</span>
+					</div>
+					<div id="tj_jr_ch2" style="display:block; width:100%;height:330px;margin-left:0px;margin-top:-44px" >
+					</div>
+				</div>
+				<div class="divInfo cxjc">
+					<div class="title">
+						<span>脱贫成效统计</span>
+						<span style="font-size: 15px">（脱贫成效精准）</span>
+					</div>
+					<div id="ct_ri_cxjc" style="display:block; width:100%;  height: 310px; margin-top:-9px"></div>
+				</div>
+				<div class="divInfo ywltj">
+					<div class="title">
+						<span>建档立卡工作情况统计</span>
+						<span style="font-size: 15px">（扶贫对象精准）</span>
+					</div>
+					<div id="tj_fwd" style="display:block; width:100%;  height: 264px;margin-left: 0px;margin-top:-17px">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="rightDiv">
+			<div class="divInfo map" style="display: none;">
+				<div class="title">
+					<span>扶贫一张图</span>
+				</div>
+				<!--<iframe src="SreenMap/index.html" width="99%" height="93%" style="border:0;">-->
+            	<!--</iframe>-->
+				<div style="width:100%;height: 93%;">
+					<iframe src="SreenMap/map.html" style="border:0;width:99%;height: 100%;">
+					</iframe>
+				</div>
+			</div>
+			<div class="divInfo mapinfo">
+				<div id="map_info" style="display:block; width:100%;  height: 210px;margin-left:0px;margin-top:0px">
+				</div>
+			</div>
+		</div>
+	
+		<div class="clear"></div>
+	</div>
+	
+	<div class="areaDiv hide">
+		<div class="areaWrap">
+			<div class="area first-area">
+				<ul id="firstU">
+					<!--<li>昆明市</li>
+					<li>曲靖市</li>
+					<li>玉溪市</li>
+					<li>保山市</li>
+					<li>昭通市</li>
+					<li>丽江市</li>
+					<li>普洱市</li>
+					<li>临沧市</li>
+					<li>楚雄州</li>
+					<li>红河州</li>
+					<li>文山州</li>
+					<li>版纳州</li>
+					<li>大理州</li>
+					<li>曲靖市</li>
+					<li>怒江州</li>
+					<li>迪庆州</li>-->
+				</ul>
+			</div>
+			<div class="area second-area hide">
+				<ul id="secondU">
+					<!--<li>呈贡区</li>
+					<li>五华区</li>
+					<li>盘龙区</li>
+					<li>官渡区</li>
+					<li>西山区</li>
+					<li>东川区</li>
+					<li>晋宁县</li>
+					<li>富民县</li>
+					<li>宜良县</li>
+					<li>嵩明县</li>
+					<li>石林彝族自治县</li>
+					<li>寻甸回族彝族自治县</li>-->
+				</ul>
+			</div>
+			<div class="area third-area hide">
+				<ul id="thirdU">
+					<!--<li>昆明市</li>
+					<li>曲靖市</li>
+					<li>玉溪市</li>
+					<li>保山市</li>
+					<li>昭通市</li>
+					<li>丽江市</li>
+					<li>普洱市</li>
+					<li>临沧市</li>
+					<li>楚雄州</li>
+					<li>红河州</li>
+					<li>文山州</li>
+					<li>版纳州</li>
+					<li>大理州</li>
+					<li>曲靖市</li>
+					<li>怒江州</li>
+					<li>迪庆州</li>-->
+				</ul>
+			</div>
+			<div class="area fourth-area hide">
+				<ul id="fourthU">
+					<!--<li>昆明市</li>
+					<li>曲靖市</li>
+					<li>玉溪市</li>
+					<li>保山市</li>
+					<li>昭通市</li>
+					<li>丽江市</li>
+					<li>普洱市</li>
+					<li>临沧市</li>
+					<li>楚雄州</li>
+					<li>红河州</li>
+					<li>文山州</li>
+					<li>版纳州</li>
+					<li>大理州</li>
+					<li>曲靖市</li>
+					<li>怒江州</li>
+					<li>迪庆州</li>-->
+				</ul>
+			</div>
+		</div>
+		
+	</div>
+	
+<script src="lib/echarts-all.js"></script>
+		<!-- 引入baiduTemplate -->
+		<script type="text/javascript" src="lib/baiduTemplate.js"></script>
+		
+		<!--<script src="js/theme.js"></script>-->
+		<script type="text/javascript">
+			//var myChart = echarts.init(document.getElementById('tj_fwd'));
+			//myChart.setOption(option);
+			//var myChart2 = echarts.init(document.getElementById('tj_fwd2'));
+			//zpyy();
+			//myChart2.setOption(option2);
+			//var myChart3 = echarts.init(document.getElementById('tj_jr_ch'));
+			//myChart3.setOption(option3);
+			var myChart4 = echarts.init(document.getElementById('tj_jr_ch2'));
+			myChart4.setOption(option4);
+			var myChart5 = echarts.init(document.getElementById('ct_ri_zjjc'));
+			myChart5.setOption(option5);
+			var myChart6 = echarts.init(document.getElementById('ct_ri_cxjc'));
+			myChart6.setOption(option6);
+			//var myChart7 = echarts.init(document.getElementById('map_info'));
+			//myChart7.setOption(option7);
+			var bt = baidu.template;
+			
+		</script>
+		<!--<script src="js/chart_data.js"></script>-->
+		<!--<script type="text/javascript" src="js/chart_data_jrye.js"></script>-->	
+</body>
+</html>

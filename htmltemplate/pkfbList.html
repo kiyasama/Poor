@@ -1,0 +1,65 @@
+<!-- 贫困分布右侧列表 -->
+<div class="rightdiv" id="rightdiv" style="display: block;">
+    <div class="tabLeft">
+        <span class="leftTitle lessText" id="poorInfo">贫困信息</span>
+        <span class="leftTitle lessText current" id="totalInfo">整体情况</span>
+        <span class="leftTitle lessText" id="tpPoorInfo">脱贫信息</span>
+    </div>
+    <div class="tabRight view" style="display: none;">
+        <div class="conditions">
+            <div class="search">
+                <input type="text" placeholder="请输入要搜索的内容" id="pkrycx">
+                <input type="button" class="search_btn" id="pkrycxbt">
+                <div class="clear"></div>
+            </div>
+            <span style="padding-left:10px; "><span id="xzqhqh" style="color: red;">旬邑县</span>共有<span id="allhushu" style="color: red;">15</span>户</span>
+        </div>
+        <div class="detail">
+            <div id="pkfbListDiv">
+            </div>
+            <div style="margin-top:10px; margin-left: 1%;" id="pkfbPagenav"></div>
+        </div>
+    </div>
+    <div class="tabRight allDetail" style="display: block;">
+        <div class="approvedmap">
+            <div class="approved-track-detail" id="summary">
+            </div>
+        </div>
+        <div class="approvedmap fpqk">
+            <div class="approved-track-detail">
+                <div class="goto">
+                    <span class="title">贫困权重</span>
+                </div>
+                <div style=" height: 200px; width: 351px;  margin-top: 15px; margin-left: 0px;" id="dci_chart_pkry"></div>
+                <div style=" height: 200px; width: 351px;  margin-top: 15px; margin-left: 0px ;" id="dci_chart_zpyy"></div>
+            </div>
+        </div>
+        <!-- <div class="approvedmap ycyj">
+
+            <div class="approved-track-detail">
+                <div class="goto">
+                    <span class="title">异常预警</span><span class="icon-arrows-right"></span>
+                </div>
+                <div class="summary" >
+                    当前<span class="ycsl"><a href="javascript:void(0)" onclick="showabnormal()" style="color:#ffffff;">0</a></span>个村贫困认定异常
+                </div>
+
+            </div>
+        </div> -->
+    </div>
+    <div class="tabRight view" style="display: none;">
+        <div class="conditions">
+            <div class="search">
+                <input type="text" placeholder="请输入要搜索的内容" id="tprycx">
+                <input type="button" class="search_btn" id="tprycxbt">
+                <div class="clear"></div>
+            </div>
+            <span style="padding-left:10px; "><span id="tpxzqhqh" style="color: red;">旬邑县</span>共有<span id="tpallhushu" style="color: red;">15</span>户</span>
+        </div>
+        <div class="detail">
+            <div id="tpfbListDiv">
+            </div>
+            <div style="margin-top:10px; margin-left: 1%;" id="tpfbPagenav"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+<!-- 脱贫资金管理详情 -->
+<div class="xqDiv tpzj" id="tpzjDetail">
+    <div class="detailTitle" id="detailTitle">
+        <span class="titleSpan">帮扶资金详细信息</span>
+        <div class="box_tool">
+            <a class="max" href="javascript:;" title="最大化" style="display:none;"></a>
+            <a class="revert" href="javascript:;" title="还原" style="display:none;"></a>
+            <a class="close" href="javascript:;" id="closeButton" title="关闭"></a>
+        </div>
+        <!-- <span class="imgSpan"><img src="images/detailClose.png" id="closeButton" /></span> -->
+        <div class="clear"></div>
+    </div>
+    <div class="bfryDetail" id="bfryDetail">
+        <div class="commonTitle jbxx">
+            <span>基本信息</span>
+        </div>
+        <div class="detailWrap">
+            <div class="contentWrap jbqk">
+                <table>
+                    <tr>
+                        <td class="nameTD">资金类型：</td>
+                        <td id="MONEYTYPE">{$T.moneytype}</td>
+                        <td class="nameTD">金额（万元）：</td>
+                        <td id="MONEYNUM">{$T.MONEYNUM}</td>
+                    </tr>
+                    <tr>
+                        <td class="nameTD">年度：</td>
+                        <td id="YEARS">{$T.YEARS}</td>
+                        <td class="nameTD">批次：</td>
+                        <td id="PC">{$T.PC}</td>
+                    </tr>
+                    <tr>
+                        <td class="nameTD">发文编号：</td>
+                        <td id="FWBH">{$T.FWBH}</td>
+                        <td class="nameTD">下拨时间：</td>
+                        <td id="XBSJ">{$T.XBSJ}</td>
+                    </tr>
+                    <tr>
+                        <td class="nameTD">资金下拨情况：</td>
+                        <td id="ZJXBQK">{$T.ZJXBQK}</td>
+                        <td class="nameTD">发文名称：</td>
+                        <td id="WJNAME">{$T.WJNAME}</td>
+                    </tr>
+                    <tr>
+                        <td class="nameTD">附件查看：</td>
+                        <td colspan="3" style="color: #8B8378;" id="filepath">
+                            <a herf="{$T.fileUrl}" id="{$T.FILEPATH}" class="pdfLink">{$T.fileName}</a>
+                        </td>
+                    </tr>
+                </table>
+                <div class="commonTitle jbxx"><span>资金使用情况</span></div>
+                <div class="syqkDiv">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="jdTH">节点</th>
+                                <th class="jhjeTH">计划金额</th>
+                                <th>金额使用情况</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {#foreach $T.poorWorkUses as record}
+                            <tr>
+                                <td class="jdTD"><span>{$T.record.JD}</span><img src="images/jd_icon.png" alt=""></td>
+                                <td class="jhjeTD">{$T.record.JHJE}</td>
+                                <td class="syqkTD">
+                                    <div class="qkDiv">
+                                        <p>{$T.record.shortCut}</p>
+                                    </div>
+                                    <div class="moreDiv">
+                                        <a href="#">更多</a>
+                                        <span style="display: none;">{$T.record.ZJSYQK}</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            {#/for}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="ZJSYQKmsg" style="display: none;">
+    <div class="detailTitle" id="detailTitle">
+        <span class="titleSpan">金额使用情况</span>
+        <span class="imgSpan return"><img src="images/box_return1.png" id="goback2" /></span>
+        <div class="clear"></div>
+    </div>
+    <div id="zjDetail" style="width: 720px;height: 506px;"></div>
+</div>
